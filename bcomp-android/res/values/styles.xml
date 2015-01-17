@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BasicComputerTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:textColor">@color/black_54</item>
+        <item name="android:textColorPrimary">@color/black_87</item>
+        <item name="android:windowBackground">@color/primary_light</item>
+    </style>
+
+    <color name="primary_light">#dcedc8</color>
+    <color name="primary">#8bc34a</color>
+    <color name="primary_dark">#689f38</color>
+
+    <color name="accent_light">#ff9e80</color>
+    <color name="accent">#ff6e40</color>
+    <color name="accent_dark">#ff3d00</color>
+
+    <color name="black_12">#1e000000</color>
+    <color name="black_26">#42000000</color>
+    <color name="black_54">#89000000</color>
+    <color name="black_87">#dd000000</color>
+    <color name="black_100">#ff000000</color>
+
+    <color name="white_12">#1effffff</color>
+    <color name="white_30">#4cffffff</color>
+    <color name="white_70">#b2ffffff</color>
+    <color name="white_100">#ffffffff</color>
+
+</resources>
