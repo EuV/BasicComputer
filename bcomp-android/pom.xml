@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ru.ifmo.cs</groupId>
+        <artifactId>BasicComputer</artifactId>
+        <version>1</version>
+    </parent>
+
+    <artifactId>bcomp-android</artifactId>
+    <version>1</version>
+    <name>bcomp-android</name>
+    <packaging>apk</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>bcomp</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- The following dependencies are resolved by Maven Android SDK Deployer -->
+        <!-- https://github.com/simpligility/maven-android-sdk-deployer -->
+
+        <dependency>
+            <groupId>android</groupId>
+            <artifactId>android</artifactId>
+            <version>5.0.1_r2</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>android.support</groupId>
+            <artifactId>compatibility-v4</artifactId>
+            <version>21.0.3</version>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>android.support</groupId>
+            <artifactId>compatibility-v7-appcompat</artifactId>
+            <version>21.0.3</version>
+            <type>apklib</type>
+        </dependency>
+
+        <dependency>
+            <groupId>android.support</groupId>
+            <artifactId>compatibility-v7-appcompat</artifactId>
+            <version>21.0.3</version>
+            <type>jar</type>
+        </dependency>
+
+    </dependencies>
+
+
+    <build>
+        <finalName>bcomp-android</finalName>
+
+        <plugins>
+
+            <plugin>
+                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                <artifactId>android-maven-plugin</artifactId>
+                <version>3.8.2</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <sdk>
+                        <platform>21</platform>
+                    </sdk>
+                    <manifest>
+                        <debuggable>true</debuggable>
+                    </manifest>
+                    <proguard>
+                        <skip>true</skip>
+                    </proguard>
+                    <zipalign>
+                        <skip>true</skip>
+                    </zipalign>
+                    <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <profiles>
+        <profile>
+            <id>development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                        <artifactId>android-maven-plugin</artifactId>
+                        <inherited>true</inherited>
+                        <configuration>
+                            <zipalign>
+                                <skip>false</skip>
+                                <verbose>true</verbose>
+                                <inputApk>${project.build.directory}/${project.artifactId}.apk</inputApk>
+                                <outputApk>${project.build.directory}/${project.artifactId}-aligned.apk</outputApk>
+                            </zipalign>
+                            <manifest>
+                                <debuggable>false</debuggable>
+                            </manifest>
+                            <proguard>
+                                <skip>false</skip>
+                            </proguard>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>zipalign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
+
+</project>

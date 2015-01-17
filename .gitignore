@@ -55,3 +55,4 @@ release.properties
 ### The rest project
 .idea
 *.iml
+gen-external-apklibs/
