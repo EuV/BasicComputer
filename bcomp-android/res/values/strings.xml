@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">БЭВМ</string>
+    <string name="dummy_register">Register</string>
+    <string name="keyboard_register">Keyboard register</string>
 </resources>
