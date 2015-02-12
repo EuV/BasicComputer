@@ -6,6 +6,7 @@ package ru.ifmo.cs.bcomp.ui.components;
 
 import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.ControlSignal;
+import ru.ifmo.cs.bcomp.SignalListener;
 import ru.ifmo.cs.bcomp.ui.GUI;
 import static ru.ifmo.cs.bcomp.ui.components.DisplayStyles.*;
 
@@ -19,7 +20,7 @@ public class BasicView extends BCompPanel {
 
 	public BasicView(GUI gui) {
 		super(gui.getComponentManager(),
-			new RegisterProperties[] { 
+			new RegisterProperties[] {
 				new RegisterProperties(CPU.Reg.ADDR, REG_ACCUM_X_BV, REG_ADDR_Y_BV, false),
 				new RegisterProperties(CPU.Reg.DATA, REG_ACCUM_X_BV, REG_DATA_Y_BV, false),
 				new RegisterProperties(CPU.Reg.IP, REG_IP_X_BV, REG_IP_Y_BV, false),
