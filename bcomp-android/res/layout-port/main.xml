@@ -73,22 +73,13 @@
     </LinearLayout>
 
 
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <fragment
+        android:name="ru.ifmo.cs.bcomp.android.KeyboardFragment"
+        android:id="@+id/keyboard_fragment"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="5dp"
-        app:cardBackgroundColor="@color/primary_200"
-        card_view:cardElevation="2dp"
-        card_view:cardCornerRadius="0dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/keyboard_register"
-            android:gravity="center" />
-    </android.support.v7.widget.CardView>
+        android:layout_margin="5dp" />
 
 
 </LinearLayout>

@@ -4,10 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import java.util.Random;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements KeyboardFragment.OnKeyboardEventListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,5 +27,10 @@ public class MainActivity extends ActionBarActivity {
         }
 
         memoryView.setAdapter(new MemoryAdapter(rows));
+    }
+
+    @Override
+    public void onKeyboardPressed() {
+        Toast.makeText(this, "Keyboard register pressed!", Toast.LENGTH_SHORT).show();
     }
 }
