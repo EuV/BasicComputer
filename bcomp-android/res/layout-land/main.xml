@@ -1,52 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:baselineAligned="false"
-    android:padding="0dp">
-
-
-    <fragment
-        android:name="ru.ifmo.cs.bcomp.android.MemoryFragment"
-        android:id="@+id/memory_fragment"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp" />
-
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_weight="3"
-        android:layout_width="0dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="0dp">
+        android:baselineAligned="false">
 
         <fragment
-            android:name="ru.ifmo.cs.bcomp.android.BasicFragment"
-            android:id="@+id/basic_fragment"
-            android:layout_weight="4"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            tools:layout="@layout/basic_fragment"
-            tools:ignore="NestedWeights" />
-
-
-        <fragment
-            android:name="ru.ifmo.cs.bcomp.android.KeyboardFragment"
-            android:id="@+id/keyboard_fragment"
+            android:name="ru.ifmo.cs.bcomp.android.MemoryFragment"
+            android:id="@+id/memory_fragment"
             android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            tools:layout="@layout/keyboard_fragment" />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tab_content_stub"
+                android:layout_weight="4"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                tools:ignore="NestedWeights" />
+
+            <fragment
+                android:name="ru.ifmo.cs.bcomp.android.KeyboardFragment"
+                android:id="@+id/keyboard_fragment"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                tools:layout="@layout/keyboard_fragment" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/tab_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+</FrameLayout>
