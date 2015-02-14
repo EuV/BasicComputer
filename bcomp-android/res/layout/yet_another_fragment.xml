@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Container">
+
+    <TextView style="@style/Indent" />
+
+    <android.support.v7.widget.CardView style="@style/Content">
+
+            <TextView
+                android:id="@+id/fragment_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:gravity="center"/>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

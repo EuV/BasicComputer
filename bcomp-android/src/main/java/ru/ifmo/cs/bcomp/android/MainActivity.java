@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity implements KeyboardFragment.
         viewPager.setAdapter(new TabAdapter(getSupportFragmentManager()));
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-             return;
+            return;
         }
 
         final View contentStub = findViewById(R.id.tab_content_stub);
@@ -55,7 +55,30 @@ public class MainActivity extends ActionBarActivity implements KeyboardFragment.
 
         @Override
         public Fragment getItem(int tab) {
-            return new BasicFragment();
+            switch (tab) {
+
+                case 0: {
+                    return new BasicFragment();
+                }
+
+                case 1: {
+                    YetAnotherFragment fragment = new YetAnotherFragment();
+                    Bundle args = new Bundle();
+                    args.putString(YetAnotherFragment.NAME, "Работа с ВУ");
+                    fragment.setArguments(args);
+                    return fragment;
+                }
+
+                case 2: {
+                    YetAnotherFragment fragment = new YetAnotherFragment();
+                    Bundle args = new Bundle();
+                    args.putString(YetAnotherFragment.NAME, "Работа с МПУ");
+                    fragment.setArguments(args);
+                    return fragment;
+                }
+            }
+
+            return null;
         }
 
         @Override
