@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="7"
+        android:baselineAligned="false"
         android:padding="0dp">
 
         <fragment
@@ -22,44 +23,18 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
-            tools:ignore="NestedWeights"
-            tools:layout="@layout/memory_fragment" />
+            tools:ignore="NestedWeights" />
 
 
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <fragment
+            android:name="ru.ifmo.cs.bcomp.android.BasicFragment"
+            android:id="@+id/basic_fragment"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
-            android:background="@color/primary_200"
-            card_view:cardElevation="2dp"
-            card_view:cardCornerRadius="0dp">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/primary_200"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/dummy_register"
-                    android:layout_margin="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/dummy_register"
-                    android:layout_margin="10dp" />
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
+            tools:layout="@layout/basic_fragment" />
 
     </LinearLayout>
 
