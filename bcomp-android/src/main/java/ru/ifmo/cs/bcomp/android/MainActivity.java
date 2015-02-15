@@ -12,13 +12,24 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
-public class MainActivity extends ActionBarActivity implements KeyboardFragment.OnKeyboardEventListener {
+public class MainActivity extends ActionBarActivity implements BCompInstance.BCompCallbacks, KeyboardFragment.KeyboardCallbacks {
+
+    private static final String TAG_BASIC_COMPUTER_INSTANCE = "bcomp_fragment";
+    private BCompInstance bci;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         setupViewPager();
+
+        FragmentManager fm = getSupportFragmentManager();
+        bci = (BCompInstance) fm.findFragmentByTag(TAG_BASIC_COMPUTER_INSTANCE);
+
+        if (bci == null) {
+            bci = new BCompInstance();
+            fm.beginTransaction().add(bci, TAG_BASIC_COMPUTER_INSTANCE).commit();
+        }
     }
 
     @Override

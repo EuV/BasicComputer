@@ -9,11 +9,12 @@ import android.view.ViewGroup;
 
 
 public class KeyboardFragment extends Fragment {
-    protected OnKeyboardEventListener callback;
 
-    public interface OnKeyboardEventListener {
-        public void onKeyboardPressed();
+    public interface KeyboardCallbacks {
+        void onKeyboardPressed();
     }
+
+    private KeyboardCallbacks callbacks;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class KeyboardFragment extends Fragment {
         keyboardView.findViewById(R.id.ok_keyboard_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.onKeyboardPressed();
+                callbacks.onKeyboardPressed();
             }
         });
 
@@ -32,6 +33,6 @@ public class KeyboardFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        callback = (OnKeyboardEventListener) activity;
+        callbacks = (KeyboardCallbacks) activity;
     }
 }
