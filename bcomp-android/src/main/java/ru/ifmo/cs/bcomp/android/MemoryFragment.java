@@ -8,10 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.Random;
-
 
 public class MemoryFragment extends Fragment {
+    MemoryAdapter memoryAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -21,14 +20,19 @@ public class MemoryFragment extends Fragment {
         memoryRecyclerView.setHasFixedSize(true);
         memoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        String[] rows = new String[2048];
-        Random random = new Random();
-        for (int i = 0; i < rows.length; i++) {
-            rows[i] = String.format("%03X | %04X", i, random.nextInt(65535));
-        }
-
-        memoryRecyclerView.setAdapter(new MemoryAdapter(rows));
+        memoryAdapter = new MemoryAdapter();
+        memoryRecyclerView.setAdapter(memoryAdapter);
 
         return memoryView;
+    }
+
+
+    public void fillMemory(int[] values) {
+        String[] rows = new String[values.length];
+        for (int i = 0; i < rows.length; i++) {
+            rows[i] = String.format("%03X | %04X", i, values[i]);
+        }
+        memoryAdapter.changeDataSet(rows);
+        memoryAdapter.notifyDataSetChanged();
     }
 }

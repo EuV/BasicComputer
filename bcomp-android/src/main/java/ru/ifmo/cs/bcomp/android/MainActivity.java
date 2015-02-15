@@ -9,6 +9,7 @@ public class MainActivity extends ActionBarActivity implements BCompInstance.BCo
 
     private static final String TAG_BASIC_COMPUTER_INSTANCE = "bcomp_fragment";
     private BCompInstance bci;
+    private MemoryFragment memory;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -17,6 +18,9 @@ public class MainActivity extends ActionBarActivity implements BCompInstance.BCo
         TabAdapter.setup(this);
 
         FragmentManager fm = getSupportFragmentManager();
+
+        memory = (MemoryFragment) fm.findFragmentById(R.id.memory_fragment);
+
         bci = (BCompInstance) fm.findFragmentByTag(TAG_BASIC_COMPUTER_INSTANCE);
 
         if (bci == null) {
@@ -30,8 +34,19 @@ public class MainActivity extends ActionBarActivity implements BCompInstance.BCo
         }
     }
 
+
+    /* KeyboardFragment callbacks */
+
     @Override
     public void onKeyboardPressed() {
         Toast.makeText(this, "Keyboard register pressed!", Toast.LENGTH_SHORT).show();
+    }
+
+
+    /* BCompInstance callbacks */
+
+    @Override
+    public void fillMemory(int[] values) {
+        memory.fillMemory(values);
     }
 }

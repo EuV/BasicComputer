@@ -7,12 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder> {
-    private String[] data;
-
-    public MemoryAdapter(String[] data) {
-        this.data = data;
-    }
-
+    private String[] data = new String[]{""};
 
     @Override
     public MemoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -32,6 +27,9 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         return data.length;
     }
 
+    public void changeDataSet(String[] data) {
+        this.data = data;
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
