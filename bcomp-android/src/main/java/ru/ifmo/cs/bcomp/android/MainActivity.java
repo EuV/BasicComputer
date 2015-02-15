@@ -20,7 +20,12 @@ public class MainActivity extends ActionBarActivity implements BCompInstance.BCo
         bci = (BCompInstance) fm.findFragmentByTag(TAG_BASIC_COMPUTER_INSTANCE);
 
         if (bci == null) {
-            bci = new BCompInstance();
+            try {
+                bci = new BCompInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+                finish();
+            }
             fm.beginTransaction().add(bci, TAG_BASIC_COMPUTER_INSTANCE).commit();
         }
     }
