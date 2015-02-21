@@ -8,45 +8,49 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import ru.ifmo.cs.bcomp.Utils;
 
 
 public class KeyboardFragment extends Fragment {
 
     public interface KeyboardCallbacks {
-        void onKeyboardPressed();
+        void updateKeyRegister(int value);
     }
 
     public static final int HEX_SYMBOL_REQUEST = 0;
+    public static final int KEYBOARD_WIDTH = 16;
     public static final String HEX_SYMBOL_VALUE = "hex_symbol_value";
-    public static final String HEX_SYMBOL_PRESSED_TAG = "hex_symbol_tag";
+    public static final String HEX_SYMBOL_PRESSED_INDEX = "hex_symbol_tag";
 
     private KeyboardCallbacks callbacks;
     private View keyboardView;
-    private String hexSymbolPressedTag;
+    private Integer hexSymbolPressedIndex = -1;
+    private Button[] hexSymbols;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         if (savedInstanceState != null) {
-            hexSymbolPressedTag = savedInstanceState.getString(HEX_SYMBOL_PRESSED_TAG);
+            hexSymbolPressedIndex = savedInstanceState.getInt(HEX_SYMBOL_PRESSED_INDEX);
         }
 
         keyboardView = inflater.inflate(R.layout.keyboard_fragment, container, false);
 
-        keyboardView.findViewById(R.id.ok_keyboard_button).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callbacks.onKeyboardPressed();
-            }
-        });
+        hexSymbols = new Button[]{
+            (Button) keyboardView.findViewById(R.id.keyboard_hex_0),
+            (Button) keyboardView.findViewById(R.id.keyboard_hex_1),
+            (Button) keyboardView.findViewById(R.id.keyboard_hex_2),
+            (Button) keyboardView.findViewById(R.id.keyboard_hex_3),
+        };
 
         HexSymbolOnClickListener listener = new HexSymbolOnClickListener();
-        keyboardView.findViewById(R.id.keyboard_hex_0).setOnClickListener(listener);
-        keyboardView.findViewById(R.id.keyboard_hex_1).setOnClickListener(listener);
-        keyboardView.findViewById(R.id.keyboard_hex_2).setOnClickListener(listener);
-        keyboardView.findViewById(R.id.keyboard_hex_3).setOnClickListener(listener);
+
+        for (Button hexSymbol : hexSymbols) {
+            hexSymbol.setOnClickListener(listener);
+        }
 
         return keyboardView;
     }
@@ -61,7 +65,7 @@ public class KeyboardFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putString(HEX_SYMBOL_PRESSED_TAG, hexSymbolPressedTag);
+        outState.putInt(HEX_SYMBOL_PRESSED_INDEX, hexSymbolPressedIndex);
         super.onSaveInstanceState(outState);
     }
 
@@ -69,32 +73,37 @@ public class KeyboardFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (hexSymbolPressedTag == null) return;
+        if (hexSymbolPressedIndex == -1) return;
 
         if (requestCode == HEX_SYMBOL_REQUEST && resultCode == Activity.RESULT_OK) {
+            hexSymbols[hexSymbolPressedIndex].setText(String.format("%X", data.getIntExtra(HEX_SYMBOL_VALUE, 0)));
 
-            View symbolView = null;
-            switch (hexSymbolPressedTag) {
-                case "hex_0":
-                    symbolView = keyboardView.findViewById(R.id.keyboard_hex_0);
-                    break;
-                case "hex_1":
-                    symbolView = keyboardView.findViewById(R.id.keyboard_hex_1);
-                    break;
-                case "hex_2":
-                    symbolView = keyboardView.findViewById(R.id.keyboard_hex_2);
-                    break;
-                case "hex_3":
-                    symbolView = keyboardView.findViewById(R.id.keyboard_hex_3);
-                    break;
+            StringBuilder sb = new StringBuilder();
+            for (int i = hexSymbols.length - 1; i >= 0; i--) {
+                sb.append(hexSymbols[i].getText());
             }
+            int regValue = Integer.parseInt(sb.toString(), 16);
 
-            if (symbolView != null) {
-                ((TextView) symbolView).setText(String.format("%X", data.getIntExtra(HEX_SYMBOL_VALUE, 0)));
-            }
+            updateBinary(regValue);
+            callbacks.updateKeyRegister(regValue);
         }
 
-        hexSymbolPressedTag = null;
+        hexSymbolPressedIndex = -1;
+    }
+
+
+    public void fillKeyboard(int value) {
+        String hexValue = Utils.toHex(value, KEYBOARD_WIDTH);
+        for (int i = 0; i < hexSymbols.length; i++) {
+            hexSymbols[i].setText("" + hexValue.charAt(hexValue.length() - 1 - i));
+        }
+
+        updateBinary(value);
+    }
+
+
+    protected void updateBinary(int value) {
+        ((TextView) keyboardView.findViewById(R.id.keyboard_binary)).setText(Utils.toBinary(value, KEYBOARD_WIDTH));
     }
 
 
@@ -102,8 +111,8 @@ public class KeyboardFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            if (hexSymbolPressedTag != null) return;
-            hexSymbolPressedTag = (String) view.getTag();
+            if (hexSymbolPressedIndex != -1) return;
+            hexSymbolPressedIndex = Integer.parseInt((String) view.getTag());
             Intent intent = new Intent(getActivity(), KeyboardPopupActivity.class);
             startActivityForResult(intent, HEX_SYMBOL_REQUEST);
         }

@@ -4,14 +4,17 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import ru.ifmo.cs.bcomp.BasicComp;
+import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.MicroPrograms;
 import ru.ifmo.cs.elements.Memory;
 
+import static ru.ifmo.cs.bcomp.CPU.Reg.KEY;
 
 public class BCompInstance extends Fragment {
 
     public interface BCompCallbacks {
         void fillMemory(int[] values);
+        void fillKeyboard(int value);
     }
 
     private BCompCallbacks callbacks;
@@ -47,16 +50,24 @@ public class BCompInstance extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        updateUI();
+        triggerUpdateUI();
     }
 
 
-    private void updateUI() {
-        Memory memory = bcomp.getCPU().getMemory();
+    private void triggerUpdateUI() {
+        CPU cpu = bcomp.getCPU();
+        callbacks.fillKeyboard(cpu.getRegister(KEY).getValue());
+
+        Memory memory = cpu.getMemory();
         int[] memoryValues = new int[memory.getSize()];
         for (int i = 0; i < memoryValues.length; i++) {
             memoryValues[i] = memory.getValue(i);
         }
         callbacks.fillMemory(memoryValues);
+    }
+
+
+    public void updateKeyRegister(int value) {
+        bcomp.getCPU().setRegKey(value);
     }
 }

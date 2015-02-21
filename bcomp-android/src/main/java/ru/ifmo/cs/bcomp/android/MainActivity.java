@@ -3,13 +3,13 @@ package ru.ifmo.cs.bcomp.android;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
-import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity implements BCompInstance.BCompCallbacks, KeyboardFragment.KeyboardCallbacks {
 
     private static final String TAG_BASIC_COMPUTER_INSTANCE = "bcomp_fragment";
     private BCompInstance bci;
     private MemoryFragment memory;
+    private KeyboardFragment keyboard;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -20,6 +20,7 @@ public class MainActivity extends ActionBarActivity implements BCompInstance.BCo
         FragmentManager fm = getSupportFragmentManager();
 
         memory = (MemoryFragment) fm.findFragmentById(R.id.memory_fragment);
+        keyboard = (KeyboardFragment) fm.findFragmentById(R.id.keyboard_fragment);
 
         bci = (BCompInstance) fm.findFragmentByTag(TAG_BASIC_COMPUTER_INSTANCE);
 
@@ -38,8 +39,8 @@ public class MainActivity extends ActionBarActivity implements BCompInstance.BCo
     /* KeyboardFragment callbacks */
 
     @Override
-    public void onKeyboardPressed() {
-        Toast.makeText(this, "Keyboard register pressed!", Toast.LENGTH_SHORT).show();
+    public void updateKeyRegister(int value) {
+        bci.updateKeyRegister(value);
     }
 
 
@@ -48,5 +49,10 @@ public class MainActivity extends ActionBarActivity implements BCompInstance.BCo
     @Override
     public void fillMemory(int[] values) {
         memory.fillMemory(values);
+    }
+
+    @Override
+    public void fillKeyboard(int value) {
+        keyboard.fillKeyboard(value);
     }
 }

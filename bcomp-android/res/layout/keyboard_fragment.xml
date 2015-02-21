@@ -27,28 +27,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/keyboard_hex_3"
-                android:tag="hex_3" />
+                android:tag="3" />
 
             <Button
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/keyboard_hex_2"
-                android:tag="hex_2" />
+                android:tag="2" />
 
             <Button
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/keyboard_hex_1"
-                android:tag="hex_1" />
+                android:tag="1" />
 
             <Button
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/keyboard_hex_0"
-                android:tag="hex_0" />
+                android:tag="0" />
 
             <Button
                 style="?android:attr/buttonBarButtonStyle"
