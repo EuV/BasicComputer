@@ -23,6 +23,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="KeyboardPopupActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+
     </application>
 
 </manifest>
