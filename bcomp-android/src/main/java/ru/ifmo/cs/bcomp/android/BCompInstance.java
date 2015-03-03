@@ -20,9 +20,12 @@ public class BCompInstance extends Fragment {
     private BCompCallbacks callbacks;
     private final BasicComp bcomp;
 
+    public final CPU cpu;
+
 
     public BCompInstance() throws Exception {
         bcomp = new BasicComp(MicroPrograms.getMicroProgram(MicroPrograms.DEFAULT_MICROPROGRAM));
+        cpu = bcomp.getCPU();
     }
 
     @Override
@@ -55,7 +58,6 @@ public class BCompInstance extends Fragment {
 
 
     private void triggerUpdateUI() {
-        CPU cpu = bcomp.getCPU();
         callbacks.fillKeyboard(cpu.getRegister(KEY).getValue());
 
         Memory memory = cpu.getMemory();
@@ -68,6 +70,6 @@ public class BCompInstance extends Fragment {
 
 
     public void updateKeyRegister(int value) {
-        bcomp.getCPU().setRegKey(value);
+        cpu.setRegKey(value);
     }
 }

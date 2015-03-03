@@ -3,13 +3,18 @@ package ru.ifmo.cs.bcomp.android;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
+import ru.ifmo.cs.bcomp.CPU;
 
-public class MainActivity extends ActionBarActivity implements BCompInstance.BCompCallbacks, KeyboardFragment.KeyboardCallbacks {
+public class MainActivity extends ActionBarActivity implements
+    BCompInstance.BCompCallbacks,
+    KeyboardFragment.KeyboardCallbacks,
+    BasicFragment.BasicCallbacks {
 
     private static final String TAG_BASIC_COMPUTER_INSTANCE = "bcomp_fragment";
     private BCompInstance bci;
-    private MemoryFragment memory;
-    private KeyboardFragment keyboard;
+    private MemoryFragment memoryFragment;
+    private KeyboardFragment keyboardFragment;
+    private BasicFragment basicFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,8 +24,9 @@ public class MainActivity extends ActionBarActivity implements BCompInstance.BCo
 
         FragmentManager fm = getSupportFragmentManager();
 
-        memory = (MemoryFragment) fm.findFragmentById(R.id.memory_fragment);
-        keyboard = (KeyboardFragment) fm.findFragmentById(R.id.keyboard_fragment);
+        memoryFragment = (MemoryFragment) fm.findFragmentById(R.id.memory_fragment);
+        keyboardFragment = (KeyboardFragment) fm.findFragmentById(R.id.keyboard_fragment);
+        basicFragment = (BasicFragment) TabAdapter.getAdapter().getItem(TabAdapter.BC_TAB);
 
         bci = (BCompInstance) fm.findFragmentByTag(TAG_BASIC_COMPUTER_INSTANCE);
 
@@ -44,15 +50,23 @@ public class MainActivity extends ActionBarActivity implements BCompInstance.BCo
     }
 
 
+    /* BasicFragment callbacks */
+
+    @Override
+    public CPU getCPU() {
+        return bci.cpu;
+    }
+
+
     /* BCompInstance callbacks */
 
     @Override
     public void fillMemory(int[] values) {
-        memory.fillMemory(values);
+        memoryFragment.fillMemory(values);
     }
 
     @Override
     public void fillKeyboard(int value) {
-        keyboard.fillKeyboard(value);
+        keyboardFragment.fillKeyboard(value);
     }
 }
