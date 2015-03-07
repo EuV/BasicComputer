@@ -40,10 +40,10 @@ public class KeyboardFragment extends Fragment {
         keyboardView = inflater.inflate(R.layout.keyboard_fragment, container, false);
 
         hexSymbols = new Button[]{
-            (Button) keyboardView.findViewById(R.id.keyboard_hex_0),
-            (Button) keyboardView.findViewById(R.id.keyboard_hex_1),
-            (Button) keyboardView.findViewById(R.id.keyboard_hex_2),
-            (Button) keyboardView.findViewById(R.id.keyboard_hex_3),
+            (Button) keyboardView.findViewWithTag("0"),
+            (Button) keyboardView.findViewWithTag("1"),
+            (Button) keyboardView.findViewWithTag("2"),
+            (Button) keyboardView.findViewWithTag("3")
         };
 
         HexSymbolOnClickListener listener = new HexSymbolOnClickListener();

@@ -3,4 +3,6 @@
     <string name="app_name">БЭВМ</string>
     <string name="dummy_register">Register</string>
     <string name="keyboard_register">Keyboard register</string>
+    <string name="keyboard_address">Ad</string>
+    <string name="keyboard_write">Wr</string>
 </resources>
