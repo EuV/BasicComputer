@@ -19,17 +19,9 @@ public class MainActivity extends ActionBarActivity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        TabAdapter.setup(this);
 
         FragmentManager fm = getSupportFragmentManager();
-
-        memoryFragment = (MemoryFragment) fm.findFragmentById(R.id.memory_fragment);
-        keyboardFragment = (KeyboardFragment) fm.findFragmentById(R.id.keyboard_fragment);
-        basicFragment = (BasicFragment) TabAdapter.getAdapter().getItem(TabAdapter.BC_TAB);
-
         bci = (BCompInstance) fm.findFragmentByTag(TAG_BASIC_COMPUTER_INSTANCE);
-
         if (bci == null) {
             try {
                 bci = new BCompInstance();
@@ -39,6 +31,13 @@ public class MainActivity extends ActionBarActivity implements
             }
             fm.beginTransaction().add(bci, TAG_BASIC_COMPUTER_INSTANCE).commit();
         }
+
+        setContentView(R.layout.main);
+        TabAdapter.setup(this);
+
+        memoryFragment = (MemoryFragment) fm.findFragmentById(R.id.memory_fragment);
+        keyboardFragment = (KeyboardFragment) fm.findFragmentById(R.id.keyboard_fragment);
+        basicFragment = (BasicFragment) TabAdapter.getAdapter().getItem(TabAdapter.BC_TAB);
     }
 
 

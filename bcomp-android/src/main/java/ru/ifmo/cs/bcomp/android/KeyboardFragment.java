@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.Utils;
 
 
@@ -24,7 +25,8 @@ public class KeyboardFragment extends Fragment {
     public static final String HEX_SYMBOL_VALUE = "hex_symbol_value";
     public static final String HEX_SYMBOL_PRESSED_INDEX = "hex_symbol_tag";
 
-    private KeyboardCallbacks callbacks;
+    private MainActivity callbacks;
+    private CPU cpu;
     private View keyboardView;
     private Integer hexSymbolPressedIndex = -1;
     private Button[] hexSymbols;
@@ -32,6 +34,9 @@ public class KeyboardFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (cpu == null) {
+            cpu = callbacks.getCPU();
+        }
 
         if (savedInstanceState != null) {
             hexSymbolPressedIndex = savedInstanceState.getInt(HEX_SYMBOL_PRESSED_INDEX);
@@ -52,6 +57,20 @@ public class KeyboardFragment extends Fragment {
             hexSymbol.setOnClickListener(listener);
         }
 
+        keyboardView.findViewById(R.id.keyboard_address).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cpu.startSetAddr();
+            }
+        });
+
+        keyboardView.findViewById(R.id.keyboard_write).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cpu.startWrite();
+            }
+        });
+
         return keyboardView;
     }
 
@@ -59,7 +78,7 @@ public class KeyboardFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        callbacks = (KeyboardCallbacks) activity;
+        callbacks = (MainActivity) activity;
     }
 
 
