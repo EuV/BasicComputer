@@ -12,37 +12,37 @@ import android.widget.Button;
 import android.widget.TextView;
 import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.Utils;
+import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
+
+import static ru.ifmo.cs.bcomp.CPU.Reg.KEY;
 
 
 public class KeyboardFragment extends Fragment {
-
-    public interface KeyboardCallbacks {
-        void updateKeyRegister(int value);
-    }
-
     public static final int HEX_SYMBOL_REQUEST = 0;
     public static final int KEYBOARD_WIDTH = 16;
     public static final String HEX_SYMBOL_VALUE = "hex_symbol_value";
     public static final String HEX_SYMBOL_PRESSED_INDEX = "hex_symbol_tag";
 
-    private MainActivity callbacks;
+    private BCompHolder bCompHolder;
     private CPU cpu;
-    private View keyboardView;
     private Integer hexSymbolPressedIndex = -1;
     private Button[] hexSymbols;
+    private TextView binaryView;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (cpu == null) {
-            cpu = callbacks.getCPU();
+            cpu = bCompHolder.getCPU();
         }
 
         if (savedInstanceState != null) {
             hexSymbolPressedIndex = savedInstanceState.getInt(HEX_SYMBOL_PRESSED_INDEX);
         }
 
-        keyboardView = inflater.inflate(R.layout.keyboard_fragment, container, false);
+        View keyboardView = inflater.inflate(R.layout.keyboard_fragment, container, false);
+
+        binaryView = (TextView) keyboardView.findViewById(R.id.keyboard_binary);
 
         hexSymbols = new Button[]{
             (Button) keyboardView.findViewWithTag("0"),
@@ -71,6 +71,8 @@ public class KeyboardFragment extends Fragment {
             }
         });
 
+        fillKeyboard();
+
         return keyboardView;
     }
 
@@ -78,7 +80,7 @@ public class KeyboardFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        callbacks = (MainActivity) activity;
+        bCompHolder = (BCompHolder) activity;
     }
 
 
@@ -104,14 +106,15 @@ public class KeyboardFragment extends Fragment {
             int regValue = Integer.parseInt(sb.toString(), 16);
 
             updateBinary(regValue);
-            callbacks.updateKeyRegister(regValue);
+            cpu.setRegKey(regValue);
         }
 
         hexSymbolPressedIndex = -1;
     }
 
 
-    public void fillKeyboard(int value) {
+    protected void fillKeyboard() {
+        int value = cpu.getRegister(KEY).getValue();
         String hexValue = Utils.toHex(value, KEYBOARD_WIDTH);
         for (int i = 0; i < hexSymbols.length; i++) {
             hexSymbols[i].setText("" + hexValue.charAt(hexValue.length() - 1 - i));
@@ -122,12 +125,11 @@ public class KeyboardFragment extends Fragment {
 
 
     protected void updateBinary(int value) {
-        ((TextView) keyboardView.findViewById(R.id.keyboard_binary)).setText(Utils.toBinary(value, KEYBOARD_WIDTH));
+        binaryView.setText(Utils.toBinary(value, KEYBOARD_WIDTH));
     }
 
 
     protected class HexSymbolOnClickListener implements OnClickListener {
-
         @Override
         public void onClick(View view) {
             if (hexSymbolPressedIndex != -1) return;

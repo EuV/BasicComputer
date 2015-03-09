@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import ru.ifmo.cs.bcomp.CPU;
+import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
 import ru.ifmo.cs.elements.Register;
 
 import java.util.ArrayList;
@@ -14,23 +15,17 @@ import java.util.List;
 
 
 public class BasicFragment extends Fragment {
-
-    public interface BasicCallbacks {
-        CPU getCPU();
-    }
-
-    private BasicCallbacks callbacks;
+    private BCompHolder bCompHolder;
     private CPU cpu;
-    private View basicView;
     private List<RegisterView> registerViews;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (cpu == null) {
-            cpu = callbacks.getCPU();
+            cpu = bCompHolder.getCPU();
         }
 
-        basicView = inflater.inflate(R.layout.basic_fragment, container, false);
+        View basicView = inflater.inflate(R.layout.basic_fragment, container, false);
 
         registerViews = new ArrayList<>();
 
@@ -52,7 +47,7 @@ public class BasicFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        callbacks = (BasicCallbacks) activity;
+        bCompHolder = (BCompHolder) activity;
     }
 
 
