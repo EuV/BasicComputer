@@ -12,7 +12,6 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
     private BCompInstance bci;
     private MemoryFragment memoryFragment;
     private KeyboardFragment keyboardFragment;
-    private BasicFragment basicFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,12 +34,26 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
 
         memoryFragment = (MemoryFragment) fm.findFragmentById(R.id.memory_fragment);
         keyboardFragment = (KeyboardFragment) fm.findFragmentById(R.id.keyboard_fragment);
-        basicFragment = (BasicFragment) TabAdapter.getAdapter().getItem(TabAdapter.BC_TAB);
     }
 
 
     @Override
     public CPU getCPU() {
         return bci.cpu;
+    }
+
+
+    @Override
+    public void tickFinished() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TabAdapter tabAdapter = TabAdapter.getAdapter();
+                BasicFragment basicFragment = (BasicFragment) tabAdapter.getFragment(TabAdapter.BC_TAB);
+                if (basicFragment != null) {
+                    basicFragment.updateRegisterViews();
+                }
+            }
+        });
     }
 }

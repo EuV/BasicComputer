@@ -10,14 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TabAdapter extends FragmentStatePagerAdapter {
     public static final int BC_TAB = 0;
     public static final int IO_TAB = 1;
     public static final int MP_TAB = 2;
 
-    private static final BasicFragment basicFragment = new BasicFragment();
-
     private static TabAdapter adapter;
+
+    Map<Integer, Fragment> tabReferenceMap = new HashMap<>();
 
     public TabAdapter(FragmentManager fm) {
         super(fm);
@@ -56,11 +59,18 @@ public class TabAdapter extends FragmentStatePagerAdapter {
     }
 
 
+    public Fragment getFragment(int tab) {
+        return tabReferenceMap.get(tab);
+    }
+
+
     @Override
-    public Fragment getItem(int tab) {
-        switch (tab) {
+    public Fragment getItem(int index) {
+        switch (index) {
 
             case BC_TAB: {
+                Fragment basicFragment = new BasicFragment();
+                tabReferenceMap.put(index, basicFragment);
                 return basicFragment;
             }
 
@@ -68,7 +78,7 @@ public class TabAdapter extends FragmentStatePagerAdapter {
             case MP_TAB: {
                 YetAnotherFragment fragment = new YetAnotherFragment();
                 Bundle args = new Bundle();
-                args.putString(YetAnotherFragment.NAME, "Работа с " + ((tab == 1) ? "ВУ" : "МПУ"));
+                args.putString(YetAnotherFragment.NAME, "Работа с " + ((index == 1) ? "ВУ" : "МПУ"));
                 fragment.setArguments(args);
                 return fragment;
             }
@@ -76,6 +86,22 @@ public class TabAdapter extends FragmentStatePagerAdapter {
 
         return null;
     }
+
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        Fragment fragment = (Fragment) super.instantiateItem(container, position);
+        tabReferenceMap.put(position, fragment);
+        return fragment;
+    }
+
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        super.destroyItem(container, position, object);
+        tabReferenceMap.remove(position);
+    }
+
 
     @Override
     public int getCount() {

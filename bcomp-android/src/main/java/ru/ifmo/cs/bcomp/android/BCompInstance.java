@@ -11,6 +11,7 @@ public class BCompInstance extends Fragment {
 
     public interface BCompHolder {
         CPU getCPU();
+        void tickFinished();
     }
 
     private BCompHolder bCompHolder;
@@ -22,6 +23,14 @@ public class BCompInstance extends Fragment {
     public BCompInstance() throws Exception {
         bcomp = new BasicComp(MicroPrograms.getMicroProgram(MicroPrograms.DEFAULT_MICROPROGRAM));
         cpu = bcomp.getCPU();
+        cpu.setTickFinishListener(new Runnable() {
+            @Override
+            public void run() {
+                if (bCompHolder != null) {
+                    bCompHolder.tickFinished();
+                }
+            }
+        });
     }
 
     @Override
