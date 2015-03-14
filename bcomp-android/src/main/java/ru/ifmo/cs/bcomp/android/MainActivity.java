@@ -56,4 +56,15 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
             }
         });
     }
+
+
+    @Override
+    public void updateMemory() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                memoryFragment.fillMemory();
+            }
+        });
+    }
 }

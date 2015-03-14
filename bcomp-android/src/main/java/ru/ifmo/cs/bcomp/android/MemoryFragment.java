@@ -1,13 +1,13 @@
 package ru.ifmo.cs.bcomp.android;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
 import ru.ifmo.cs.elements.Memory;
@@ -16,7 +16,7 @@ import ru.ifmo.cs.elements.Memory;
 public class MemoryFragment extends Fragment {
     private BCompHolder bCompHolder;
     private CPU cpu;
-    private MemoryAdapter memoryAdapter;
+    private TextView memoryView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -24,28 +24,24 @@ public class MemoryFragment extends Fragment {
             cpu = bCompHolder.getCPU();
         }
 
-        View memoryView = inflater.inflate(R.layout.memory_fragment, container, false);
+        View memoryFragment = inflater.inflate(R.layout.memory_fragment, container, false);
 
-        RecyclerView memoryRecyclerView = (RecyclerView) memoryView.findViewById(R.id.memory_recycler_view);
-        memoryRecyclerView.setHasFixedSize(true);
-        memoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        memoryAdapter = new MemoryAdapter();
+        memoryView = (TextView) memoryFragment.findViewById(R.id.memory_view);
+        memoryView.setTypeface(Typeface.create("Courier New", Typeface.NORMAL));
         fillMemory();
-        memoryRecyclerView.setAdapter(memoryAdapter);
 
-        return memoryView;
+        return memoryFragment;
     }
 
 
     protected void fillMemory() {
         Memory memory = cpu.getMemory();
-        String[] rows = new String[memory.getSize()];
-        for (int i = 0; i < rows.length; i++) {
-            rows[i] = String.format("%03X | %04X", i, memory.getValue(i));
+        int page = memory.getAddrValue() & 0xFFF0;
+        StringBuilder rows = new StringBuilder();
+        for (int i = 0; i < 16; i++) {
+            rows.append(String.format("%03X | %04X\n", page + i, memory.getValue(page + i)));
         }
-        memoryAdapter.changeDataSet(rows);
-        memoryAdapter.notifyDataSetChanged();
+        memoryView.setText(rows);
     }
 
 
