@@ -19,7 +19,7 @@
             style="@style/ControlButton"
             android:layout_width="40dp"
             android:text="@string/control_read"
-            android:id="@+id/keyboard_write" />
+            android:id="@+id/control_read" />
 
         <Button
             style="@style/ControlButton"

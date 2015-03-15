@@ -9,6 +9,8 @@ import ru.ifmo.cs.bcomp.ControlSignal;
 import ru.ifmo.cs.bcomp.MicroPrograms;
 import ru.ifmo.cs.elements.DataDestination;
 
+import java.util.concurrent.TimeUnit;
+
 public class BCompInstance extends Fragment {
 
     public interface BCompHolder {
@@ -50,6 +52,10 @@ public class BCompInstance extends Fragment {
             public void run() {
                 if (bCompHolder != null) {
                     bCompHolder.tickFinished();
+                }
+                try {
+                    TimeUnit.MILLISECONDS.sleep(10);
+                } catch (InterruptedException ignored) {
                 }
             }
         });
