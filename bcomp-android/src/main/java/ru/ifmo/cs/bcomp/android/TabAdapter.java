@@ -36,26 +36,6 @@ public class TabAdapter extends FragmentStatePagerAdapter {
         adapter = new TabAdapter(activity.getSupportFragmentManager());
         ViewPager viewPager = (ViewPager) activity.findViewById(R.id.tab_view_pager);
         viewPager.setAdapter(adapter);
-
-        if (activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            return;
-        }
-
-        adjustViewPager(activity, viewPager);
-    }
-
-
-    protected static void adjustViewPager(MainActivity activity, final ViewPager viewPager) {
-        final View contentStub = activity.findViewById(R.id.tab_content_stub);
-        contentStub.getViewTreeObserver().addOnGlobalLayoutListener(
-            new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    ViewGroup.LayoutParams params = viewPager.getLayoutParams();
-                    params.height = contentStub.getHeight();
-                    viewPager.setLayoutParams(params);
-                }
-            });
     }
 
 

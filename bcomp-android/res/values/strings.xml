@@ -3,6 +3,12 @@
     <string name="app_name">БЭВМ</string>
     <string name="dummy_register">Register</string>
     <string name="keyboard_register">Keyboard register</string>
-    <string name="keyboard_address">Ad</string>
-    <string name="keyboard_write">Wr</string>
+    <string name="keyboard_address">Addr</string>
+    <string name="keyboard_write">Write</string>
+    <string name="control_read">Rd</string>
+    <string name="control_start">Srt</string>
+    <string name="control_continue">Cnt</string>
+    <string name="control_run_state_off">Halt</string>
+    <string name="control_run_state_on">Run</string>
+    <string name="control_clock_state">Stp</string>
 </resources>

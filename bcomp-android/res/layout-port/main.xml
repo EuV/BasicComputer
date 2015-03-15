@@ -8,7 +8,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7">
+        android:layout_weight="6">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -49,5 +49,16 @@
         android:layout_height="0dp"
         android:layout_margin="5dp"
         tools:layout="@layout/keyboard_fragment" />
+
+    <fragment
+        android:name="ru.ifmo.cs.bcomp.android.ControlFragment"
+        android:id="@+id/control_fragment"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        tools:layout="@layout/control_fragment" />
 
 </LinearLayout>

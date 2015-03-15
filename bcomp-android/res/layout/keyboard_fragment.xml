@@ -22,9 +22,7 @@
             android:gravity="center">
 
             <Button
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/ControlButton"
                 android:text="@string/keyboard_address"
                 android:id="@+id/keyboard_address" />
 
@@ -45,9 +43,7 @@
                 android:tag="0" />
 
             <Button
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/ControlButton"
                 android:text="@string/keyboard_write"
                 android:id="@+id/keyboard_write" />
 
