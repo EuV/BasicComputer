@@ -11,4 +11,13 @@
     <string name="control_run_state_off">Halt</string>
     <string name="control_run_state_on">Run</string>
     <string name="control_clock_state">Stp</string>
+    <string name="running_cycle_title">Control unit</string>
+    <string-array name="running_cycles">
+        <item>Выборка команды</item>
+        <item>Выбора адреса</item>
+        <item>Исполнение</item>
+        <item>Прерывание</item>
+        <item>Пультовая операция</item>
+        <item>Программа</item>
+    </string-array>
 </resources>

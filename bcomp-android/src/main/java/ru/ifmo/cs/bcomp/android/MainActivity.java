@@ -51,7 +51,7 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
                 TabAdapter tabAdapter = TabAdapter.getAdapter();
                 BasicFragment basicFragment = (BasicFragment) tabAdapter.getFragment(TabAdapter.BC_TAB);
                 if (basicFragment != null) {
-                    basicFragment.updateRegisterViews();
+                    basicFragment.updateViews();
                 }
             }
         });

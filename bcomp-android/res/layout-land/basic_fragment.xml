@@ -43,6 +43,11 @@
                 android:tag="Акк"
                 app:full_view="false" />
 
+            <ru.ifmo.cs.bcomp.android.RunningCycleView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/running_cycle" />
+
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

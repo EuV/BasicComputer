@@ -17,6 +17,7 @@ import java.util.List;
 public class BasicFragment extends Fragment {
     private BCompHolder bCompHolder;
     private CPU cpu;
+    private RunningCycleView runningCycleView;
     private List<RegisterView> registerViews;
 
     @Override
@@ -26,6 +27,8 @@ public class BasicFragment extends Fragment {
         }
 
         View basicView = inflater.inflate(R.layout.basic_fragment, container, false);
+
+        runningCycleView = (RunningCycleView) basicView.findViewById(R.id.running_cycle);
 
         registerViews = new ArrayList<>();
 
@@ -38,7 +41,7 @@ public class BasicFragment extends Fragment {
             registerViews.add(registerView);
         }
 
-        updateRegisterViews();
+        updateViews();
 
         return basicView;
     }
@@ -51,9 +54,11 @@ public class BasicFragment extends Fragment {
     }
 
 
-    public void updateRegisterViews() {
+    public void updateViews() {
         for (RegisterView view : registerViews) {
             view.update();
         }
+
+        runningCycleView.update(cpu);
     }
 }
