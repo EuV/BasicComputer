@@ -9,6 +9,8 @@ import ru.ifmo.cs.bcomp.ControlSignal;
 import ru.ifmo.cs.bcomp.MicroPrograms;
 import ru.ifmo.cs.elements.DataDestination;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class BCompInstance extends Fragment {
@@ -17,10 +19,27 @@ public class BCompInstance extends Fragment {
         CPU getCPU();
         void tickFinished();
         void updateMemory();
+        void registerNewSignals(Set<ControlSignal> buses);
+        Set<ControlSignal> getOpenSignals();
+    }
+
+    private class SignalHandler implements DataDestination {
+        private final ControlSignal signal;
+
+        public SignalHandler(ControlSignal signal) {
+            this.signal = signal;
+        }
+
+        @Override
+        public void setValue(int ignored) {
+            openSignals.add(signal);
+        }
     }
 
     private BCompHolder bCompHolder;
     private final BasicComp bcomp;
+    private final Set<ControlSignal> openSignals = new HashSet<>();
+    private final Set<ControlSignal> registeredSignals = new HashSet<>();
 
     public final CPU cpu;
 
@@ -47,6 +66,12 @@ public class BCompInstance extends Fragment {
         });
 
         cpu = bcomp.getCPU();
+        cpu.setTickStartListener(new Runnable() {
+            @Override
+            public void run() {
+                openSignals.clear();
+            }
+        });
         cpu.setTickFinishListener(new Runnable() {
             @Override
             public void run() {
@@ -60,6 +85,21 @@ public class BCompInstance extends Fragment {
             }
         });
     }
+
+
+    public void registerNewSignals(Set<ControlSignal> signals) {
+        for (ControlSignal signal : signals) {
+            if (registeredSignals.contains(signal)) continue;
+            bcomp.addDestination(signal, new SignalHandler(signal));
+            registeredSignals.add(signal);
+        }
+    }
+
+
+    public Set<ControlSignal> getOpenSignals() {
+        return openSignals;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

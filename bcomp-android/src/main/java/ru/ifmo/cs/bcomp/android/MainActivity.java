@@ -4,14 +4,16 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import ru.ifmo.cs.bcomp.CPU;
+import ru.ifmo.cs.bcomp.ControlSignal;
 import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
+
+import java.util.Set;
 
 public class MainActivity extends ActionBarActivity implements BCompHolder {
 
     private static final String TAG_BASIC_COMPUTER_INSTANCE = "bcomp_fragment";
     private BCompInstance bci;
     private MemoryFragment memoryFragment;
-    private KeyboardFragment keyboardFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,6 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
         TabAdapter.setup(this);
 
         memoryFragment = (MemoryFragment) fm.findFragmentById(R.id.memory_fragment);
-        keyboardFragment = (KeyboardFragment) fm.findFragmentById(R.id.keyboard_fragment);
     }
 
 
@@ -66,5 +67,17 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
                 memoryFragment.fillMemory();
             }
         });
+    }
+
+
+    @Override
+    public void registerNewSignals(Set<ControlSignal> signals) {
+        bci.registerNewSignals(signals);
+    }
+
+
+    @Override
+    public Set<ControlSignal> getOpenSignals() {
+        return bci.getOpenSignals();
     }
 }

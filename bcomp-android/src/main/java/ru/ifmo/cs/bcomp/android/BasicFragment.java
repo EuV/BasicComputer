@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import ru.ifmo.cs.bcomp.CPU;
+import ru.ifmo.cs.bcomp.ControlSignal;
 import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
 import ru.ifmo.cs.elements.Register;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 public class BasicFragment extends Fragment {
@@ -19,6 +21,7 @@ public class BasicFragment extends Fragment {
     private CPU cpu;
     private RunningCycleView runningCycleView;
     private List<RegisterView> registerViews;
+    private List<BusView> busViews;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class BasicFragment extends Fragment {
 
         registerViews = new ArrayList<>();
 
+        // TODO: find registers like buses?
         for (CPU.Reg reg : CPU.Reg.values()) {
             Register register = cpu.getRegister(reg);
             RegisterView registerView = (RegisterView) basicView.findViewWithTag(register.name);
@@ -39,6 +43,17 @@ public class BasicFragment extends Fragment {
 
             registerView.linkWithRegister(register);
             registerViews.add(registerView);
+        }
+
+        busViews = new ArrayList<>();
+
+        ViewGroup viewsHolder = (ViewGroup) basicView.findViewById(R.id.basic_views_holder);
+        for (int i = 0; i < viewsHolder.getChildCount(); i++) {
+            View view = viewsHolder.getChildAt(i);
+            if (view instanceof BusView) {
+                busViews.add((BusView) view);
+                bCompHolder.registerNewSignals(((BusView) view).getSignals());
+            }
         }
 
         updateViews();
@@ -55,8 +70,22 @@ public class BasicFragment extends Fragment {
 
 
     public void updateViews() {
-        for (RegisterView view : registerViews) {
-            view.update();
+        for (RegisterView registerView : registerViews) {
+            registerView.update();
+        }
+
+        Set<ControlSignal> openSignals = bCompHolder.getOpenSignals();
+        nextBusView:
+        for (BusView busView : busViews) {
+            for (ControlSignal busSignal : busView.getSignals()) {
+                if (openSignals.contains(busSignal)) {
+                    // TODO: activate()/deactivate()
+                    busView.mark(true);
+                    break nextBusView;
+                } else {
+                    busView.mark(false);
+                }
+            }
         }
 
         runningCycleView.update(cpu);

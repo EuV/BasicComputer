@@ -11,7 +11,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center">
+            android:gravity="center"
+            android:id="@+id/basic_views_holder">
 
             <ru.ifmo.cs.bcomp.android.RegisterView
                 android:layout_width="wrap_content"
@@ -47,6 +48,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/running_cycle" />
+
+            <ru.ifmo.cs.bcomp.android.BusView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="KEY_TO_ALU" />
+
+            <ru.ifmo.cs.bcomp.android.BusView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="MEMORY_WRITE" />
 
         </LinearLayout>
 
