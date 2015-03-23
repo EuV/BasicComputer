@@ -7,59 +7,90 @@
 
     <android.support.v7.widget.CardView style="@style/Content">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:id="@+id/basic_views_holder">
 
             <ru.ifmo.cs.bcomp.android.RegisterView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/Register"
                 android:tag="РК"
-                app:full_view="false" />
+                android:id="@+id/reg_rk"
+                app:full_view="false"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentTop="true" />
 
             <ru.ifmo.cs.bcomp.android.RegisterView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/Register"
                 android:tag="РА"
-                app:full_view="false" />
+                android:id="@+id/reg_ra"
+                app:full_view="false"
+                android:layout_below="@id/reg_rk"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                />
 
             <ru.ifmo.cs.bcomp.android.RegisterView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/Register"
                 android:tag="РД"
-                app:full_view="false" />
+                android:id="@+id/reg_rd"
+                app:full_view="false"
+                android:layout_below="@id/reg_ra"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                />
 
             <ru.ifmo.cs.bcomp.android.RegisterView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/Register"
                 android:tag="СК"
-                app:full_view="false" />
+                android:id="@+id/reg_sk"
+                app:full_view="false"
+                android:layout_below="@id/reg_rd"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                />
 
             <ru.ifmo.cs.bcomp.android.RegisterView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/Register"
                 android:tag="Акк"
-                app:full_view="false" />
+                android:id="@+id/reg_akk"
+                app:full_view="false"
+                android:layout_below="@id/reg_sk"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                />
 
             <ru.ifmo.cs.bcomp.android.RunningCycleView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/running_cycle" />
+                android:id="@+id/running_cycle"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                />
 
             <ru.ifmo.cs.bcomp.android.BusView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tag="KEY_TO_ALU" />
+                android:layout_width="20dp"
+                android:layout_height="0dp"
+                android:tag="KEY_TO_ALU"
+                android:id="@+id/bus_key_alu"
+                android:layout_toRightOf="@+id/reg_rk"
+                android:layout_alignTop="@+id/reg_rk"
+                android:layout_alignBottom="@+id/reg_ra" />
 
             <ru.ifmo.cs.bcomp.android.BusView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tag="MEMORY_WRITE" />
+                android:layout_width="20dp"
+                android:layout_height="0dp"
+                android:tag="MEMORY_WRITE"
+                android:id="@+id/bus_mem_wr"
+                android:layout_toRightOf="@+id/reg_rk"
+                android:layout_alignTop="@+id/reg_rd"
+                android:layout_alignBottom="@+id/reg_sk"
+                />
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 

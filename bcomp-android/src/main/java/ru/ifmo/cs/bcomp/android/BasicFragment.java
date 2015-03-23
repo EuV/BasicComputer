@@ -79,11 +79,10 @@ public class BasicFragment extends Fragment {
         for (BusView busView : busViews) {
             for (ControlSignal busSignal : busView.getSignals()) {
                 if (openSignals.contains(busSignal)) {
-                    // TODO: activate()/deactivate()
-                    busView.mark(true);
+                    busView.activate();
                     break nextBusView;
                 } else {
-                    busView.mark(false);
+                    busView.deactivate();
                 }
             }
         }
