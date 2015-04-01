@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/accent</item>
         <item name="android:textColor">@color/black_54</item>
         <item name="android:textColorPrimary">@color/black_87</item>
-        <item name="android:windowBackground">@color/primary_light</item>
+        <item name="android:windowBackground">@color/primary_50</item>
     </style>
 
 
@@ -36,7 +36,7 @@
         <item name="android:layout_marginRight">5dp</item>
         <item name="cardElevation">2dp</item>
         <item name="cardCornerRadius">0dp</item>
-        <item name="cardBackgroundColor">@color/primary_200</item>
+        <item name="cardBackgroundColor">@color/fragment_background</item>
     </style>
 
 
@@ -44,11 +44,17 @@
 
     <!-- Register -->
     <style name="Register">
-        <item name="android:layout_width">90dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/primary</item>
-        <item name="android:padding">5dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/register_height</item>
+        <item name="android:background">@color/primary_400</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="RegisterFixedWidth" parent="Register">
+        <item name="android:layout_width">@dimen/register_width</item>
     </style>
 
 

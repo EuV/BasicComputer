@@ -11,8 +11,8 @@ import ru.ifmo.cs.elements.Register;
 public class RegisterView extends TextView {
     private static final Typeface REGISTER_TYPEFACE = Typeface.create("Courier New", Typeface.NORMAL);
 
-    private boolean fullView;
-    private Register register;
+    protected boolean fullView;
+    protected Register register;
 
     public RegisterView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -27,15 +27,19 @@ public class RegisterView extends TextView {
         }
 
         if (isInEditMode()) {
-            setText(getTag().toString() + ((fullView) ? ": 1010 1111 0000 1111" : ": ABCD"));
+            setText(getTag().toString() + ((fullView) ? "\n1010 1111 0000 1111" : "\n0"));
         }
     }
 
     public void update() {
+        int value = register.getValue();
+        int width = register.getWidth();
         if (fullView) {
-            setText(register.fullname + ":\n" + Utils.toBinary(register.getValue(), register.getWidth()));
+            setText(register.fullname + " ("
+                + Utils.toHex(value, width) + ")\n"
+                + Utils.toBinary(value, width));
         } else {
-            setText(register.name + ": " + Utils.toHex(register.getValue(), register.getWidth()));
+            setText(register.name + "\n" + Utils.toHex(value, width));
         }
     }
 

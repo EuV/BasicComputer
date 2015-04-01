@@ -75,12 +75,11 @@ public class BasicFragment extends Fragment {
         }
 
         Set<ControlSignal> openSignals = bCompHolder.getOpenSignals();
-        nextBusView:
         for (BusView busView : busViews) {
             for (ControlSignal busSignal : busView.getSignals()) {
                 if (openSignals.contains(busSignal)) {
                     busView.activate();
-                    break nextBusView;
+                    break;
                 } else {
                     busView.deactivate();
                 }

@@ -19,7 +19,7 @@ public class BCompInstance extends Fragment {
         CPU getCPU();
         void tickFinished();
         void updateMemory();
-        void registerNewSignals(Set<ControlSignal> buses);
+        void registerNewSignals(Set<ControlSignal> signals);
         Set<ControlSignal> getOpenSignals();
     }
 

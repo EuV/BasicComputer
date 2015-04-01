@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="register_width">170dp</dimen>
+
+    <dimen name="register_top_offset">15dp</dimen>
+    <dimen name="register_vertical_space">15dp</dimen>
+    <dimen name="register_height">32dp</dimen>
+    <dimen name="register_height_half">15dp</dimen>
+    <dimen name="register_height_quarter">6dp</dimen>
+
+    <dimen name="bus_offset_x">15dp</dimen>
+    <dimen name="bus_offset_x_neg">-16dp</dimen>
+
+    <dimen name="bus_offset_y">15dp</dimen>
+    <dimen name="bus_offset_y_neg">-16dp</dimen>
+
+    <dimen name="alu_width">80dp</dimen>
+    <dimen name="alu_height">45dp</dimen>
+
+    <dimen name="alu_top_offset">40dp</dimen>
+    <dimen name="alu_top_offset_neg">-41dp</dimen>
+    <dimen name="alu_bottom_offset">25dp</dimen>
+
+    <dimen name="alu_outlet_top">20dp</dimen>
+    <dimen name="alu_outlet_top_2">57dp</dimen>
+    <dimen name="alu_outlet_bottom">40dp</dimen>
+</resources>

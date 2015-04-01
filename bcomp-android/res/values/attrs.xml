@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <declare-styleable name="RegisterView">
         <attr name="full_view" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="BusView">
+        <attr name="left" format="boolean" />
+        <attr name="left_padding" format="dimension" />
+        <attr name="top" format="boolean" />
+        <attr name="top_padding" format="dimension" />
+        <attr name="right" format="boolean" />
+        <attr name="right_padding" format="dimension" />
+        <attr name="bottom" format="boolean" />
+        <attr name="bottom_padding" format="dimension" />
+    </declare-styleable>
+
 </resources>

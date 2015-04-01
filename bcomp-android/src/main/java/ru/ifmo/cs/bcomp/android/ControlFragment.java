@@ -57,11 +57,12 @@ public class ControlFragment extends Fragment {
                 // We shouldn't just call invertRunState() because the change event is also fired during fragment recreation
                 if (running ^ isChecked) {
                     cpu.invertRunState();
+                    // TODO: Redraw State Register on the MP tab (there's its full view there)
                 }
             }
         });
 
-        ((CheckBox)controlView.findViewById(R.id.control_clock_state)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        ((CheckBox) controlView.findViewById(R.id.control_clock_state)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (cpu.getClockState() ^ !isChecked) {
