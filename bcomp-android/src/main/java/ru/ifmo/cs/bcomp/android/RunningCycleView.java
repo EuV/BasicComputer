@@ -12,7 +12,7 @@ import ru.ifmo.cs.bcomp.RunningCycle;
 import ru.ifmo.cs.bcomp.StateReg;
 
 public class RunningCycleView extends LinearLayout {
-    private static final Typeface REGISTER_TYPEFACE = Typeface.create("Courier New", Typeface.NORMAL);
+    private static final Typeface TYPEFACE = Typeface.create("Courier New", Typeface.NORMAL);
     private static final int COLOR_ACTIVE = Color.RED;
     private static final int COLOR_INACTIVE = Color.BLACK;
 
@@ -27,7 +27,7 @@ public class RunningCycleView extends LinearLayout {
         TextView title = new TextView(context);
         title.setText(context.getString(R.string.running_cycle_title));
         title.setGravity(Gravity.CENTER);
-        title.setTypeface(REGISTER_TYPEFACE);
+        title.setTypeface(TYPEFACE);
         addView(title);
 
         if (isInEditMode()) return;
@@ -40,7 +40,7 @@ public class RunningCycleView extends LinearLayout {
             cycles[i].setText(cycleNames[i]);
             cycles[i].setTextSize(10); // TODO decode from xml
             cycles[i].setGravity(Gravity.CENTER);
-            cycles[i].setTypeface(REGISTER_TYPEFACE);
+            cycles[i].setTypeface(TYPEFACE);
             addView(cycles[i]);
         }
     }

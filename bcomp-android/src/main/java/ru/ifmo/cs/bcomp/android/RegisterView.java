@@ -9,7 +9,7 @@ import ru.ifmo.cs.bcomp.Utils;
 import ru.ifmo.cs.elements.Register;
 
 public class RegisterView extends TextView {
-    private static final Typeface REGISTER_TYPEFACE = Typeface.create("Courier New", Typeface.NORMAL);
+    private static final Typeface TYPEFACE = Typeface.create("Courier New", Typeface.NORMAL);
 
     protected boolean fullView;
     protected Register register;
@@ -17,7 +17,7 @@ public class RegisterView extends TextView {
     public RegisterView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        setTypeface(REGISTER_TYPEFACE);
+        setTypeface(TYPEFACE);
 
         TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RegisterView, 0, 0);
         try {
