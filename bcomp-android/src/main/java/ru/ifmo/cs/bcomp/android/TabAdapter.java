@@ -1,14 +1,11 @@
 package ru.ifmo.cs.bcomp.android;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +14,7 @@ public class TabAdapter extends FragmentStatePagerAdapter {
     public static final int BC_TAB = 0;
     public static final int IO_TAB = 1;
     public static final int MP_TAB = 2;
+    public static final int ASM_TAB = 3;
 
     private static TabAdapter adapter;
 
@@ -62,6 +60,12 @@ public class TabAdapter extends FragmentStatePagerAdapter {
                 fragment.setArguments(args);
                 return fragment;
             }
+
+            case ASM_TAB: {
+                Fragment assemblerFragment = new AssemblerFragment();
+                tabReferenceMap.put(index, assemblerFragment);
+                return assemblerFragment;
+            }
         }
 
         return null;
@@ -85,6 +89,6 @@ public class TabAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }

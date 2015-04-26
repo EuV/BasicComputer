@@ -21,4 +21,5 @@
         <item>Пультовая операция</item>
         <item>Программа</item>
     </string-array>
+    <string name="delay_msg_format">Animation delay: %d ms.</string>
 </resources>

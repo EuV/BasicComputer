@@ -80,4 +80,10 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
     public Set<ControlSignal> getOpenSignals() {
         return bci.getOpenSignals();
     }
+
+
+    @Override
+    public void setTickDelay(long tickDelay) {
+        bci.setTickDelay(tickDelay);
+    }
 }

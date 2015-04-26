@@ -21,6 +21,7 @@ public class BCompInstance extends Fragment {
         void updateMemory();
         void registerNewSignals(Set<ControlSignal> signals);
         Set<ControlSignal> getOpenSignals();
+        void setTickDelay(long tickDelay);
     }
 
     private class SignalHandler implements DataDestination {
@@ -43,6 +44,7 @@ public class BCompInstance extends Fragment {
 
     public final CPU cpu;
 
+    private long tickDelay = 10;
 
     public BCompInstance() throws Exception {
         bcomp = new BasicComp(MicroPrograms.getMicroProgram(MicroPrograms.DEFAULT_MICROPROGRAM));
@@ -79,7 +81,7 @@ public class BCompInstance extends Fragment {
                     bCompHolder.tickFinished();
                 }
                 try {
-                    TimeUnit.MILLISECONDS.sleep(10);
+                    TimeUnit.MILLISECONDS.sleep(tickDelay);
                 } catch (InterruptedException ignored) {
                 }
             }
@@ -98,6 +100,11 @@ public class BCompInstance extends Fragment {
 
     public Set<ControlSignal> getOpenSignals() {
         return openSignals;
+    }
+
+
+    public void setTickDelay(long tickDelay) {
+        this.tickDelay = tickDelay;
     }
 
 
