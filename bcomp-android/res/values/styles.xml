@@ -47,9 +47,6 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">@dimen/register_height</item>
         <item name="android:background">@color/primary_400</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:paddingLeft">5dp</item>
-        <item name="android:paddingRight">5dp</item>
         <item name="android:gravity">center</item>
     </style>
 

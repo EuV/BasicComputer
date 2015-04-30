@@ -24,4 +24,6 @@
     <dimen name="alu_outlet_top">20dp</dimen>
     <dimen name="alu_outlet_top_2">57dp</dimen>
     <dimen name="alu_outlet_bottom">40dp</dimen>
+
+    <dimen name="register_text_size">12sp</dimen>
 </resources>

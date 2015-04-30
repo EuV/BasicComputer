@@ -15,7 +15,8 @@ public class StateRegisterView extends RegisterView {
         if (fullView) {
             super.update();
         } else {
-            setText(register.name + "\n" + Utils.toBinary(register.getValue(), 1));
+            headerView.setText(register.name);
+            valueView.setText(Utils.toBinary(register.getValue(), 1));
         }
     }
 }

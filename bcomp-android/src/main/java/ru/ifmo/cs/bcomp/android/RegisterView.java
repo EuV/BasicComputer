@@ -4,12 +4,16 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import ru.ifmo.cs.bcomp.Utils;
 import ru.ifmo.cs.elements.Register;
 
-public class RegisterView extends TextView {
+public class RegisterView extends LinearLayout {
     private static final Typeface TYPEFACE = Typeface.create("Courier New", Typeface.NORMAL);
+
+    protected TextView headerView;
+    protected TextView valueView;
 
     protected boolean fullView;
     protected Register register;
@@ -17,7 +21,12 @@ public class RegisterView extends TextView {
     public RegisterView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        setTypeface(TYPEFACE);
+        inflate(context, R.layout.register_view, this);
+        headerView = (TextView) findViewById(R.id.register_header);
+        valueView = (TextView) findViewById(R.id.register_value);
+
+        headerView.setTypeface(TYPEFACE);
+        valueView.setTypeface(TYPEFACE);
 
         TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RegisterView, 0, 0);
         try {
@@ -27,7 +36,8 @@ public class RegisterView extends TextView {
         }
 
         if (isInEditMode()) {
-            setText(getTag().toString() + ((fullView) ? "\n1010 1111 0000 1111" : "\n0"));
+            headerView.setText(getTag().toString());
+            valueView.setText((fullView) ? "1010 1111 0000 1111" : "0");
         }
     }
 
@@ -35,11 +45,11 @@ public class RegisterView extends TextView {
         int value = register.getValue();
         int width = register.getWidth();
         if (fullView) {
-            setText(register.fullname + " ("
-                + Utils.toHex(value, width) + ")\n"
-                + Utils.toBinary(value, width));
+            headerView.setText(register.fullname + " (" + Utils.toHex(value, width) + ")");
+            valueView.setText(Utils.toBinary(value, width));
         } else {
-            setText(register.name + "\n" + Utils.toHex(value, width));
+            headerView.setText(register.name);
+            valueView.setText(Utils.toHex(value, width));
         }
     }
 
