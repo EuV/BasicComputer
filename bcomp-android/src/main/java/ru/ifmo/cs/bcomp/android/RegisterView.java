@@ -10,8 +10,6 @@ import ru.ifmo.cs.bcomp.Utils;
 import ru.ifmo.cs.elements.Register;
 
 public class RegisterView extends LinearLayout {
-    private static final Typeface TYPEFACE = Typeface.create("Courier New", Typeface.NORMAL);
-
     protected TextView headerView;
     protected TextView valueView;
 
@@ -25,8 +23,8 @@ public class RegisterView extends LinearLayout {
         headerView = (TextView) findViewById(R.id.register_header);
         valueView = (TextView) findViewById(R.id.register_value);
 
-        headerView.setTypeface(TYPEFACE);
-        valueView.setTypeface(TYPEFACE);
+        headerView.setTypeface(Typeface.MONOSPACE);
+        valueView.setTypeface(Typeface.MONOSPACE);
 
         TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.RegisterView, 0, 0);
         try {

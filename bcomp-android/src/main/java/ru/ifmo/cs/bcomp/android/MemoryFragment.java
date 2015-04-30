@@ -27,7 +27,7 @@ public class MemoryFragment extends Fragment {
         View memoryFragment = inflater.inflate(R.layout.memory_fragment, container, false);
 
         memoryView = (TextView) memoryFragment.findViewById(R.id.memory_view);
-        memoryView.setTypeface(Typeface.create("Courier New", Typeface.NORMAL));
+        memoryView.setTypeface(Typeface.MONOSPACE);
         fillMemory();
 
         return memoryFragment;

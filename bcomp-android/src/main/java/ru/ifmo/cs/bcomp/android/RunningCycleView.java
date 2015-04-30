@@ -12,7 +12,6 @@ import ru.ifmo.cs.bcomp.RunningCycle;
 import ru.ifmo.cs.bcomp.StateReg;
 
 public class RunningCycleView extends LinearLayout {
-    private static final Typeface TYPEFACE = Typeface.create("Courier New", Typeface.NORMAL);
     private static final int COLOR_ACTIVE = Color.RED;
     private static final int COLOR_INACTIVE = Color.BLACK;
 
@@ -27,7 +26,7 @@ public class RunningCycleView extends LinearLayout {
         TextView title = new TextView(context);
         title.setText(context.getString(R.string.running_cycle_title));
         title.setGravity(Gravity.CENTER);
-        title.setTypeface(TYPEFACE);
+        title.setTypeface(Typeface.MONOSPACE);
         title.setBackgroundResource(R.color.register_header);
         title.setPadding(5,0,5,0); // TODO it's in pixel for now; move all the style to xml
         title.setTextSize(10);
@@ -43,7 +42,7 @@ public class RunningCycleView extends LinearLayout {
             cycles[i].setText(cycleNames[i]);
             cycles[i].setTextSize(10); // TODO decode from xml
             cycles[i].setGravity(Gravity.CENTER);
-            cycles[i].setTypeface(TYPEFACE);
+            cycles[i].setTypeface(Typeface.MONOSPACE);
             cycles[i].setBackgroundResource(R.color.register_value);
             addView(cycles[i]);
         }
