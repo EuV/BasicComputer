@@ -52,7 +52,6 @@ public class BCompInstance extends Fragment {
             @Override
             public void setValue(int ignored) {
                 if (bCompHolder != null) {
-                    // TODO: update only if needed
                     bCompHolder.updateMemory();
                 }
             }
@@ -61,7 +60,6 @@ public class BCompInstance extends Fragment {
             @Override
             public void setValue(int ignored) {
                 if (bCompHolder != null) {
-                    // TODO: update only one cell if possible
                     bCompHolder.updateMemory();
                 }
             }

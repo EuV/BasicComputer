@@ -18,7 +18,7 @@
             <fragment
                 android:name="ru.ifmo.cs.bcomp.android.MemoryFragment"
                 android:id="@+id/memory_fragment"
-                android:layout_weight="1"
+                android:layout_weight="@integer/memory_weight"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -28,7 +28,7 @@
 
             <TextView
                 android:id="@+id/tab_content_stub"
-                android:layout_weight="5"
+                android:layout_weight="@integer/content_weight"
                 android:layout_width="0dp"
                 android:layout_height="0dp" />
 

@@ -26,4 +26,6 @@
     <dimen name="alu_outlet_bottom">40dp</dimen>
 
     <dimen name="register_text_size">12sp</dimen>
+
+    <dimen name="memory_rows_padding">10dp</dimen>
 </resources>

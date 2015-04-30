@@ -20,4 +20,5 @@
         <item>Программа</item>
     </string-array>
     <string name="delay_msg_format">Задержка анимации: %d мс.</string>
+    <string name="memory">Память</string>
 </resources>
