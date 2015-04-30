@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">БЭВМ</string>
-    <string name="alu">ALU</string>
-    <string name="dummy_register">Register</string>
-    <string name="keyboard_register">Keyboard register</string>
+    <string name="alu">АЛУ</string>
     <string name="keyboard_address">Addr</string>
     <string name="keyboard_write">Write</string>
     <string name="control_read">Rd</string>
@@ -12,7 +10,7 @@
     <string name="control_run_state_off">Halt</string>
     <string name="control_run_state_on">Run</string>
     <string name="control_clock_state">Stp</string>
-    <string name="running_cycle_title">Control unit</string>
+    <string name="running_cycle_title">Устройство управления</string>
     <string-array name="running_cycles">
         <item>Выборка команды</item>
         <item>Выбора адреса</item>
@@ -21,5 +19,5 @@
         <item>Пультовая операция</item>
         <item>Программа</item>
     </string-array>
-    <string name="delay_msg_format">Animation delay: %d ms.</string>
+    <string name="delay_msg_format">Задержка анимации: %d мс.</string>
 </resources>

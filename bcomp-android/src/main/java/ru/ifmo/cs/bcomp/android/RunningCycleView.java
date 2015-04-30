@@ -28,6 +28,9 @@ public class RunningCycleView extends LinearLayout {
         title.setText(context.getString(R.string.running_cycle_title));
         title.setGravity(Gravity.CENTER);
         title.setTypeface(TYPEFACE);
+        title.setBackgroundResource(R.color.register_header);
+        title.setPadding(5,0,5,0); // TODO it's in pixel for now; move all the style to xml
+        title.setTextSize(10);
         addView(title);
 
         if (isInEditMode()) return;
@@ -41,6 +44,7 @@ public class RunningCycleView extends LinearLayout {
             cycles[i].setTextSize(10); // TODO decode from xml
             cycles[i].setGravity(Gravity.CENTER);
             cycles[i].setTypeface(TYPEFACE);
+            cycles[i].setBackgroundResource(R.color.register_value);
             addView(cycles[i]);
         }
     }
