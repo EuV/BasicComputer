@@ -60,6 +60,7 @@ public class KeyboardFragment extends Fragment {
         keyboardView.findViewById(R.id.keyboard_address).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                BCompVibrator.vibrate();
                 cpu.startSetAddr();
             }
         });
@@ -67,6 +68,7 @@ public class KeyboardFragment extends Fragment {
         keyboardView.findViewById(R.id.keyboard_write).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                BCompVibrator.vibrate();
                 cpu.startWrite();
             }
         });
@@ -133,6 +135,7 @@ public class KeyboardFragment extends Fragment {
         @Override
         public void onClick(View view) {
             if (hexSymbolPressedIndex != -1) return;
+            BCompVibrator.vibrate();
             hexSymbolPressedIndex = Integer.parseInt((String) view.getTag());
             Intent intent = new Intent(getActivity(), KeyboardPopupActivity.class);
             startActivityForResult(intent, HEX_SYMBOL_REQUEST);

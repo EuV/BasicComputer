@@ -31,6 +31,7 @@ public class ControlFragment extends Fragment {
         controlView.findViewById(R.id.control_read).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                BCompVibrator.vibrate();
                 cpu.startRead();
             }
         });
@@ -38,6 +39,7 @@ public class ControlFragment extends Fragment {
         controlView.findViewById(R.id.control_start).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                BCompVibrator.vibrate();
                 cpu.startStart();
             }
         });
@@ -45,6 +47,7 @@ public class ControlFragment extends Fragment {
         controlView.findViewById(R.id.control_continue).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                BCompVibrator.vibrate();
                 cpu.startContinue();
             }
         });
@@ -56,6 +59,7 @@ public class ControlFragment extends Fragment {
 
                 // We shouldn't just call invertRunState() because the change event is also fired during fragment recreation
                 if (running ^ isChecked) {
+                    BCompVibrator.vibrate();
                     cpu.invertRunState();
                     // TODO: Redraw State Register on the MP tab (there's its full view there)
                 }
@@ -66,6 +70,7 @@ public class ControlFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (cpu.getClockState() ^ !isChecked) {
+                    BCompVibrator.vibrate();
                     cpu.invertClockState();
                 }
             }

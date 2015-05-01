@@ -45,6 +45,7 @@ public class KeyboardPopupActivity extends Activity {
             setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    BCompVibrator.vibrate();
                     Intent resultData = new Intent();
                     resultData.putExtra(KeyboardFragment.HEX_SYMBOL_VALUE, value);
                     setResult(Activity.RESULT_OK, resultData);

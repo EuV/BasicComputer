@@ -34,6 +34,8 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
         setContentView(R.layout.main);
         TabAdapter.setup(this);
 
+        BCompVibrator.init(this);
+
         memoryFragment = (MemoryFragment) fm.findFragmentById(R.id.memory_fragment);
     }
 
