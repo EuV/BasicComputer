@@ -78,13 +78,4 @@
         <item name="android:scaleType">centerInside</item>
     </style>
 
-    <!-- Control Button -->
-    <style name="ControlButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@drawable/control_button</item>
-        <item name="android:textSize">17sp</item>
-        <item name="android:padding">5dp</item>
-    </style>
-
 </resources>

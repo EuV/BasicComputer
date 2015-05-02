@@ -12,37 +12,43 @@
         style="?android:attr/buttonBarStyle"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
+        android:layout_height="match_parent">
 
-        <Button
-            style="@style/ControlButton"
-            android:layout_width="40dp"
-            android:text="@string/control_read"
-            android:id="@+id/control_read" />
+        <ImageButton
+            style="@style/ControlImageButton"
+            android:id="@+id/image_button_settings"
+            android:src="@drawable/image_button_settings"
+            android:contentDescription="@null" />
 
-        <Button
-            style="@style/ControlButton"
-            android:layout_width="40dp"
-            android:text="@string/control_start"
-            android:id="@+id/control_start" />
+        <ImageButton
+            style="@style/ControlImageButton"
+            android:id="@+id/image_button_read"
+            android:src="@drawable/image_button_read"
+            android:contentDescription="@null" />
 
-        <Button
-            style="@style/ControlButton"
-            android:layout_width="40dp"
-            android:text="@string/control_continue"
-            android:id="@+id/control_continue" />
+        <ImageButton
+            style="@style/ControlImageButton"
+            android:id="@+id/image_button_start"
+            android:src="@drawable/image_button_start"
+            android:contentDescription="@null" />
 
-        <Switch
-            style="@style/ControlButton"
-            android:textOff="@string/control_run_state_off"
-            android:textOn="@string/control_run_state_on"
-            android:id="@+id/control_run_state" />
+        <ImageButton
+            style="@style/ControlImageButton"
+            android:id="@+id/image_button_continue"
+            android:src="@drawable/image_button_continue"
+            android:contentDescription="@null" />
 
-        <CheckBox
-            style="@style/ControlButton"
-            android:text="@string/control_clock_state"
-            android:id="@+id/control_clock_state" />
+        <ImageButton
+            style="@style/ControlImageButton"
+            android:id="@+id/image_button_run_state"
+            android:src="@drawable/image_button_run_state"
+            android:contentDescription="@null" />
+
+        <ImageButton
+            style="@style/ControlImageButton"
+            android:id="@+id/image_button_clock_state"
+            android:src="@drawable/image_button_clock_state"
+            android:contentDescription="@null" />
 
     </LinearLayout>
 

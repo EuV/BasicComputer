@@ -7,10 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.Switch;
+import android.widget.ImageButton;
 import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.StateReg;
 
@@ -28,7 +25,15 @@ public class ControlFragment extends Fragment {
 
         View controlView = inflater.inflate(R.layout.control_fragment, container, false);
 
-        controlView.findViewById(R.id.control_read).setOnClickListener(new OnClickListener() {
+        controlView.findViewById(R.id.image_button_settings).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BCompVibrator.vibrate();
+                // TODO
+            }
+        });
+
+        controlView.findViewById(R.id.image_button_read).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 BCompVibrator.vibrate();
@@ -36,7 +41,7 @@ public class ControlFragment extends Fragment {
             }
         });
 
-        controlView.findViewById(R.id.control_start).setOnClickListener(new OnClickListener() {
+        controlView.findViewById(R.id.image_button_start).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 BCompVibrator.vibrate();
@@ -44,7 +49,7 @@ public class ControlFragment extends Fragment {
             }
         });
 
-        controlView.findViewById(R.id.control_continue).setOnClickListener(new OnClickListener() {
+        controlView.findViewById(R.id.image_button_continue).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 BCompVibrator.vibrate();
@@ -52,31 +57,40 @@ public class ControlFragment extends Fragment {
             }
         });
 
-        ((Switch) controlView.findViewById(R.id.control_run_state)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        ImageButton runStateButton = (ImageButton) controlView.findViewById(R.id.image_button_run_state);
+        runStateButton.setSelected(getRunState());
+        runStateButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                boolean running = (cpu.getRegister(CPU.Reg.STATE).getValue(StateReg.FLAG_RUN) == 1);
-
-                // We shouldn't just call invertRunState() because the change event is also fired during fragment recreation
-                if (running ^ isChecked) {
-                    BCompVibrator.vibrate();
-                    cpu.invertRunState();
-                    // TODO: Redraw State Register on the MP tab (there's its full view there)
-                }
+            public void onClick(View v) {
+                BCompVibrator.vibrate();
+                cpu.invertRunState();
+                v.setSelected(getRunState());
+                // TODO: Redraw State Register on the MP tab (there's its full view there)
             }
         });
 
-        ((CheckBox) controlView.findViewById(R.id.control_clock_state)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        ImageButton clockStateButton = (ImageButton) controlView.findViewById(R.id.image_button_clock_state);
+        clockStateButton.setSelected(getClockState());
+        clockStateButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (cpu.getClockState() ^ !isChecked) {
-                    BCompVibrator.vibrate();
-                    cpu.invertClockState();
-                }
+            public void onClick(View v) {
+                BCompVibrator.vibrate();
+                cpu.invertClockState();
+                v.setSelected(getClockState());
             }
         });
 
         return controlView;
+    }
+
+
+    private boolean getRunState() {
+        return (cpu.getStateValue(StateReg.FLAG_RUN) == 1);
+    }
+
+
+    private boolean getClockState() {
+        return !cpu.getClockState();
     }
 
 
