@@ -61,12 +61,22 @@
     <!-- Hex Button -->
     <style name="HexButton">
         <item name="android:background">@drawable/control_button</item>
-        <item name="android:layout_width">42dp</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
     </style>
 
 
     <!-- Control Fragment -->
+
+    <!-- Control Image Button -->
+    <style name="ControlImageButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@null</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
 
     <!-- Control Button -->
     <style name="ControlButton">

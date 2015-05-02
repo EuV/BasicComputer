@@ -57,7 +57,7 @@ public class KeyboardFragment extends Fragment {
             hexSymbol.setOnClickListener(listener);
         }
 
-        keyboardView.findViewById(R.id.keyboard_address).setOnClickListener(new OnClickListener() {
+        keyboardView.findViewById(R.id.image_button_address).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 BCompVibrator.vibrate();
@@ -65,7 +65,7 @@ public class KeyboardFragment extends Fragment {
             }
         });
 
-        keyboardView.findViewById(R.id.keyboard_write).setOnClickListener(new OnClickListener() {
+        keyboardView.findViewById(R.id.image_button_write).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 BCompVibrator.vibrate();
