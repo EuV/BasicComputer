@@ -14,21 +14,12 @@
 
             <ru.ifmo.cs.bcomp.android.RegisterView
                 style="@style/RegisterFixedWidth"
-                android:tag="РК"
-                android:id="@+id/reg_rk"
+                android:tag="РА"
+                android:id="@+id/reg_ra"
                 app:full_view="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/register_top_offset"
                 android:layout_alignParentTop="true" />
-
-            <ru.ifmo.cs.bcomp.android.RegisterView
-                style="@style/RegisterFixedWidth"
-                android:tag="РА"
-                android:id="@+id/reg_ra"
-                app:full_view="true"
-                android:layout_below="@id/reg_rk"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/register_vertical_space" />
 
             <ru.ifmo.cs.bcomp.android.RegisterView
                 style="@style/RegisterFixedWidth"
@@ -48,13 +39,22 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/register_vertical_space" />
 
+            <ru.ifmo.cs.bcomp.android.RegisterView
+                style="@style/RegisterFixedWidth"
+                android:tag="РК"
+                android:id="@+id/reg_rk"
+                app:full_view="true"
+                android:layout_below="@id/reg_sk"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/register_vertical_space" />
+
             <TextView
                 style="@style/Register"
                 android:layout_width="@dimen/alu_width"
                 android:layout_height="@dimen/alu_height"
                 android:id="@+id/alu"
                 android:text="@string/alu"
-                android:layout_below="@id/reg_sk"
+                android:layout_below="@id/reg_rk"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/alu_top_offset" />
 
@@ -86,28 +86,6 @@
             <ru.ifmo.cs.bcomp.android.BusView
                 android:layout_width="@dimen/bus_offset_x"
                 android:layout_height="0dp"
-                android:tag="INSTR_TO_ALU"
-                app:top="true"
-                app:top_padding="@dimen/register_height_half"
-                android:layout_toLeftOf="@id/reg_rk"
-                android:layout_alignTop="@id/reg_rk"
-                android:layout_alignBottom="@id/reg_rk" />
-
-            <ru.ifmo.cs.bcomp.android.BusView
-                android:layout_width="@dimen/bus_offset_x"
-                android:layout_height="0dp"
-                android:tag="INSTR_TO_ALU"
-                app:left="true"
-                app:top_padding="@dimen/register_height_half"
-                android:layout_alignTop="@id/reg_rk"
-                android:layout_alignBottom="@id/reg_rd"
-                android:layout_alignLeft="@id/reg_rd"
-                android:layout_marginBottom="@dimen/register_height_half"
-                android:layout_marginLeft="@dimen/bus_offset_x_neg" />
-
-            <ru.ifmo.cs.bcomp.android.BusView
-                android:layout_width="@dimen/bus_offset_x"
-                android:layout_height="0dp"
                 android:tag="DATA_TO_ALU"
                 app:top="true"
                 app:top_padding="@dimen/register_height_half"
@@ -118,7 +96,7 @@
             <ru.ifmo.cs.bcomp.android.BusView
                 android:layout_width="@dimen/bus_offset_x"
                 android:layout_height="0dp"
-                android:tag="DATA_TO_ALU INSTR_TO_ALU"
+                android:tag="DATA_TO_ALU"
                 app:left="true"
                 app:top_padding="@dimen/register_height_half"
                 android:layout_alignTop="@id/reg_rd"
@@ -138,6 +116,28 @@
                 android:layout_alignBottom="@id/reg_sk" />
 
             <ru.ifmo.cs.bcomp.android.BusView
+                android:layout_width="@dimen/bus_offset_x"
+                android:layout_height="0dp"
+                android:tag="DATA_TO_ALU IP_TO_ALU"
+                app:left="true"
+                app:top_padding="@dimen/register_height_half"
+                android:layout_alignTop="@id/reg_sk"
+                android:layout_alignBottom="@id/reg_rk"
+                android:layout_alignLeft="@id/reg_sk"
+                android:layout_marginBottom="@dimen/register_height_half"
+                android:layout_marginLeft="@dimen/bus_offset_x_neg" />
+
+            <ru.ifmo.cs.bcomp.android.BusView
+                android:layout_width="@dimen/bus_offset_x"
+                android:layout_height="0dp"
+                android:tag="INSTR_TO_ALU"
+                app:top="true"
+                app:top_padding="@dimen/register_height_half"
+                android:layout_toLeftOf="@id/reg_rk"
+                android:layout_alignTop="@id/reg_rk"
+                android:layout_alignBottom="@id/reg_rk" />
+
+            <ru.ifmo.cs.bcomp.android.BusView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:tag="DATA_TO_ALU INSTR_TO_ALU IP_TO_ALU"
@@ -145,10 +145,10 @@
                 app:top_padding="@dimen/register_height_half"
                 app:right_padding="@dimen/alu_outlet_top"
                 app:bottom="true"
-                android:layout_alignTop="@id/reg_sk"
-                android:layout_alignBottom="@id/reg_sk"
+                android:layout_alignTop="@id/reg_rk"
+                android:layout_alignBottom="@id/reg_rk"
                 android:layout_alignRight="@id/alu"
-                android:layout_alignLeft="@id/reg_sk"
+                android:layout_alignLeft="@id/reg_rk"
                 android:layout_marginBottom="@dimen/bus_offset_y_neg"
                 android:layout_marginLeft="@dimen/bus_offset_x_neg" />
 
@@ -161,7 +161,7 @@
                 app:arrow="right_top_to_bottom"
                 android:layout_alignLeft="@id/alu"
                 android:layout_alignRight="@id/alu"
-                android:layout_below="@id/reg_sk"
+                android:layout_below="@id/reg_rk"
                 android:layout_marginTop="@dimen/bus_offset_y"
                 android:layout_above="@id/alu"
                 android:layout_marginBottom="@dimen/alu_top_offset_neg" />
@@ -169,43 +169,11 @@
             <ru.ifmo.cs.bcomp.android.BusView
                 android:layout_width="@dimen/bus_offset_x"
                 android:layout_height="0dp"
-                android:tag="BUF_TO_INSTR"
-                app:top="true"
-                app:top_padding="@dimen/register_height_half"
-                app:arrow="top_right_to_left"
-                android:layout_toRightOf="@id/reg_rk"
-                android:layout_alignTop="@id/reg_rk"
-                android:layout_alignBottom="@id/reg_rk" />
-
-            <ru.ifmo.cs.bcomp.android.BusView
-                android:layout_width="@dimen/bus_offset_x"
-                android:layout_height="0dp"
-                android:tag="BUF_TO_INSTR"
-                app:top_padding="@dimen/register_height_half"
-                app:right="true"
-                android:layout_alignTop="@id/reg_rk"
-                android:layout_alignBottom="@id/reg_ra"
-                android:layout_alignRight="@id/reg_rk"
-                android:layout_marginBottom="@dimen/register_height_half"
-                android:layout_marginRight="@dimen/bus_offset_x_neg" />
-
-            <ru.ifmo.cs.bcomp.android.BusView
-                android:layout_width="@dimen/bus_offset_x"
-                android:layout_height="0dp"
                 android:tag="BUF_TO_ADDR"
                 app:top="true"
                 app:top_padding="@dimen/register_height_half"
-                app:arrow="top_right_to_left"
-                android:layout_toRightOf="@id/reg_ra"
-                android:layout_alignTop="@id/reg_ra"
-                android:layout_alignBottom="@id/reg_ra" />
-
-            <ru.ifmo.cs.bcomp.android.BusView
-                android:layout_width="@dimen/bus_offset_x"
-                android:layout_height="0dp"
-                android:tag="BUF_TO_ADDR BUF_TO_INSTR"
-                app:top_padding="@dimen/register_height_half"
                 app:right="true"
+                app:arrow="top_right_to_left"
                 android:layout_alignTop="@id/reg_ra"
                 android:layout_alignBottom="@id/reg_rd"
                 android:layout_alignRight="@id/reg_ra"
@@ -226,7 +194,7 @@
             <ru.ifmo.cs.bcomp.android.BusView
                 android:layout_width="@dimen/bus_offset_x"
                 android:layout_height="0dp"
-                android:tag="BUF_TO_ADDR BUF_TO_DATA BUF_TO_INSTR"
+                android:tag="BUF_TO_ADDR BUF_TO_DATA"
                 app:top_padding="@dimen/register_height_half"
                 app:right="true"
                 android:layout_alignTop="@id/reg_rd"
@@ -245,6 +213,29 @@
                 android:layout_toRightOf="@id/reg_sk"
                 android:layout_alignTop="@id/reg_sk"
                 android:layout_alignBottom="@id/reg_sk" />
+
+            <ru.ifmo.cs.bcomp.android.BusView
+                android:layout_width="@dimen/bus_offset_x"
+                android:layout_height="0dp"
+                android:tag="BUF_TO_ADDR BUF_TO_DATA BUF_TO_IP"
+                app:top_padding="@dimen/register_height_half"
+                app:right="true"
+                android:layout_alignTop="@id/reg_sk"
+                android:layout_alignBottom="@id/reg_rk"
+                android:layout_alignRight="@id/reg_sk"
+                android:layout_marginBottom="@dimen/register_height_half"
+                android:layout_marginRight="@dimen/bus_offset_x_neg" />
+
+            <ru.ifmo.cs.bcomp.android.BusView
+                android:layout_width="@dimen/bus_offset_x"
+                android:layout_height="0dp"
+                android:tag="BUF_TO_INSTR"
+                app:top="true"
+                app:top_padding="@dimen/register_height_half"
+                app:arrow="top_right_to_left"
+                android:layout_toRightOf="@id/reg_rk"
+                android:layout_alignTop="@id/reg_rk"
+                android:layout_alignBottom="@id/reg_rk" />
 
             <ru.ifmo.cs.bcomp.android.BusView
                 android:layout_width="0dp"
@@ -268,8 +259,8 @@
                 app:left_padding="@dimen/alu_outlet_bottom"
                 android:layout_alignLeft="@id/alu"
                 android:layout_above="@id/akk_src"
-                android:layout_alignTop="@id/reg_sk"
-                android:layout_alignRight="@id/reg_sk"
+                android:layout_alignTop="@id/reg_rk"
+                android:layout_alignRight="@id/reg_rk"
                 android:layout_marginRight="@dimen/bus_offset_x_neg" />
 
             <ru.ifmo.cs.bcomp.android.BusView
