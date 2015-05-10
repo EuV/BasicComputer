@@ -1,4 +1,4 @@
-package ru.ifmo.cs.bcomp.android;
+package ru.ifmo.cs.bcomp.android.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
+import ru.ifmo.cs.bcomp.android.R;
 
 
 public class AssemblerFragment extends Fragment {

@@ -1,4 +1,4 @@
-package ru.ifmo.cs.bcomp.android;
+package ru.ifmo.cs.bcomp.android.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.StateReg;
+import ru.ifmo.cs.bcomp.android.BCompInstance;
+import ru.ifmo.cs.bcomp.android.R;
+import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
 
 
 public class ControlFragment extends Fragment {

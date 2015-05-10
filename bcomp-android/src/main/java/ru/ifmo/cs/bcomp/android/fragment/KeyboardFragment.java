@@ -1,4 +1,4 @@
-package ru.ifmo.cs.bcomp.android;
+package ru.ifmo.cs.bcomp.android.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,9 @@ import android.widget.TextView;
 import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.Utils;
 import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
+import ru.ifmo.cs.bcomp.android.KeyboardPopupActivity;
+import ru.ifmo.cs.bcomp.android.R;
+import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
 
 import static ru.ifmo.cs.bcomp.CPU.Reg.KEY;
 

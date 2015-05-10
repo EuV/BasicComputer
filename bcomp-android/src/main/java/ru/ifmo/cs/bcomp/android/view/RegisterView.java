@@ -1,4 +1,4 @@
-package ru.ifmo.cs.bcomp.android;
+package ru.ifmo.cs.bcomp.android.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import ru.ifmo.cs.bcomp.Utils;
+import ru.ifmo.cs.bcomp.android.R;
 import ru.ifmo.cs.elements.Register;
 
 public class RegisterView extends LinearLayout {

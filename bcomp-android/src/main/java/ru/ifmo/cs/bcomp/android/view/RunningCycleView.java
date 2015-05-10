@@ -1,4 +1,4 @@
-package ru.ifmo.cs.bcomp.android;
+package ru.ifmo.cs.bcomp.android.view;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.RunningCycle;
 import ru.ifmo.cs.bcomp.StateReg;
+import ru.ifmo.cs.bcomp.android.R;
 
 public class RunningCycleView extends LinearLayout {
     private static final int COLOR_ACTIVE = Color.RED;
@@ -28,7 +29,7 @@ public class RunningCycleView extends LinearLayout {
         title.setGravity(Gravity.CENTER);
         title.setTypeface(Typeface.MONOSPACE);
         title.setBackgroundResource(R.color.register_header);
-        title.setPadding(5,0,5,0); // TODO it's in pixel for now; move all the style to xml
+        title.setPadding(5, 0, 5, 0); // TODO it's in pixel for now; move all the style to xml
         title.setTextSize(10);
         addView(title);
 

@@ -1,4 +1,4 @@
-package ru.ifmo.cs.bcomp.android;
+package ru.ifmo.cs.bcomp.android.util;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,6 +6,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
+import ru.ifmo.cs.bcomp.android.MainActivity;
+import ru.ifmo.cs.bcomp.android.R;
+import ru.ifmo.cs.bcomp.android.fragment.AssemblerFragment;
+import ru.ifmo.cs.bcomp.android.fragment.BasicFragment;
+import ru.ifmo.cs.bcomp.android.fragment.IOFragment;
+import ru.ifmo.cs.bcomp.android.fragment.YetAnotherFragment;
 
 import java.util.HashMap;
 import java.util.Map;

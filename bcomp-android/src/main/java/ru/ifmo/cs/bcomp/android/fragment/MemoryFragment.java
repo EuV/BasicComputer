@@ -1,4 +1,4 @@
-package ru.ifmo.cs.bcomp.android;
+package ru.ifmo.cs.bcomp.android.fragment;
 
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -15,6 +15,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
+import ru.ifmo.cs.bcomp.android.R;
 import ru.ifmo.cs.elements.Memory;
 
 

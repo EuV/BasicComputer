@@ -1,4 +1,4 @@
-package ru.ifmo.cs.bcomp.android;
+package ru.ifmo.cs.bcomp.android.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.ControlSignal;
 import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
+import ru.ifmo.cs.bcomp.android.R;
+import ru.ifmo.cs.bcomp.android.view.BusView;
+import ru.ifmo.cs.bcomp.android.view.RegisterView;
+import ru.ifmo.cs.bcomp.android.view.RunningCycleView;
 import ru.ifmo.cs.elements.Register;
 
 import java.util.ArrayList;

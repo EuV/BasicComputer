@@ -7,6 +7,11 @@ import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.ControlSignal;
 import ru.ifmo.cs.bcomp.IOCtrl;
 import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
+import ru.ifmo.cs.bcomp.android.fragment.BasicFragment;
+import ru.ifmo.cs.bcomp.android.fragment.IOFragment;
+import ru.ifmo.cs.bcomp.android.fragment.MemoryFragment;
+import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
+import ru.ifmo.cs.bcomp.android.util.TabAdapter;
 
 import java.util.Set;
 

@@ -16,7 +16,7 @@
             android:layout_height="match_parent">
 
             <fragment
-                android:name="ru.ifmo.cs.bcomp.android.MemoryFragment"
+                android:name="ru.ifmo.cs.bcomp.android.fragment.MemoryFragment"
                 android:id="@+id/memory_fragment"
                 android:layout_weight="@integer/memory_weight"
                 android:layout_width="0dp"
@@ -49,7 +49,7 @@
         android:baselineAligned="false">
 
         <fragment
-            android:name="ru.ifmo.cs.bcomp.android.KeyboardFragment"
+            android:name="ru.ifmo.cs.bcomp.android.fragment.KeyboardFragment"
             android:id="@+id/keyboard_fragment"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -59,7 +59,7 @@
             tools:ignore="NestedWeights" />
 
         <fragment
-            android:name="ru.ifmo.cs.bcomp.android.ControlFragment"
+            android:name="ru.ifmo.cs.bcomp.android.fragment.ControlFragment"
             android:id="@+id/control_fragment"
             android:layout_weight="1"
             android:layout_width="0dp"

@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import ru.ifmo.cs.bcomp.android.fragment.KeyboardFragment;
+import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
 
 public class KeyboardPopupActivity extends Activity {
 

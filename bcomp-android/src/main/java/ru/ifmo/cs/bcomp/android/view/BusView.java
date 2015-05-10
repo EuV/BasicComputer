@@ -1,4 +1,4 @@
-package ru.ifmo.cs.bcomp.android;
+package ru.ifmo.cs.bcomp.android.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,11 +10,12 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
 import ru.ifmo.cs.bcomp.ControlSignal;
+import ru.ifmo.cs.bcomp.android.R;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static ru.ifmo.cs.bcomp.android.BusView.Arrow.*;
+import static ru.ifmo.cs.bcomp.android.view.BusView.Arrow.*;
 
 public class BusView extends View {
     protected interface Arrow {

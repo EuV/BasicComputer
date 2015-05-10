@@ -1,4 +1,4 @@
-package ru.ifmo.cs.bcomp.android;
+package ru.ifmo.cs.bcomp.android.util;
 
 import android.app.Activity;
 import android.content.Context;

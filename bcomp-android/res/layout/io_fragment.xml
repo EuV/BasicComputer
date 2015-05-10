@@ -14,7 +14,7 @@
 
             <!-- 4 Row -->
 
-            <ru.ifmo.cs.bcomp.android.StateRegisterView
+            <ru.ifmo.cs.bcomp.android.view.StateRegisterView
                 style="@style/Register"
                 android:tag="C"
                 android:id="@+id/reg_rs"
@@ -23,7 +23,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="@dimen/io_row_vertical_space" />
 
-            <ru.ifmo.cs.bcomp.android.RegisterView
+            <ru.ifmo.cs.bcomp.android.view.RegisterView
                 style="@style/Register"
                 android:tag="Акк"
                 android:id="@+id/reg_akk"
@@ -31,7 +31,7 @@
                 android:layout_toRightOf="@id/reg_rs"
                 android:layout_alignTop="@id/reg_rs" />
 
-            <ru.ifmo.cs.bcomp.android.RegisterView
+            <ru.ifmo.cs.bcomp.android.view.RegisterView
                 style="@style/Register"
                 android:tag="РД ВУ1"
                 android:id="@+id/reg_rd_device_1"
@@ -40,7 +40,7 @@
                 android:layout_alignTop="@id/reg_akk"
                 android:layout_marginLeft="@dimen/register_horizontal_space" />
 
-            <ru.ifmo.cs.bcomp.android.RegisterView
+            <ru.ifmo.cs.bcomp.android.view.RegisterView
                 style="@style/Register"
                 android:tag="РД ВУ2"
                 android:id="@+id/reg_rd_device_2"
@@ -49,7 +49,7 @@
                 android:layout_alignTop="@id/reg_rd_device_1"
                 android:layout_marginLeft="@dimen/register_horizontal_space" />
 
-            <ru.ifmo.cs.bcomp.android.RegisterView
+            <ru.ifmo.cs.bcomp.android.view.RegisterView
                 style="@style/Register"
                 android:tag="РД ВУ3"
                 android:id="@+id/reg_rd_device_3"
@@ -70,7 +70,7 @@
                 android:layout_above="@id/reg_rd_device_1"
                 android:layout_marginBottom="@dimen/io_row_vertical_space" />
 
-            <ru.ifmo.cs.bcomp.android.RegisterView
+            <ru.ifmo.cs.bcomp.android.view.RegisterView
                 style="@style/Register"
                 android:tag="РА"
                 android:id="@+id/reg_ra"
@@ -79,7 +79,7 @@
                 android:layout_alignLeft="@id/reg_rd_device_1"
                 android:layout_alignRight="@id/reg_rd_device_1" />
 
-            <ru.ifmo.cs.bcomp.android.RegisterView
+            <ru.ifmo.cs.bcomp.android.view.RegisterView
                 style="@style/Register"
                 android:tag="СК"
                 android:id="@+id/reg_sk"
@@ -88,7 +88,7 @@
                 android:layout_alignLeft="@id/reg_rd_device_2"
                 android:layout_alignRight="@id/reg_rd_device_2" />
 
-            <ru.ifmo.cs.bcomp.android.RegisterView
+            <ru.ifmo.cs.bcomp.android.view.RegisterView
                 style="@style/Register"
                 android:tag="РК"
                 android:id="@+id/reg_rk"
@@ -100,7 +100,7 @@
 
             <!-- 2 Row -->
 
-            <ru.ifmo.cs.bcomp.android.RegisterView
+            <ru.ifmo.cs.bcomp.android.view.RegisterView
                 style="@style/Register"
                 android:tag="РД"
                 android:id="@+id/reg_rd"
@@ -173,7 +173,7 @@
 
             <!-- 1 Row top -->
 
-            <ru.ifmo.cs.bcomp.android.StatelessBusView
+            <ru.ifmo.cs.bcomp.android.view.StatelessBusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO2_SETFLAG"
@@ -183,7 +183,7 @@
                 android:layout_above="@id/running_cycle_static_block"
                 android:layout_alignRight="@id/device_button_2" />
 
-            <ru.ifmo.cs.bcomp.android.StatelessBusView
+            <ru.ifmo.cs.bcomp.android.view.StatelessBusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO1_SETFLAG"
@@ -193,7 +193,7 @@
                 android:layout_above="@id/running_cycle_static_block"
                 android:layout_alignRight="@id/device_button_1" />
 
-            <ru.ifmo.cs.bcomp.android.StatelessBusView
+            <ru.ifmo.cs.bcomp.android.view.StatelessBusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO3_SETFLAG"
@@ -205,7 +205,7 @@
                 android:layout_alignRight="@id/device_button_3"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
-            <ru.ifmo.cs.bcomp.android.StatelessBusView
+            <ru.ifmo.cs.bcomp.android.view.StatelessBusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO2_SETFLAG IO3_SETFLAG"
@@ -216,7 +216,7 @@
                 android:layout_alignRight="@id/device_button_2"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
-            <ru.ifmo.cs.bcomp.android.StatelessBusView
+            <ru.ifmo.cs.bcomp.android.view.StatelessBusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO1_SETFLAG IO2_SETFLAG IO3_SETFLAG"
@@ -232,7 +232,7 @@
 
             <!-- 1 Row bottom -->
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO2_TSF"
@@ -243,7 +243,7 @@
                 android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
                 android:layout_alignRight="@id/device_button_2" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO1_TSF"
@@ -254,7 +254,7 @@
                 android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
                 android:layout_alignRight="@id/device_button_1" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO3_TSF"
@@ -267,7 +267,7 @@
                 android:layout_alignRight="@id/device_button_3"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO2_TSF IO3_TSF"
@@ -279,7 +279,7 @@
                 android:layout_alignRight="@id/device_button_2"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO1_TSF IO2_TSF IO3_TSF"
@@ -296,7 +296,7 @@
 
             <!-- 2 Row top -->
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="INPUT_OUTPUT"
@@ -307,7 +307,7 @@
                 android:layout_above="@id/reg_rd"
                 android:layout_alignRight="@id/device_button_1" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="INPUT_OUTPUT"
@@ -320,7 +320,7 @@
                 android:layout_alignRight="@id/device_button_3"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="INPUT_OUTPUT"
@@ -333,7 +333,7 @@
                 android:layout_alignRight="@id/device_button_2"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="INPUT_OUTPUT"
@@ -348,7 +348,7 @@
 
             <!-- 2 Row bottom -->
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="INPUT_OUTPUT"
@@ -360,7 +360,7 @@
                 android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
                 android:layout_alignRight="@id/device_button_1" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="INPUT_OUTPUT"
@@ -374,7 +374,7 @@
                 android:layout_alignRight="@id/device_button_3"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="INPUT_OUTPUT"
@@ -388,7 +388,7 @@
                 android:layout_alignRight="@id/device_button_2"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="INPUT_OUTPUT"
@@ -404,7 +404,7 @@
 
             <!-- 4 Row top -->
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO2_IN"
@@ -414,7 +414,7 @@
                 android:layout_above="@id/reg_akk"
                 android:layout_alignRight="@id/device_button_2" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO3_IN"
@@ -426,7 +426,7 @@
                 android:layout_alignRight="@id/device_button_3"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO2_IN IO3_IN"
@@ -442,7 +442,7 @@
 
             <!-- 4 Row bottom -->
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO1_OUT"
@@ -454,7 +454,7 @@
                 android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
                 android:layout_alignRight="@id/device_button_1" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO3_OUT"
@@ -468,7 +468,7 @@
                 android:layout_alignRight="@id/device_button_3"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="0dp"
                 android:layout_height="@dimen/bus_offset_y"
                 android:tag="IO1_OUT IO3_OUT"

@@ -1,4 +1,4 @@
-package ru.ifmo.cs.bcomp.android;
+package ru.ifmo.cs.bcomp.android.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

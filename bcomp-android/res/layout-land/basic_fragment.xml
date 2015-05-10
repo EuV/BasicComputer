@@ -14,47 +14,47 @@
             android:gravity="center"
             android:id="@+id/basic_views_holder">
 
-            <ru.ifmo.cs.bcomp.android.RegisterView
+            <ru.ifmo.cs.bcomp.android.view.RegisterView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="РК"
                 app:full_view="false" />
 
-            <ru.ifmo.cs.bcomp.android.RegisterView
+            <ru.ifmo.cs.bcomp.android.view.RegisterView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="РА"
                 app:full_view="false" />
 
-            <ru.ifmo.cs.bcomp.android.RegisterView
+            <ru.ifmo.cs.bcomp.android.view.RegisterView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="РД"
                 app:full_view="false" />
 
-            <ru.ifmo.cs.bcomp.android.RegisterView
+            <ru.ifmo.cs.bcomp.android.view.RegisterView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="СК"
                 app:full_view="false" />
 
-            <ru.ifmo.cs.bcomp.android.RegisterView
+            <ru.ifmo.cs.bcomp.android.view.RegisterView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="Акк"
                 app:full_view="false" />
 
-            <ru.ifmo.cs.bcomp.android.RunningCycleView
+            <ru.ifmo.cs.bcomp.android.view.RunningCycleView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/running_cycle" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="KEY_TO_ALU" />
 
-            <ru.ifmo.cs.bcomp.android.BusView
+            <ru.ifmo.cs.bcomp.android.view.BusView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="MEMORY_WRITE" />
