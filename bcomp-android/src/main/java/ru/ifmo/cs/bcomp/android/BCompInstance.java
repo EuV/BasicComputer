@@ -3,10 +3,7 @@ package ru.ifmo.cs.bcomp.android;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import ru.ifmo.cs.bcomp.BasicComp;
-import ru.ifmo.cs.bcomp.CPU;
-import ru.ifmo.cs.bcomp.ControlSignal;
-import ru.ifmo.cs.bcomp.MicroPrograms;
+import ru.ifmo.cs.bcomp.*;
 import ru.ifmo.cs.elements.DataDestination;
 
 import java.util.HashSet;
@@ -22,6 +19,7 @@ public class BCompInstance extends Fragment {
         void registerNewSignals(Set<ControlSignal> signals);
         Set<ControlSignal> getOpenSignals();
         void setTickDelay(long tickDelay);
+        IOCtrl[] getIOControls();
     }
 
     private class SignalHandler implements DataDestination {
@@ -103,6 +101,11 @@ public class BCompInstance extends Fragment {
 
     public void setTickDelay(long tickDelay) {
         this.tickDelay = tickDelay;
+    }
+
+
+    public IOCtrl[] getIOControls() {
+        return bcomp.getIOCtrls();
     }
 
 

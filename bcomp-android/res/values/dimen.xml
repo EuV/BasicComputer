@@ -4,9 +4,13 @@
 
     <dimen name="register_top_offset">15dp</dimen>
     <dimen name="register_vertical_space">15dp</dimen>
+    <dimen name="register_horizontal_space">13dp</dimen>
     <dimen name="register_height">32dp</dimen>
     <dimen name="register_height_half">15dp</dimen>
     <dimen name="register_height_quarter">6dp</dimen>
+
+    <dimen name="io_1st_col_register_width_half">26dp</dimen>
+    <dimen name="io_2nd_col_register_width_half">24dp</dimen>
 
     <dimen name="bus_offset_x">15dp</dimen>
     <dimen name="bus_offset_x_neg">-16dp</dimen>
@@ -27,5 +31,13 @@
 
     <dimen name="register_text_size">12sp</dimen>
 
+    <dimen name="static_block_text_size">9sp</dimen>
+    <dimen name="static_block_text_padding">3dp</dimen>
+
+    <dimen name="device_button_text_size">12sp</dimen>
+
     <dimen name="memory_rows_padding">10dp</dimen>
+
+    <dimen name="io_row_vertical_space">50dp</dimen>
+    <dimen name="io_row_vertical_space_minus_bus_y">35dp</dimen>
 </resources>

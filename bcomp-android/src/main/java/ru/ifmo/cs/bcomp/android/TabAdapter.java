@@ -52,11 +52,16 @@ public class TabAdapter extends FragmentStatePagerAdapter {
                 return basicFragment;
             }
 
-            case IO_TAB:
+            case IO_TAB: {
+                Fragment ioFragment = new IOFragment();
+                tabReferenceMap.put(index, ioFragment);
+                return ioFragment;
+            }
+
             case MP_TAB: {
                 YetAnotherFragment fragment = new YetAnotherFragment();
                 Bundle args = new Bundle();
-                args.putString(YetAnotherFragment.NAME, "Работа с " + ((index == 1) ? "ВУ" : "МПУ"));
+                args.putString(YetAnotherFragment.NAME, "Работа с МПУ");
                 fragment.setArguments(args);
                 return fragment;
             }

@@ -50,7 +50,7 @@ public class BasicFragment extends Fragment {
         ViewGroup viewsHolder = (ViewGroup) basicView.findViewById(R.id.basic_views_holder);
         for (int i = 0; i < viewsHolder.getChildCount(); i++) {
             View view = viewsHolder.getChildAt(i);
-            if (view instanceof BusView) {
+            if (view.getClass() == BusView.class) {
                 busViews.add((BusView) view);
                 bCompHolder.registerNewSignals(((BusView) view).getSignals());
             }

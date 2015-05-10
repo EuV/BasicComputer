@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.ControlSignal;
+import ru.ifmo.cs.bcomp.IOCtrl;
 import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
 
 import java.util.Set;
@@ -52,9 +53,15 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
             @Override
             public void run() {
                 TabAdapter tabAdapter = TabAdapter.getAdapter();
+
                 BasicFragment basicFragment = (BasicFragment) tabAdapter.getFragment(TabAdapter.BC_TAB);
                 if (basicFragment != null) {
                     basicFragment.updateViews();
+                }
+
+                IOFragment ioFragment = (IOFragment) tabAdapter.getFragment(TabAdapter.IO_TAB);
+                if (ioFragment != null) {
+                    ioFragment.updateViews();
                 }
             }
         });
@@ -87,5 +94,11 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
     @Override
     public void setTickDelay(long tickDelay) {
         bci.setTickDelay(tickDelay);
+    }
+
+
+    @Override
+    public IOCtrl[] getIOControls() {
+        return bci.getIOControls();
     }
 }

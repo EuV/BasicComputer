@@ -271,8 +271,8 @@
                 app:left_padding="@dimen/alu_outlet_bottom"
                 android:layout_alignLeft="@id/alu"
                 android:layout_alignRight="@id/alu"
-                android:layout_below="@+id/alu"
-                android:layout_above="@+id/akk_src" />
+                android:layout_below="@id/alu"
+                android:layout_above="@id/akk_src" />
 
             <ru.ifmo.cs.bcomp.android.BusView
                 android:layout_width="0dp"
@@ -326,7 +326,7 @@
                 android:layout_height="0dp"
                 android:tag="ACCUM_TO_ALU"
                 app:bottom="true"
-                app:bottom_padding="@dimen/bus_offset_y"
+                app:bottom_padding="@dimen/register_height_half"
                 android:layout_alignTop="@id/reg_rs"
                 android:layout_alignBottom="@id/reg_rs"
                 android:layout_toLeftOf="@id/reg_rs" />
