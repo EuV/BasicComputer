@@ -9,7 +9,7 @@ import android.widget.TextView;
 import ru.ifmo.cs.bcomp.android.R;
 
 
-public class YetAnotherFragment extends Fragment {
+public class YetAnotherTab extends Fragment {
     public static final String NAME = "name";
     private TextView fragment_description;
 

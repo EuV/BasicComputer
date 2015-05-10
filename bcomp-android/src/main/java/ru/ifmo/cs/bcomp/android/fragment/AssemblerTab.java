@@ -10,7 +10,7 @@ import android.widget.TextView;
 import ru.ifmo.cs.bcomp.android.R;
 
 
-public class AssemblerFragment extends RootFragment {
+public class AssemblerTab extends RootFragment {
     private static final int MIN_DELAY_MS = 10;
     private static final int MAX_DELAY_MS = 1000;
 

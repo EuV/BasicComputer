@@ -7,8 +7,7 @@ import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.ControlSignal;
 import ru.ifmo.cs.bcomp.IOCtrl;
 import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
-import ru.ifmo.cs.bcomp.android.fragment.BasicFragment;
-import ru.ifmo.cs.bcomp.android.fragment.IOFragment;
+import ru.ifmo.cs.bcomp.android.fragment.GraphicalTab;
 import ru.ifmo.cs.bcomp.android.fragment.MemoryFragment;
 import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
 import ru.ifmo.cs.bcomp.android.util.TabAdapter;
@@ -59,14 +58,14 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
             public void run() {
                 TabAdapter tabAdapter = TabAdapter.getAdapter();
 
-                BasicFragment basicFragment = (BasicFragment) tabAdapter.getFragment(TabAdapter.BC_TAB);
-                if (basicFragment != null) {
-                    basicFragment.updateViews();
+                GraphicalTab basicTab = (GraphicalTab) tabAdapter.getFragment(TabAdapter.BC_TAB);
+                if (basicTab != null) {
+                    basicTab.updateViews();
                 }
 
-                IOFragment ioFragment = (IOFragment) tabAdapter.getFragment(TabAdapter.IO_TAB);
-                if (ioFragment != null) {
-                    ioFragment.updateViews();
+                GraphicalTab ioTab = (GraphicalTab) tabAdapter.getFragment(TabAdapter.IO_TAB);
+                if (ioTab != null) {
+                    ioTab.updateViews();
                 }
             }
         });

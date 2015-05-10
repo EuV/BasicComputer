@@ -8,10 +8,10 @@ import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
 import ru.ifmo.cs.bcomp.android.MainActivity;
 import ru.ifmo.cs.bcomp.android.R;
-import ru.ifmo.cs.bcomp.android.fragment.AssemblerFragment;
-import ru.ifmo.cs.bcomp.android.fragment.BasicFragment;
-import ru.ifmo.cs.bcomp.android.fragment.IOFragment;
-import ru.ifmo.cs.bcomp.android.fragment.YetAnotherFragment;
+import ru.ifmo.cs.bcomp.android.fragment.AssemblerTab;
+import ru.ifmo.cs.bcomp.android.fragment.BasicTab;
+import ru.ifmo.cs.bcomp.android.fragment.IOTab;
+import ru.ifmo.cs.bcomp.android.fragment.YetAnotherTab;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,29 +53,29 @@ public class TabAdapter extends FragmentStatePagerAdapter {
         switch (index) {
 
             case BC_TAB: {
-                Fragment basicFragment = new BasicFragment();
-                tabReferenceMap.put(index, basicFragment);
-                return basicFragment;
+                Fragment basicTab = new BasicTab();
+                tabReferenceMap.put(index, basicTab);
+                return basicTab;
             }
 
             case IO_TAB: {
-                Fragment ioFragment = new IOFragment();
-                tabReferenceMap.put(index, ioFragment);
-                return ioFragment;
+                Fragment ioTab = new IOTab();
+                tabReferenceMap.put(index, ioTab);
+                return ioTab;
             }
 
             case MP_TAB: {
-                YetAnotherFragment fragment = new YetAnotherFragment();
+                YetAnotherTab anotherTab = new YetAnotherTab();
                 Bundle args = new Bundle();
-                args.putString(YetAnotherFragment.NAME, "Работа с МПУ");
-                fragment.setArguments(args);
-                return fragment;
+                args.putString(YetAnotherTab.NAME, "Работа с МПУ");
+                anotherTab.setArguments(args);
+                return anotherTab;
             }
 
             case ASM_TAB: {
-                Fragment assemblerFragment = new AssemblerFragment();
-                tabReferenceMap.put(index, assemblerFragment);
-                return assemblerFragment;
+                Fragment assemblerTab = new AssemblerTab();
+                tabReferenceMap.put(index, assemblerTab);
+                return assemblerTab;
             }
         }
 

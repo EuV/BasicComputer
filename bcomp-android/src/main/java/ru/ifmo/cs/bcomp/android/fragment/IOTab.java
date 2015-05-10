@@ -16,7 +16,7 @@ import ru.ifmo.cs.elements.DataDestination;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IOFragment extends GraphicalTab {
+public class IOTab extends GraphicalTab {
     private List<StatelessBusView> statelessBusViews = new ArrayList<>();
 
     @Override

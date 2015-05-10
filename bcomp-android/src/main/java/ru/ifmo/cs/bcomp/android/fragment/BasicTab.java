@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import ru.ifmo.cs.bcomp.android.R;
 import ru.ifmo.cs.bcomp.android.view.RunningCycleView;
 
-public class BasicFragment extends GraphicalTab {
+public class BasicTab extends GraphicalTab {
     private RunningCycleView runningCycleView;
 
     @Override
