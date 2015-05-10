@@ -38,6 +38,6 @@
 
     <dimen name="memory_rows_padding">10dp</dimen>
 
-    <dimen name="io_row_vertical_space">50dp</dimen>
-    <dimen name="io_row_vertical_space_minus_bus_y">35dp</dimen>
+    <dimen name="io_row_vertical_space">65dp</dimen>
+    <dimen name="io_no_bus_row_vertical_space">45dp</dimen>
 </resources>

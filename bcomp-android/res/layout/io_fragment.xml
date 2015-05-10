@@ -63,19 +63,19 @@
 
             <TextView
                 style="@style/StaticBlock"
-                android:id="@+id/anchor"
+                android:id="@+id/anchor_row_3"
                 android:visibility="invisible"
                 android:layout_alignLeft="@id/reg_rs"
                 android:layout_alignRight="@id/reg_akk"
                 android:layout_above="@id/reg_rd_device_1"
-                android:layout_marginBottom="@dimen/io_row_vertical_space" />
+                android:layout_marginBottom="@dimen/io_no_bus_row_vertical_space" />
 
             <ru.ifmo.cs.bcomp.android.view.RegisterView
                 style="@style/Register"
                 android:tag="РА"
                 android:id="@+id/reg_ra"
                 app:full_view="false"
-                android:layout_alignTop="@id/anchor"
+                android:layout_alignTop="@id/anchor_row_3"
                 android:layout_alignLeft="@id/reg_rd_device_1"
                 android:layout_alignRight="@id/reg_rd_device_1" />
 
@@ -84,7 +84,7 @@
                 android:tag="СК"
                 android:id="@+id/reg_sk"
                 app:full_view="false"
-                android:layout_alignTop="@id/anchor"
+                android:layout_alignTop="@id/anchor_row_3"
                 android:layout_alignLeft="@id/reg_rd_device_2"
                 android:layout_alignRight="@id/reg_rd_device_2" />
 
@@ -93,7 +93,7 @@
                 android:tag="РК"
                 android:id="@+id/reg_rk"
                 app:full_view="false"
-                android:layout_alignTop="@id/anchor"
+                android:layout_alignTop="@id/anchor_row_3"
                 android:layout_alignLeft="@id/reg_rd_device_3"
                 android:layout_alignRight="@id/reg_rd_device_3" />
 
@@ -105,13 +105,14 @@
                 android:tag="РД"
                 android:id="@+id/reg_rd"
                 app:full_view="false"
-                android:layout_alignLeft="@id/reg_rs"
+                android:layout_alignLeft="@id/anchor_row_3"
                 android:layout_alignRight="@id/reg_akk"
-                android:layout_above="@id/anchor"
-                android:layout_marginBottom="@dimen/io_row_vertical_space" />
+                android:layout_above="@id/anchor_row_3"
+                android:layout_marginBottom="@dimen/io_no_bus_row_vertical_space" />
 
             <TextView
                 style="@style/StaticBlock"
+                android:id="@+id/anchor_row_2"
                 android:text="@string/decoder_label"
                 android:layout_alignLeft="@id/reg_rd_device_1"
                 android:layout_alignRight="@id/reg_rd_device_1"
@@ -138,7 +139,7 @@
                 style="@style/StaticBlock"
                 android:id="@+id/running_cycle_static_block"
                 android:text="@string/running_cycle_title"
-                android:layout_alignLeft="@id/reg_rs"
+                android:layout_alignLeft="@id/reg_rd"
                 android:layout_alignRight="@id/reg_akk"
                 android:layout_above="@id/reg_rd"
                 android:layout_marginBottom="@dimen/io_row_vertical_space" />
@@ -180,7 +181,7 @@
                 app:right_padding="@dimen/io_2nd_col_register_width_half"
                 app:right="true"
                 android:layout_alignLeft="@id/device_button_2"
-                android:layout_above="@id/running_cycle_static_block"
+                android:layout_above="@id/device_button_1"
                 android:layout_alignRight="@id/device_button_2" />
 
             <ru.ifmo.cs.bcomp.android.view.StatelessBusView
@@ -190,7 +191,7 @@
                 app:right_padding="@dimen/io_2nd_col_register_width_half"
                 app:right="true"
                 android:layout_alignLeft="@id/device_button_1"
-                android:layout_above="@id/running_cycle_static_block"
+                android:layout_above="@id/device_button_1"
                 android:layout_alignRight="@id/device_button_1" />
 
             <ru.ifmo.cs.bcomp.android.view.StatelessBusView
@@ -201,7 +202,7 @@
                 app:right_padding="@dimen/io_2nd_col_register_width_half"
                 app:right="true"
                 android:layout_alignLeft="@id/device_button_2"
-                android:layout_above="@id/running_cycle_static_block"
+                android:layout_above="@id/device_button_1"
                 android:layout_alignRight="@id/device_button_3"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
@@ -212,7 +213,7 @@
                 app:right_padding="@dimen/io_2nd_col_register_width_half"
                 app:top="true"
                 android:layout_alignLeft="@id/device_button_1"
-                android:layout_above="@id/running_cycle_static_block"
+                android:layout_above="@id/device_button_1"
                 android:layout_alignRight="@id/device_button_2"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
@@ -226,7 +227,7 @@
                 app:right_padding="@dimen/io_2nd_col_register_width_half"
                 app:arrow="left_top_to_bottom"
                 android:layout_alignLeft="@id/running_cycle_static_block"
-                android:layout_above="@id/running_cycle_static_block"
+                android:layout_above="@id/device_button_1"
                 android:layout_alignRight="@id/device_button_1" />
 
 
@@ -239,8 +240,7 @@
                 app:right_padding="@dimen/io_2nd_col_register_width_half"
                 app:right="true"
                 android:layout_alignLeft="@id/device_button_2"
-                android:layout_above="@id/reg_rd"
-                android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
+                android:layout_below="@id/device_button_1"
                 android:layout_alignRight="@id/device_button_2" />
 
             <ru.ifmo.cs.bcomp.android.view.BusView
@@ -250,8 +250,7 @@
                 app:right_padding="@dimen/io_2nd_col_register_width_half"
                 app:right="true"
                 android:layout_alignLeft="@id/device_button_1"
-                android:layout_above="@id/reg_rd"
-                android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
+                android:layout_below="@id/device_button_1"
                 android:layout_alignRight="@id/device_button_1" />
 
             <ru.ifmo.cs.bcomp.android.view.BusView
@@ -262,8 +261,7 @@
                 app:right="true"
                 app:bottom="true"
                 android:layout_alignLeft="@id/device_button_2"
-                android:layout_above="@id/reg_rd"
-                android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
+                android:layout_below="@id/device_button_1"
                 android:layout_alignRight="@id/device_button_3"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
@@ -274,8 +272,7 @@
                 app:right_padding="@dimen/io_2nd_col_register_width_half"
                 app:bottom="true"
                 android:layout_alignLeft="@id/device_button_1"
-                android:layout_above="@id/reg_rd"
-                android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
+                android:layout_below="@id/device_button_1"
                 android:layout_alignRight="@id/device_button_2"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
@@ -289,8 +286,7 @@
                 app:bottom="true"
                 app:arrow="left_bottom_to_top"
                 android:layout_alignLeft="@id/running_cycle_static_block"
-                android:layout_above="@id/reg_rd"
-                android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
+                android:layout_below="@id/device_button_1"
                 android:layout_alignRight="@id/device_button_1" />
 
 
@@ -304,7 +300,7 @@
                 app:right="true"
                 app:arrow="right_top_to_bottom"
                 android:layout_alignLeft="@id/device_button_1"
-                android:layout_above="@id/reg_rd"
+                android:layout_above="@id/anchor_row_2"
                 android:layout_alignRight="@id/device_button_1" />
 
             <ru.ifmo.cs.bcomp.android.view.BusView
@@ -316,7 +312,7 @@
                 app:right="true"
                 app:arrow="right_top_to_bottom"
                 android:layout_alignLeft="@id/device_button_2"
-                android:layout_above="@id/reg_rd"
+                android:layout_above="@id/anchor_row_2"
                 android:layout_alignRight="@id/device_button_3"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
@@ -329,7 +325,7 @@
                 app:right="true"
                 app:arrow="right_top_to_bottom"
                 android:layout_alignLeft="@id/device_button_1"
-                android:layout_above="@id/reg_rd"
+                android:layout_above="@id/anchor_row_2"
                 android:layout_alignRight="@id/device_button_2"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
@@ -341,8 +337,8 @@
                 app:left="true"
                 app:top="true"
                 app:right_padding="@dimen/io_2nd_col_register_width_half"
-                android:layout_alignLeft="@id/running_cycle_static_block"
-                android:layout_above="@id/reg_rd"
+                android:layout_alignLeft="@id/reg_rd"
+                android:layout_above="@id/anchor_row_2"
                 android:layout_alignRight="@id/device_button_1" />
 
 
@@ -356,8 +352,7 @@
                 app:right="true"
                 app:arrow="right_bottom_to_top"
                 android:layout_alignLeft="@id/device_button_1"
-                android:layout_above="@id/anchor"
-                android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
+                android:layout_below="@id/anchor_row_2"
                 android:layout_alignRight="@id/device_button_1" />
 
             <ru.ifmo.cs.bcomp.android.view.BusView
@@ -369,8 +364,7 @@
                 app:bottom="true"
                 app:arrow="right_bottom_to_top"
                 android:layout_alignLeft="@id/device_button_2"
-                android:layout_above="@id/anchor"
-                android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
+                android:layout_below="@id/anchor_row_2"
                 android:layout_alignRight="@id/device_button_3"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
@@ -383,8 +377,7 @@
                 app:bottom="true"
                 app:arrow="right_bottom_to_top"
                 android:layout_alignLeft="@id/device_button_1"
-                android:layout_above="@id/anchor"
-                android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
+                android:layout_below="@id/anchor_row_2"
                 android:layout_alignRight="@id/device_button_2"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
@@ -396,9 +389,8 @@
                 app:left="true"
                 app:right_padding="@dimen/io_2nd_col_register_width_half"
                 app:bottom="true"
-                android:layout_alignLeft="@id/running_cycle_static_block"
-                android:layout_above="@id/anchor"
-                android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
+                android:layout_alignLeft="@id/reg_rd"
+                android:layout_below="@id/anchor_row_2"
                 android:layout_alignRight="@id/device_button_1" />
 
 
@@ -435,7 +427,7 @@
                 app:top="true"
                 app:right_padding="@dimen/io_2nd_col_register_width_half"
                 app:arrow="left_top_to_bottom"
-                android:layout_alignLeft="@id/running_cycle_static_block"
+                android:layout_alignLeft="@id/reg_rs"
                 android:layout_above="@id/reg_akk"
                 android:layout_alignRight="@id/device_button_2" />
 
@@ -450,8 +442,7 @@
                 app:right="true"
                 app:arrow="right_bottom_to_top"
                 android:layout_alignLeft="@id/device_button_1"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
+                android:layout_below="@id/reg_akk"
                 android:layout_alignRight="@id/device_button_1" />
 
             <ru.ifmo.cs.bcomp.android.view.BusView
@@ -463,8 +454,7 @@
                 app:bottom="true"
                 app:arrow="right_bottom_to_top"
                 android:layout_alignLeft="@id/device_button_1"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
+                android:layout_below="@id/reg_akk"
                 android:layout_alignRight="@id/device_button_3"
                 android:layout_marginLeft="@dimen/io_2nd_col_register_width_half" />
 
@@ -476,10 +466,48 @@
                 app:left="true"
                 app:right_padding="@dimen/io_2nd_col_register_width_half"
                 app:bottom="true"
-                android:layout_alignLeft="@id/running_cycle_static_block"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/io_row_vertical_space_minus_bus_y"
+                android:layout_alignLeft="@id/reg_rs"
+                android:layout_below="@id/reg_akk"
                 android:layout_alignRight="@id/device_button_1" />
+
+
+            <!-- Labels -->
+
+            <TextView
+                style="@style/Label"
+                android:text="@string/label_1"
+                android:layout_above="@id/device_button_1"
+                android:layout_marginBottom="@dimen/bus_offset_y" />
+
+            <TextView
+                style="@style/Label"
+                android:text="@string/label_2"
+                android:layout_below="@id/device_button_1"
+                android:layout_marginTop="@dimen/bus_offset_y" />
+
+            <TextView
+                style="@style/Label"
+                android:text="@string/label_3"
+                android:layout_above="@id/anchor_row_2"
+                android:layout_marginBottom="@dimen/bus_offset_y" />
+
+            <TextView
+                style="@style/Label"
+                android:text="@string/label_4"
+                android:layout_below="@id/anchor_row_2"
+                android:layout_marginTop="@dimen/bus_offset_y" />
+
+            <TextView
+                style="@style/Label"
+                android:text="@string/label_5"
+                android:layout_above="@id/reg_akk"
+                android:layout_marginBottom="@dimen/bus_offset_y" />
+
+            <TextView
+                style="@style/Label"
+                android:text="@string/label_6"
+                android:layout_below="@id/reg_akk"
+                android:layout_marginTop="@dimen/bus_offset_y" />
 
         </RelativeLayout>
 

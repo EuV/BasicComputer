@@ -55,7 +55,7 @@
         <item name="android:layout_width">@dimen/register_width</item>
     </style>
 
-    <!-- Label -->
+    <!-- Static Block -->
     <style name="StaticBlock">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">@dimen/register_height</item>
@@ -63,6 +63,14 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/static_block_text_size</item>
         <item name="android:padding">@dimen/static_block_text_padding</item>
+    </style>
+
+    <!-- Label -->
+    <style name="Label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textSize">@dimen/register_text_size</item>
     </style>
 
 

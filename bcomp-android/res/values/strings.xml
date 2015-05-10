@@ -26,4 +26,10 @@
     <string name="device_1">ВУ1</string>
     <string name="device_2">ВУ2</string>
     <string name="device_3">ВУ3</string>
+    <string name="label_1">Запрос прерывания</string>
+    <string name="label_2">Состояние флага ВУ</string>
+    <string name="label_3">Адрес ВУ</string>
+    <string name="label_4">Приказ на ввод/вывод</string>
+    <string name="label_5">Шина ввода</string>
+    <string name="label_6">Шина вывода</string>
 </resources>
