@@ -40,7 +40,7 @@
                 android:layout_alignTop="@id/reg_akk"
                 android:layout_marginLeft="@dimen/register_horizontal_space" />
 
-            <ru.ifmo.cs.bcomp.android.view.RegisterView
+            <ru.ifmo.cs.bcomp.android.view.InputRegisterView
                 style="@style/Register"
                 android:tag="РД ВУ2"
                 android:id="@+id/reg_rd_device_2"
@@ -49,7 +49,7 @@
                 android:layout_alignTop="@id/reg_rd_device_1"
                 android:layout_marginLeft="@dimen/register_horizontal_space" />
 
-            <ru.ifmo.cs.bcomp.android.view.RegisterView
+            <ru.ifmo.cs.bcomp.android.view.InputRegisterView
                 style="@style/Register"
                 android:tag="РД ВУ3"
                 android:id="@+id/reg_rd_device_3"

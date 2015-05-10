@@ -8,32 +8,46 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import ru.ifmo.cs.bcomp.Utils;
 import ru.ifmo.cs.bcomp.android.KeyboardPopupActivity;
 import ru.ifmo.cs.bcomp.android.R;
 import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
+import ru.ifmo.cs.bcomp.android.util.TabAdapter;
+import ru.ifmo.cs.elements.Register;
 
 import static ru.ifmo.cs.bcomp.CPU.Reg.KEY;
 
 
 public class KeyboardFragment extends RootFragment {
     public static final int HEX_SYMBOL_REQUEST = 0;
-    public static final int KEYBOARD_WIDTH = 16;
+    public static final int DEVICE_NAME_INDEX = 3;
+    public static final int CLOSE_BUTTON_INDEX = 2;
+    public static final String CLOSE_BUTTON_SYMBOL = "╳";
     public static final String HEX_SYMBOL_VALUE = "hex_symbol_value";
     public static final String HEX_SYMBOL_PRESSED_INDEX = "hex_symbol_tag";
 
     private Integer hexSymbolPressedIndex = -1;
     private Button[] hexSymbols;
     private TextView binaryView;
+    private Register linkedRegister;
+    private Register keyRegister;
+    private ImageButton setAddressButton;
+    private ImageButton writeButton;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        if (savedInstanceState != null) {
+        keyRegister = cpu.getRegister(KEY);
+
+        if (savedInstanceState == null) {
+            linkedRegister = keyRegister;
+        } else {
             hexSymbolPressedIndex = savedInstanceState.getInt(HEX_SYMBOL_PRESSED_INDEX);
+            linkedRegister = bCompHolder.getKeyboardLinkedRegister();
         }
 
         View keyboardView = inflater.inflate(R.layout.keyboard_fragment, container, false);
@@ -53,7 +67,8 @@ public class KeyboardFragment extends RootFragment {
             hexSymbol.setOnClickListener(listener);
         }
 
-        keyboardView.findViewById(R.id.image_button_address).setOnClickListener(new OnClickListener() {
+        setAddressButton = (ImageButton) keyboardView.findViewById(R.id.image_button_address);
+        setAddressButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 BCompVibrator.vibrate();
@@ -61,7 +76,8 @@ public class KeyboardFragment extends RootFragment {
             }
         });
 
-        keyboardView.findViewById(R.id.image_button_write).setOnClickListener(new OnClickListener() {
+        writeButton = (ImageButton) keyboardView.findViewById(R.id.image_button_write);
+        writeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 BCompVibrator.vibrate();
@@ -75,10 +91,43 @@ public class KeyboardFragment extends RootFragment {
     }
 
 
+    public void switchKeyboard(Register register) {
+        linkedRegister = register;
+        fillKeyboard();
+    }
+
+
+    private void fillKeyboard() {
+        boolean isKeyReg = (linkedRegister == keyRegister);
+
+        setButtonsClickable(isKeyReg);
+
+        if (!isKeyReg) {
+            hexSymbols[DEVICE_NAME_INDEX].setText(linkedRegister.name.substring(3));
+            hexSymbols[CLOSE_BUTTON_INDEX].setText(CLOSE_BUTTON_SYMBOL);
+        }
+
+        int symbolsCount = (isKeyReg) ? 4 : 2;
+        String hexValue = Utils.toHex(linkedRegister.getValue(), linkedRegister.getWidth());
+        for (int i = 0; i < symbolsCount; i++) {
+            hexSymbols[i].setText(Character.toString(hexValue.charAt(hexValue.length() - 1 - i)));
+        }
+
+        binaryView.setText(Utils.toBinary(linkedRegister.getValue(), linkedRegister.getWidth()));
+    }
+
+
+    private void setButtonsClickable(boolean isClickable) {
+        hexSymbols[DEVICE_NAME_INDEX].setClickable(isClickable);
+        setAddressButton.setClickable(isClickable);
+        writeButton.setClickable(isClickable);
+    }
+
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putInt(HEX_SYMBOL_PRESSED_INDEX, hexSymbolPressedIndex);
-        super.onSaveInstanceState(outState);
+        bCompHolder.setKeyboardLinkedRegister(linkedRegister);
     }
 
 
@@ -88,44 +137,31 @@ public class KeyboardFragment extends RootFragment {
         if (hexSymbolPressedIndex == -1) return;
 
         if (requestCode == HEX_SYMBOL_REQUEST && resultCode == Activity.RESULT_OK) {
-            hexSymbols[hexSymbolPressedIndex].setText(String.format("%X", data.getIntExtra(HEX_SYMBOL_VALUE, 0)));
+            linkedRegister.setValue(data.getIntExtra(HEX_SYMBOL_VALUE, 0), hexSymbolPressedIndex * 4, 4);
+            fillKeyboard();
 
-            StringBuilder sb = new StringBuilder();
-            for (int i = hexSymbols.length - 1; i >= 0; i--) {
-                sb.append(hexSymbols[i].getText());
+            if (linkedRegister != keyRegister) {
+                bCompHolder.updateTab(TabAdapter.IO_TAB);
             }
-            int regValue = Integer.parseInt(sb.toString(), 16);
-
-            updateBinary(regValue);
-            cpu.setRegKey(regValue);
         }
 
         hexSymbolPressedIndex = -1;
     }
 
 
-    protected void fillKeyboard() {
-        int value = cpu.getRegister(KEY).getValue();
-        String hexValue = Utils.toHex(value, KEYBOARD_WIDTH);
-        for (int i = 0; i < hexSymbols.length; i++) {
-            hexSymbols[i].setText("" + hexValue.charAt(hexValue.length() - 1 - i));
-        }
-
-        updateBinary(value);
-    }
-
-
-    protected void updateBinary(int value) {
-        binaryView.setText(Utils.toBinary(value, KEYBOARD_WIDTH));
-    }
-
-
-    protected class HexSymbolOnClickListener implements OnClickListener {
+    private class HexSymbolOnClickListener implements OnClickListener {
         @Override
         public void onClick(View view) {
             if (hexSymbolPressedIndex != -1) return;
             BCompVibrator.vibrate();
-            hexSymbolPressedIndex = Integer.parseInt((String) view.getTag());
+
+            int buttonIndex = Integer.parseInt((String) view.getTag());
+            if ((buttonIndex == CLOSE_BUTTON_INDEX) && (linkedRegister != keyRegister)) {
+                switchKeyboard(keyRegister);
+                return;
+            }
+
+            hexSymbolPressedIndex = buttonIndex;
             Intent intent = new Intent(getActivity(), KeyboardPopupActivity.class);
             startActivityForResult(intent, HEX_SYMBOL_REQUEST);
         }

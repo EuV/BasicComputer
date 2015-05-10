@@ -8,9 +8,11 @@ import ru.ifmo.cs.bcomp.ControlSignal;
 import ru.ifmo.cs.bcomp.IOCtrl;
 import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
 import ru.ifmo.cs.bcomp.android.fragment.GraphicalTab;
+import ru.ifmo.cs.bcomp.android.fragment.KeyboardFragment;
 import ru.ifmo.cs.bcomp.android.fragment.MemoryFragment;
 import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
 import ru.ifmo.cs.bcomp.android.util.TabAdapter;
+import ru.ifmo.cs.elements.Register;
 
 import java.util.Set;
 
@@ -19,6 +21,7 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
     private static final String TAG_BASIC_COMPUTER_INSTANCE = "bcomp_fragment";
     private BCompInstance bci;
     private MemoryFragment memoryFragment;
+    private KeyboardFragment keyboardFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
         BCompVibrator.init(this);
 
         memoryFragment = (MemoryFragment) fm.findFragmentById(R.id.memory_fragment);
+        keyboardFragment = (KeyboardFragment) fm.findFragmentById(R.id.keyboard_fragment);
     }
 
 
@@ -56,19 +60,19 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                TabAdapter tabAdapter = TabAdapter.getAdapter();
-
-                GraphicalTab basicTab = (GraphicalTab) tabAdapter.getFragment(TabAdapter.BC_TAB);
-                if (basicTab != null) {
-                    basicTab.updateViews();
-                }
-
-                GraphicalTab ioTab = (GraphicalTab) tabAdapter.getFragment(TabAdapter.IO_TAB);
-                if (ioTab != null) {
-                    ioTab.updateViews();
-                }
+                updateTab(TabAdapter.BC_TAB);
+                updateTab(TabAdapter.IO_TAB);
             }
         });
+    }
+
+
+    @Override
+    public void updateTab(int index) {
+        GraphicalTab tab = (GraphicalTab) TabAdapter.getAdapter().getFragment(index);
+        if (tab != null) {
+            tab.updateViews();
+        }
     }
 
 
@@ -104,5 +108,23 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
     @Override
     public IOCtrl[] getIOControls() {
         return bci.getIOControls();
+    }
+
+
+    @Override
+    public void switchKeyboard(Register register) {
+        keyboardFragment.switchKeyboard(register);
+    }
+
+
+    @Override
+    public void setKeyboardLinkedRegister(Register register) {
+        bci.setKeyboardLinkedRegister(register);
+    }
+
+
+    @Override
+    public Register getKeyboardLinkedRegister() {
+        return bci.getKeyboardLinkedRegister();
     }
 }

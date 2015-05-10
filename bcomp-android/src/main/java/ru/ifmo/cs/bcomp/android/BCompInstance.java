@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import ru.ifmo.cs.bcomp.*;
 import ru.ifmo.cs.elements.DataDestination;
+import ru.ifmo.cs.elements.Register;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,11 +16,15 @@ public class BCompInstance extends Fragment {
     public interface BCompHolder {
         CPU getCPU();
         void tickFinished();
+        void updateTab(int index);
         void updateMemory();
         void registerNewSignals(Set<ControlSignal> signals);
         Set<ControlSignal> getOpenSignals();
         void setTickDelay(long tickDelay);
         IOCtrl[] getIOControls();
+        void switchKeyboard(Register register);
+        void setKeyboardLinkedRegister(Register register);
+        Register getKeyboardLinkedRegister();
     }
 
     private class SignalHandler implements DataDestination {
@@ -39,6 +44,7 @@ public class BCompInstance extends Fragment {
     private final BasicComp bcomp;
     private final Set<ControlSignal> openSignals = new HashSet<>();
     private final Set<ControlSignal> registeredSignals = new HashSet<>();
+    private Register keyboardLinkedRegister;
 
     public final CPU cpu;
 
@@ -106,6 +112,16 @@ public class BCompInstance extends Fragment {
 
     public IOCtrl[] getIOControls() {
         return bcomp.getIOCtrls();
+    }
+
+
+    public void setKeyboardLinkedRegister(Register register) {
+        keyboardLinkedRegister = register;
+    }
+
+
+    public Register getKeyboardLinkedRegister() {
+        return keyboardLinkedRegister;
     }
 
 
