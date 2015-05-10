@@ -4,78 +4,32 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import ru.ifmo.cs.bcomp.CPU;
-import ru.ifmo.cs.bcomp.ControlSignal;
 import ru.ifmo.cs.bcomp.android.R;
-import ru.ifmo.cs.bcomp.android.view.BusView;
-import ru.ifmo.cs.bcomp.android.view.RegisterView;
 import ru.ifmo.cs.bcomp.android.view.RunningCycleView;
-import ru.ifmo.cs.elements.Register;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-
-public class BasicFragment extends RootFragment {
+public class BasicFragment extends GraphicalTab {
     private RunningCycleView runningCycleView;
-    private List<RegisterView> registerViews;
-    private List<BusView> busViews;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        View basicView = inflater.inflate(R.layout.basic_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.basic_fragment, container, false);
 
-        runningCycleView = (RunningCycleView) basicView.findViewById(R.id.running_cycle);
+        init((ViewGroup) rootView.findViewById(R.id.basic_views_holder));
 
-        registerViews = new ArrayList<>();
-
-        // TODO: find registers like buses?
-        for (CPU.Reg reg : CPU.Reg.values()) {
-            Register register = cpu.getRegister(reg);
-            RegisterView registerView = (RegisterView) basicView.findViewWithTag(register.name);
-            if (registerView == null) continue;
-
-            registerView.linkWithRegister(register);
-            registerViews.add(registerView);
-        }
-
-        busViews = new ArrayList<>();
-
-        ViewGroup viewsHolder = (ViewGroup) basicView.findViewById(R.id.basic_views_holder);
-        for (int i = 0; i < viewsHolder.getChildCount(); i++) {
-            View view = viewsHolder.getChildAt(i);
-            if (view.getClass() == BusView.class) {
-                busViews.add((BusView) view);
-                bCompHolder.registerNewSignals(((BusView) view).getSignals());
-            }
-        }
-
-        updateViews();
-
-        return basicView;
+        return rootView;
     }
 
 
-    public void updateViews() {
-        for (RegisterView registerView : registerViews) {
-            registerView.update();
-        }
+    @Override
+    protected void customInit(ViewGroup viewsHolder) {
+        runningCycleView = (RunningCycleView) viewsHolder.findViewById(R.id.running_cycle);
+    }
 
-        Set<ControlSignal> openSignals = bCompHolder.getOpenSignals();
-        for (BusView busView : busViews) {
-            for (ControlSignal busSignal : busView.getSignals()) {
-                if (openSignals.contains(busSignal)) {
-                    busView.activate();
-                    break;
-                } else {
-                    busView.deactivate();
-                }
-            }
-        }
 
+    @Override
+    protected void customUpdateViews() {
         runningCycleView.update(cpu);
     }
 }
