@@ -1,14 +1,11 @@
 package ru.ifmo.cs.bcomp.android.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.ControlSignal;
-import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
 import ru.ifmo.cs.bcomp.android.R;
 import ru.ifmo.cs.bcomp.android.view.BusView;
 import ru.ifmo.cs.bcomp.android.view.RegisterView;
@@ -20,18 +17,14 @@ import java.util.List;
 import java.util.Set;
 
 
-public class BasicFragment extends Fragment {
-    private BCompHolder bCompHolder;
-    private CPU cpu;
+public class BasicFragment extends RootFragment {
     private RunningCycleView runningCycleView;
     private List<RegisterView> registerViews;
     private List<BusView> busViews;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (cpu == null) {
-            cpu = bCompHolder.getCPU();
-        }
+        super.onCreateView(inflater, container, savedInstanceState);
 
         View basicView = inflater.inflate(R.layout.basic_fragment, container, false);
 
@@ -63,13 +56,6 @@ public class BasicFragment extends Fragment {
         updateViews();
 
         return basicView;
-    }
-
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        bCompHolder = (BCompHolder) activity;
     }
 
 

@@ -3,16 +3,13 @@ package ru.ifmo.cs.bcomp.android.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.Utils;
-import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
 import ru.ifmo.cs.bcomp.android.KeyboardPopupActivity;
 import ru.ifmo.cs.bcomp.android.R;
 import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
@@ -20,14 +17,12 @@ import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
 import static ru.ifmo.cs.bcomp.CPU.Reg.KEY;
 
 
-public class KeyboardFragment extends Fragment {
+public class KeyboardFragment extends RootFragment {
     public static final int HEX_SYMBOL_REQUEST = 0;
     public static final int KEYBOARD_WIDTH = 16;
     public static final String HEX_SYMBOL_VALUE = "hex_symbol_value";
     public static final String HEX_SYMBOL_PRESSED_INDEX = "hex_symbol_tag";
 
-    private BCompHolder bCompHolder;
-    private CPU cpu;
     private Integer hexSymbolPressedIndex = -1;
     private Button[] hexSymbols;
     private TextView binaryView;
@@ -35,9 +30,7 @@ public class KeyboardFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (cpu == null) {
-            cpu = bCompHolder.getCPU();
-        }
+        super.onCreateView(inflater, container, savedInstanceState);
 
         if (savedInstanceState != null) {
             hexSymbolPressedIndex = savedInstanceState.getInt(HEX_SYMBOL_PRESSED_INDEX);
@@ -79,13 +72,6 @@ public class KeyboardFragment extends Fragment {
         fillKeyboard();
 
         return keyboardView;
-    }
-
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        bCompHolder = (BCompHolder) activity;
     }
 
 

@@ -1,30 +1,21 @@
 package ru.ifmo.cs.bcomp.android.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.StateReg;
-import ru.ifmo.cs.bcomp.android.BCompInstance;
 import ru.ifmo.cs.bcomp.android.R;
 import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
 
 
-public class ControlFragment extends Fragment {
-    private BCompInstance.BCompHolder bCompHolder;
-    private CPU cpu;
-
+public class ControlFragment extends RootFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (cpu == null) {
-            cpu = bCompHolder.getCPU();
-        }
+        super.onCreateView(inflater, container, savedInstanceState);
 
         View controlView = inflater.inflate(R.layout.control_fragment, container, false);
 
@@ -94,12 +85,5 @@ public class ControlFragment extends Fragment {
 
     private boolean getClockState() {
         return !cpu.getClockState();
-    }
-
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        bCompHolder = (BCompInstance.BCompHolder) activity;
     }
 }

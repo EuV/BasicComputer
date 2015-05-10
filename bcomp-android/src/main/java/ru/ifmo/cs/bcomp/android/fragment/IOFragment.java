@@ -2,7 +2,6 @@ package ru.ifmo.cs.bcomp.android.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,7 +10,6 @@ import android.widget.Button;
 import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.ControlSignal;
 import ru.ifmo.cs.bcomp.IOCtrl;
-import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
 import ru.ifmo.cs.bcomp.android.R;
 import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
 import ru.ifmo.cs.bcomp.android.view.BusView;
@@ -25,18 +23,14 @@ import java.util.List;
 import java.util.Set;
 
 
-public class IOFragment extends Fragment {
-    private BCompHolder bCompHolder;
-    private CPU cpu;
+public class IOFragment extends RootFragment {
     private List<RegisterView> registerViews = new ArrayList<>();
     private List<BusView> busViews = new ArrayList<>();
     private List<StatelessBusView> statelessBusViews = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (cpu == null) {
-            cpu = bCompHolder.getCPU();
-        }
+        super.onCreateView(inflater, container, savedInstanceState);
 
         View ioView = inflater.inflate(R.layout.io_fragment, container, false);
 
@@ -126,13 +120,6 @@ public class IOFragment extends Fragment {
         updateViews();
 
         return ioView;
-    }
-
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        bCompHolder = (BCompHolder) activity;
     }
 
 

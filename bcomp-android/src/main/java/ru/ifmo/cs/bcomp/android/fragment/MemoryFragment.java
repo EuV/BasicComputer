@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,27 +12,21 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
-import ru.ifmo.cs.bcomp.CPU;
-import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
 import ru.ifmo.cs.bcomp.android.R;
 import ru.ifmo.cs.elements.Memory;
 
 
-public class MemoryFragment extends Fragment {
+public class MemoryFragment extends RootFragment {
     private static final int PORTRAIT_ROW_COUNT = 16;
     private static final int LANDSCAPE_ROW_COUNT = 8;
 
-    private BCompHolder bCompHolder;
-    private CPU cpu;
     private TextView[] addressRows;
     private TextView[] valueRows;
     private int row_count;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (cpu == null) {
-            cpu = bCompHolder.getCPU();
-        }
+        super.onCreateView(inflater, container, savedInstanceState);
 
         View memoryFragment = inflater.inflate(R.layout.memory_fragment, container, false);
 
@@ -61,13 +54,6 @@ public class MemoryFragment extends Fragment {
             addressRows[i].setText(String.format("%03X", page + i));
             valueRows[i].setText(String.format("%04X", memory.getValue(page + i)));
         }
-    }
-
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        bCompHolder = (BCompHolder) activity;
     }
 
 
