@@ -13,9 +13,11 @@ public class InputRegisterView extends RegisterView {
     public InputRegisterView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        bCompHolder = (BCompHolder) context;
-
         headerView.setBackgroundColor(getResources().getColor(R.color.register_value));
+
+        if (isInEditMode()) return;
+
+        bCompHolder = (BCompHolder) context;
 
         setOnClickListener(new OnClickListener() {
             @Override
