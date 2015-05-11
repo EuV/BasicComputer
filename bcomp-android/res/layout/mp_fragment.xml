@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/ru.ifmo.cs.bcomp.android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Container">
 
@@ -20,6 +21,105 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/mp_views_holder">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/horizontal_anchor"
+                    android:layout_centerHorizontal="true" />
+
+                <ru.ifmo.cs.bcomp.android.view.RegisterView
+                    style="@style/Register"
+                    android:tag="РА"
+                    android:id="@+id/reg_ra"
+                    app:full_view="false"
+                    android:layout_alignRight="@id/horizontal_anchor"
+                    android:layout_marginRight="@dimen/mp_horizontal_margin" />
+
+                <ru.ifmo.cs.bcomp.android.view.RegisterView
+                    style="@style/Register"
+                    android:tag="СК"
+                    android:id="@+id/reg_sk"
+                    app:full_view="false"
+                    android:layout_alignLeft="@id/horizontal_anchor"
+                    android:layout_marginLeft="@dimen/mp_horizontal_margin" />
+
+                <ru.ifmo.cs.bcomp.android.view.RegisterView
+                    style="@style/Register"
+                    android:tag="РД"
+                    android:id="@+id/reg_rd"
+                    app:full_view="false"
+                    android:layout_below="@id/reg_ra"
+                    android:layout_marginTop="@dimen/mp_row_vertical_space"
+                    android:layout_alignRight="@id/horizontal_anchor"
+                    android:layout_marginRight="@dimen/mp_horizontal_margin" />
+
+                <ru.ifmo.cs.bcomp.android.view.RegisterView
+                    style="@style/Register"
+                    android:tag="РК"
+                    android:id="@+id/reg_rk"
+                    app:full_view="false"
+                    android:layout_below="@id/reg_sk"
+                    android:layout_marginTop="@dimen/mp_row_vertical_space"
+                    android:layout_alignLeft="@id/horizontal_anchor"
+                    android:layout_marginLeft="@dimen/mp_horizontal_margin" />
+
+                <TextView
+                    style="@style/Register"
+                    android:layout_width="@dimen/alu_width"
+                    android:layout_height="@dimen/alu_height"
+                    android:id="@+id/alu"
+                    android:text="@string/alu"
+                    android:layout_below="@id/reg_rd"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/mp_row_vertical_space" />
+
+                <ru.ifmo.cs.bcomp.android.view.RegisterView
+                    style="@style/Register"
+                    android:tag="Акк"
+                    android:id="@+id/reg_akk"
+                    app:full_view="false"
+                    android:layout_below="@id/alu"
+                    android:layout_marginTop="@dimen/mp_row_vertical_space"
+                    android:layout_alignRight="@id/horizontal_anchor"
+                    android:layout_marginRight="@dimen/mp_horizontal_margin" />
+
+                <ru.ifmo.cs.bcomp.android.view.RegisterView
+                    style="@style/Register"
+                    android:tag="БР"
+                    android:id="@+id/reg_br"
+                    app:full_view="false"
+                    android:layout_below="@id/alu"
+                    android:layout_marginTop="@dimen/mp_row_vertical_space"
+                    android:layout_alignLeft="@id/horizontal_anchor"
+                    android:layout_marginLeft="@dimen/mp_horizontal_margin" />
+
+                <ru.ifmo.cs.bcomp.android.view.RegisterView
+                    style="@style/Register"
+                    android:tag="C"
+                    android:id="@+id/reg_rs"
+                    app:full_view="true"
+                    android:layout_below="@id/reg_akk"
+                    android:layout_marginTop="@dimen/mp_row_vertical_space"
+                    android:layout_centerHorizontal="true" />
+
+                <ru.ifmo.cs.bcomp.android.view.RegisterView
+                    style="@style/Register"
+                    android:tag="СМ"
+                    android:id="@+id/reg_sm"
+                    app:full_view="true"
+                    android:layout_below="@id/reg_rs"
+                    android:layout_marginTop="@dimen/mp_row_vertical_space"
+                    android:layout_centerHorizontal="true" />
+
+                <ru.ifmo.cs.bcomp.android.view.MicroCommandRegisterView
+                    style="@style/Register"
+                    android:tag="РМ"
+                    android:id="@+id/reg_rm"
+                    app:full_view="true"
+                    android:layout_below="@id/reg_sm"
+                    android:layout_marginTop="@dimen/mp_row_vertical_space"
+                    android:layout_centerHorizontal="true" />
 
             </RelativeLayout>
 

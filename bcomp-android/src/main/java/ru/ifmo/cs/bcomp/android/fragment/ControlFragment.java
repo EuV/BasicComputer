@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import ru.ifmo.cs.bcomp.StateReg;
 import ru.ifmo.cs.bcomp.android.R;
 import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
+import ru.ifmo.cs.bcomp.android.util.TabAdapter;
 
 
 public class ControlFragment extends RootFragment {
@@ -59,7 +60,7 @@ public class ControlFragment extends RootFragment {
                 BCompVibrator.vibrate();
                 cpu.invertRunState();
                 v.setSelected(getRunState());
-                // TODO: Redraw State Register on the MP tab (there's its full view there)
+                bCompHolder.updateTab(TabAdapter.MP_TAB);
             }
         });
 
