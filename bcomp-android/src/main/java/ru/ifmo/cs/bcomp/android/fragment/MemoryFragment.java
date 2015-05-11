@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
+import ru.ifmo.cs.bcomp.Utils;
 import ru.ifmo.cs.bcomp.android.R;
 import ru.ifmo.cs.elements.Memory;
 
@@ -24,11 +25,23 @@ public class MemoryFragment extends RootFragment {
     private TextView[] valueRows;
     private int row_count;
 
+    private Memory memory;
+    private int addressBitWidth;
+    private int valueBitWidth;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View memoryFragment = inflater.inflate(R.layout.memory_fragment, container, false);
+
+        String title = getTag();
+        ((TextView) memoryFragment.findViewById(R.id.memory_title)).setText(title);
+
+        boolean isMicroMemory = (title.equals(getResources().getString(R.string.mp_memory)));
+        memory = (isMicroMemory) ? cpu.getMicroMemory() : cpu.getMemory();
+        addressBitWidth = memory.getAddrWidth();
+        valueBitWidth = memory.getWidth();
 
         boolean portrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
         row_count = portrait ? PORTRAIT_ROW_COUNT : LANDSCAPE_ROW_COUNT;
@@ -48,11 +61,10 @@ public class MemoryFragment extends RootFragment {
 
 
     public void fillMemory() {
-        Memory memory = cpu.getMemory();
         int page = memory.getAddrValue() & (~(row_count - 1));
         for (int i = 0; i < row_count; i++) {
-            addressRows[i].setText(String.format("%03X", page + i));
-            valueRows[i].setText(String.format("%04X", memory.getValue(page + i)));
+            addressRows[i].setText(Utils.toHex(page + i, addressBitWidth));
+            valueRows[i].setText(Utils.toHex(memory.getValue(page + i), valueBitWidth));
         }
     }
 

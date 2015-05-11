@@ -18,6 +18,7 @@
             <fragment
                 android:name="ru.ifmo.cs.bcomp.android.fragment.MemoryFragment"
                 android:id="@+id/memory_fragment"
+                android:tag="@string/memory"
                 android:layout_weight="@integer/memory_weight"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

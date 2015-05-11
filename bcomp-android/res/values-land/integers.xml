@@ -2,4 +2,6 @@
 <resources>
     <integer name="memory_weight">1</integer>
     <integer name="content_weight">6</integer>
+    <integer name="mp_memory_weight">1</integer>
+    <integer name="mp_content_weight">6</integer>
 </resources>

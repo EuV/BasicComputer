@@ -21,6 +21,7 @@
     </string-array>
     <string name="delay_msg_format">Задержка анимации: %d мс.</string>
     <string name="memory">Память</string>
+    <string name="mp_memory">Память МП</string>
     <string name="decoder_label">Дешифр. адр. и пр.</string>
     <string name="device_common">ВУ</string>
     <string name="device_1">ВУ1</string>

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import ru.ifmo.cs.bcomp.android.R;
 
 public class MPTab extends GraphicalTab {
+    private MemoryFragment microMemory;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -22,10 +23,12 @@ public class MPTab extends GraphicalTab {
 
     @Override
     protected void customInit(ViewGroup viewsHolder) {
+        microMemory = (MemoryFragment) getChildFragmentManager().findFragmentById(R.id.mp_memory_fragment);
     }
 
 
     @Override
     protected void customUpdateViews() {
+        microMemory.fillMemory();
     }
 }
