@@ -128,4 +128,16 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
     public Register getKeyboardLinkedRegister() {
         return bci.getKeyboardLinkedRegister();
     }
+
+
+    @Override
+    public boolean isInputToControlUnit() {
+        return bci.isInputToControlUnit();
+    }
+
+
+    @Override
+    public void setInputToControlUnit(boolean isInputToControlUnit) {
+        bci.setInputToControlUnit(isInputToControlUnit);
+    }
 }

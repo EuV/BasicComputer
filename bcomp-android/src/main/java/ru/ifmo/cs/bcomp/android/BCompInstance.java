@@ -25,6 +25,8 @@ public class BCompInstance extends Fragment {
         void switchKeyboard(Register register);
         void setKeyboardLinkedRegister(Register register);
         Register getKeyboardLinkedRegister();
+        boolean isInputToControlUnit();
+        void setInputToControlUnit(boolean isInputToControlUnit);
     }
 
     private class SignalHandler implements DataDestination {
@@ -45,6 +47,7 @@ public class BCompInstance extends Fragment {
     private final Set<ControlSignal> openSignals = new HashSet<>();
     private final Set<ControlSignal> registeredSignals = new HashSet<>();
     private Register keyboardLinkedRegister;
+    private boolean isInputToControlUnit = false;
 
     public final CPU cpu;
 
@@ -122,6 +125,16 @@ public class BCompInstance extends Fragment {
 
     public Register getKeyboardLinkedRegister() {
         return keyboardLinkedRegister;
+    }
+
+
+    public boolean isInputToControlUnit() {
+        return isInputToControlUnit;
+    }
+
+
+    public void setInputToControlUnit(boolean isInputToControlUnit) {
+        this.isInputToControlUnit = isInputToControlUnit;
     }
 
 

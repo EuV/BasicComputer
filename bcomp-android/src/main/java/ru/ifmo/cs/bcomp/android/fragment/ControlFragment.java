@@ -32,7 +32,12 @@ public class ControlFragment extends RootFragment {
             @Override
             public void onClick(View v) {
                 BCompVibrator.vibrate();
-                cpu.startRead();
+                if (bCompHolder.isInputToControlUnit()) {
+                    cpu.runMRead();
+                    bCompHolder.updateTab(TabAdapter.MP_TAB);
+                } else {
+                    cpu.startRead();
+                }
             }
         });
 

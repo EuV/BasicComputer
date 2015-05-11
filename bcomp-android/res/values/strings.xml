@@ -34,4 +34,5 @@
     <string name="label_5">Шина ввода</string>
     <string name="label_6">Шина вывода</string>
     <string name="micro_command_register">Регистр МК</string>
+    <string name="control_unit_input_switcher">Ввод в Устройство управления</string>
 </resources>

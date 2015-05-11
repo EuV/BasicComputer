@@ -10,14 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.Utils;
 import ru.ifmo.cs.bcomp.android.KeyboardPopupActivity;
 import ru.ifmo.cs.bcomp.android.R;
 import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
 import ru.ifmo.cs.bcomp.android.util.TabAdapter;
 import ru.ifmo.cs.elements.Register;
-
-import static ru.ifmo.cs.bcomp.CPU.Reg.KEY;
 
 
 public class KeyboardFragment extends RootFragment {
@@ -41,7 +40,7 @@ public class KeyboardFragment extends RootFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        keyRegister = cpu.getRegister(KEY);
+        keyRegister = cpu.getRegister(CPU.Reg.KEY);
 
         // It might be saved previously but lost due to OutOfMemoryError
         // TODO: Close Keyboard pop-up in this case if exists
@@ -77,7 +76,12 @@ public class KeyboardFragment extends RootFragment {
             @Override
             public void onClick(View v) {
                 BCompVibrator.vibrate();
-                cpu.startSetAddr();
+                if (bCompHolder.isInputToControlUnit()) {
+                    cpu.runSetMAddr();
+                    bCompHolder.updateTab(TabAdapter.MP_TAB);
+                } else {
+                    cpu.startSetAddr();
+                }
             }
         });
 
@@ -86,7 +90,12 @@ public class KeyboardFragment extends RootFragment {
             @Override
             public void onClick(View v) {
                 BCompVibrator.vibrate();
-                cpu.startWrite();
+                if (bCompHolder.isInputToControlUnit()) {
+                    cpu.runMWrite();
+                    bCompHolder.updateTab(TabAdapter.MP_TAB);
+                } else {
+                    cpu.startWrite();
+                }
             }
         });
 
