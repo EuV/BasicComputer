@@ -1,6 +1,5 @@
 package ru.ifmo.cs.bcomp.android.util;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -11,7 +10,7 @@ import ru.ifmo.cs.bcomp.android.R;
 import ru.ifmo.cs.bcomp.android.fragment.AssemblerTab;
 import ru.ifmo.cs.bcomp.android.fragment.BasicTab;
 import ru.ifmo.cs.bcomp.android.fragment.IOTab;
-import ru.ifmo.cs.bcomp.android.fragment.YetAnotherTab;
+import ru.ifmo.cs.bcomp.android.fragment.MPTab;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +20,15 @@ public class TabAdapter extends FragmentStatePagerAdapter {
     public static final int IO_TAB = 1;
     public static final int MP_TAB = 2;
     public static final int ASM_TAB = 3;
+
+    private static final Class TABS[] = new Class[4];
+
+    static {
+        TABS[BC_TAB] = BasicTab.class;
+        TABS[IO_TAB] = IOTab.class;
+        TABS[MP_TAB] = MPTab.class;
+        TABS[ASM_TAB] = AssemblerTab.class;
+    }
 
     private static TabAdapter adapter;
 
@@ -50,36 +58,14 @@ public class TabAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int index) {
-        switch (index) {
-
-            case BC_TAB: {
-                Fragment basicTab = new BasicTab();
-                tabReferenceMap.put(index, basicTab);
-                return basicTab;
-            }
-
-            case IO_TAB: {
-                Fragment ioTab = new IOTab();
-                tabReferenceMap.put(index, ioTab);
-                return ioTab;
-            }
-
-            case MP_TAB: {
-                YetAnotherTab anotherTab = new YetAnotherTab();
-                Bundle args = new Bundle();
-                args.putString(YetAnotherTab.NAME, "Работа с МПУ");
-                anotherTab.setArguments(args);
-                return anotherTab;
-            }
-
-            case ASM_TAB: {
-                Fragment assemblerTab = new AssemblerTab();
-                tabReferenceMap.put(index, assemblerTab);
-                return assemblerTab;
-            }
+        try {
+            Fragment fragment = (Fragment) TABS[index].newInstance();
+            tabReferenceMap.put(index, fragment);
+            return fragment;
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+            return null;
         }
-
-        return null;
     }
 
 
