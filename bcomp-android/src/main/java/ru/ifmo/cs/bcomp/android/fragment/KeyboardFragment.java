@@ -28,7 +28,7 @@ public class KeyboardFragment extends RootFragment {
     public static final String HEX_SYMBOL_VALUE = "hex_symbol_value";
     public static final String HEX_SYMBOL_PRESSED_INDEX = "hex_symbol_tag";
 
-    private Integer hexSymbolPressedIndex = -1;
+    private Integer hexSymbolPressedIndex;
     private Button[] hexSymbols;
     private TextView binaryView;
     private Register linkedRegister;
@@ -43,11 +43,16 @@ public class KeyboardFragment extends RootFragment {
 
         keyRegister = cpu.getRegister(KEY);
 
-        if (savedInstanceState == null) {
+        // It might be saved previously but lost due to OutOfMemoryError
+        // TODO: Close Keyboard pop-up in this case if exists
+        // TODO: Use Parcelable?
+        linkedRegister = bCompHolder.getKeyboardLinkedRegister();
+
+        if (savedInstanceState == null || linkedRegister == null) {
             linkedRegister = keyRegister;
+            hexSymbolPressedIndex = -1;
         } else {
             hexSymbolPressedIndex = savedInstanceState.getInt(HEX_SYMBOL_PRESSED_INDEX);
-            linkedRegister = bCompHolder.getKeyboardLinkedRegister();
         }
 
         View keyboardView = inflater.inflate(R.layout.keyboard_fragment, container, false);
