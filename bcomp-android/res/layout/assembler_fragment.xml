@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/Container">
 
     <TextView style="@style/Indent" />
@@ -21,7 +22,42 @@
                 android:id="@+id/animation_speed_bar"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:max="10" />
+                android:max="5" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/asm_src_view"
+                android:background="@color/asm_src_view"
+                android:typeface="monospace"
+                android:textSize="@dimen/register_text_size"
+                android:scrollbars="vertical"
+                android:padding="@dimen/asm_src_view_padding"
+                android:layout_margin="@dimen/asm_src_view_margin" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/asm_edit"
+                    android:text="@string/asm_edit"
+                    android:textSize="@dimen/device_button_text_size"
+                    tools:ignore="ButtonStyle" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/asm_compile"
+                    android:text="@string/asm_compile"
+                    android:textSize="@dimen/device_button_text_size"
+                    tools:ignore="ButtonStyle" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

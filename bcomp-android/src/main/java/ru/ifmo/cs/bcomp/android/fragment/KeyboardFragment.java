@@ -99,7 +99,7 @@ public class KeyboardFragment extends RootFragment {
             }
         });
 
-        fillKeyboard();
+        updateKeyboard();
 
         return keyboardView;
     }
@@ -107,11 +107,11 @@ public class KeyboardFragment extends RootFragment {
 
     public void switchKeyboard(Register register) {
         linkedRegister = register;
-        fillKeyboard();
+        updateKeyboard();
     }
 
 
-    private void fillKeyboard() {
+    public void updateKeyboard() {
         boolean isKeyReg = (linkedRegister == keyRegister);
 
         setButtonsClickable(isKeyReg);
@@ -152,7 +152,7 @@ public class KeyboardFragment extends RootFragment {
 
         if (requestCode == HEX_SYMBOL_REQUEST && resultCode == Activity.RESULT_OK) {
             linkedRegister.setValue(data.getIntExtra(HEX_SYMBOL_VALUE, 0), hexSymbolPressedIndex * 4, 4);
-            fillKeyboard();
+            updateKeyboard();
 
             if (linkedRegister != keyRegister) {
                 bCompHolder.updateTab(TabAdapter.IO_TAB);

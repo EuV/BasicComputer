@@ -1,6 +1,7 @@
 package ru.ifmo.cs.bcomp.android;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import ru.ifmo.cs.bcomp.*;
@@ -12,12 +13,14 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class BCompInstance extends Fragment {
+    private static final long EXTRA_UPDATES_DELAY_MS = 500;
 
     public interface BCompHolder {
         CPU getCPU();
-        void tickFinished();
+        void updateTabs();
         void updateTab(int index);
         void updateMemory();
+        void updateKeyboard();
         void registerNewSignals(Set<ControlSignal> signals);
         Set<ControlSignal> getOpenSignals();
         void setTickDelay(long tickDelay);
@@ -27,6 +30,7 @@ public class BCompInstance extends Fragment {
         Register getKeyboardLinkedRegister();
         boolean isInputToControlUnit();
         void setInputToControlUnit(boolean isInputToControlUnit);
+        void setCompilationFlag(boolean running);
     }
 
     private class SignalHandler implements DataDestination {
@@ -38,27 +42,32 @@ public class BCompInstance extends Fragment {
 
         @Override
         public void setValue(int ignored) {
-            openSignals.add(signal);
+            synchronized (openSignals) {
+                openSignals.add(signal);
+            }
         }
     }
 
     private BCompHolder bCompHolder;
     private final BasicComp bcomp;
-    private final Set<ControlSignal> openSignals = new HashSet<>();
+    private final CPU cpu;
+    private final HashSet<ControlSignal> openSignals = new HashSet<>();
     private final Set<ControlSignal> registeredSignals = new HashSet<>();
     private Register keyboardLinkedRegister;
     private boolean isInputToControlUnit = false;
-
-    public final CPU cpu;
+    private boolean compilationIsRunning = false;
 
     private long tickDelay = 10;
 
     public BCompInstance() throws Exception {
         bcomp = new BasicComp(MicroPrograms.getMicroProgram(MicroPrograms.DEFAULT_MICROPROGRAM));
+
+        // Perform views updating based on appropriate events but don't animate
+        // app at all in case of zero tick delay due to overloading of the CPU
         bcomp.addDestination(ControlSignal.MEMORY_READ, new DataDestination() {
             @Override
             public void setValue(int ignored) {
-                if (bCompHolder != null) {
+                if (bCompHolder != null && tickDelay != 0) {
                     bCompHolder.updateMemory();
                 }
             }
@@ -66,7 +75,7 @@ public class BCompInstance extends Fragment {
         bcomp.addDestination(ControlSignal.MEMORY_WRITE, new DataDestination() {
             @Override
             public void setValue(int ignored) {
-                if (bCompHolder != null) {
+                if (bCompHolder != null && tickDelay != 0) {
                     bCompHolder.updateMemory();
                 }
             }
@@ -76,14 +85,16 @@ public class BCompInstance extends Fragment {
         cpu.setTickStartListener(new Runnable() {
             @Override
             public void run() {
-                openSignals.clear();
+                synchronized (openSignals) {
+                    openSignals.clear();
+                }
             }
         });
         cpu.setTickFinishListener(new Runnable() {
             @Override
             public void run() {
-                if (bCompHolder != null) {
-                    bCompHolder.tickFinished();
+                if (bCompHolder != null && tickDelay != 0) {
+                    bCompHolder.updateTabs();
                 }
                 try {
                     TimeUnit.MILLISECONDS.sleep(tickDelay);
@@ -91,6 +102,43 @@ public class BCompInstance extends Fragment {
                 }
             }
         });
+
+        // In case of zero tick delay update views when BComp program stops
+        cpu.setCPUStopListener(new Runnable() {
+            @Override
+            public void run() {
+                if (bCompHolder != null && tickDelay == 0 && !compilationIsRunning) {
+                    bCompHolder.updateMemory();
+                    bCompHolder.updateTabs();
+                }
+            }
+        });
+
+        // If tick delay is equal to zero and BComp program has no halt command,
+        // a user won't se any UI updates, so it's needed to add extra updates to improve UX
+        new AsyncTask<Void, Void, Void>() {
+            @SuppressWarnings("InfiniteLoopStatement")
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    while (true) {
+                        TimeUnit.MILLISECONDS.sleep(EXTRA_UPDATES_DELAY_MS);
+                        if (bCompHolder != null && tickDelay == 0 && cpu.isRunning() && !compilationIsRunning) {
+                            bCompHolder.updateMemory();
+                            bCompHolder.updateTabs();
+                        }
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }.execute();
+    }
+
+
+    public CPU getCPU() {
+        return cpu;
     }
 
 
@@ -103,8 +151,14 @@ public class BCompInstance extends Fragment {
     }
 
 
+    // Cloning (and therefore synchronization) is needed because views updating may occurs at any time.
+    // Since views drawing takes a lot of time and Sets pass by reference,
+    // openSignals Set could become inconsistent during bus updating.
+    @SuppressWarnings("unchecked")
     public Set<ControlSignal> getOpenSignals() {
-        return openSignals;
+        synchronized (openSignals) {
+            return (HashSet<ControlSignal>) openSignals.clone();
+        }
     }
 
 
@@ -135,6 +189,11 @@ public class BCompInstance extends Fragment {
 
     public void setInputToControlUnit(boolean isInputToControlUnit) {
         this.isInputToControlUnit = isInputToControlUnit;
+    }
+
+
+    public void setCompilationFlag(boolean running) {
+        compilationIsRunning = running;
     }
 
 

@@ -51,12 +51,12 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
 
     @Override
     public CPU getCPU() {
-        return bci.cpu;
+        return bci.getCPU();
     }
 
 
     @Override
-    public void tickFinished() {
+    public void updateTabs() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -85,6 +85,12 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
                 memoryFragment.fillMemory();
             }
         });
+    }
+
+
+    @Override
+    public void updateKeyboard() {
+        keyboardFragment.updateKeyboard();
     }
 
 
@@ -139,5 +145,11 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
     @Override
     public void setInputToControlUnit(boolean isInputToControlUnit) {
         bci.setInputToControlUnit(isInputToControlUnit);
+    }
+
+
+    @Override
+    public void setCompilationFlag(boolean running) {
+        bci.setCompilationFlag(running);
     }
 }

@@ -35,4 +35,7 @@
     <string name="label_6">Шина вывода</string>
     <string name="micro_command_register">Регистр МК</string>
     <string name="control_unit_input_switcher">Ввод в Устройство управления</string>
+    <string name="asm_edit">Редактировать</string>
+    <string name="asm_compile">Компилировать</string>
+    <string name="asm_compile_success">Компиляция завершена</string>
 </resources>
