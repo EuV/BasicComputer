@@ -5,12 +5,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import ru.ifmo.cs.bcomp.*;
+import ru.ifmo.cs.bcomp.android.fragment.MemoryFragment.MemoryEvent;
 import ru.ifmo.cs.elements.DataDestination;
 import ru.ifmo.cs.elements.Register;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+import static ru.ifmo.cs.bcomp.android.fragment.MemoryFragment.MemoryEvent.*;
 
 public class BCompInstance extends Fragment {
     private static final long EXTRA_UPDATES_DELAY_MS = 500;
@@ -19,7 +22,8 @@ public class BCompInstance extends Fragment {
         CPU getCPU();
         void updateTabs();
         void updateTab(int index);
-        void updateMemory();
+        void memoryEvent(MemoryEvent event);
+        void microMemoryEvent(MemoryEvent event);
         void updateKeyboard();
         void registerNewSignals(Set<ControlSignal> signals);
         Set<ControlSignal> getOpenSignals();
@@ -68,7 +72,7 @@ public class BCompInstance extends Fragment {
             @Override
             public void setValue(int ignored) {
                 if (bCompHolder != null && tickDelay != 0) {
-                    bCompHolder.updateMemory();
+                    bCompHolder.memoryEvent(READ);
                 }
             }
         });
@@ -76,7 +80,7 @@ public class BCompInstance extends Fragment {
             @Override
             public void setValue(int ignored) {
                 if (bCompHolder != null && tickDelay != 0) {
-                    bCompHolder.updateMemory();
+                    bCompHolder.memoryEvent(WRITE);
                 }
             }
         });
@@ -108,7 +112,8 @@ public class BCompInstance extends Fragment {
             @Override
             public void run() {
                 if (bCompHolder != null && tickDelay == 0 && !compilationIsRunning) {
-                    bCompHolder.updateMemory();
+                    bCompHolder.memoryEvent(UPDATE_LAST_ADDRESS);
+                    bCompHolder.memoryEvent(UPDATE_MEMORY);
                     bCompHolder.updateTabs();
                 }
             }
@@ -124,7 +129,8 @@ public class BCompInstance extends Fragment {
                     while (true) {
                         TimeUnit.MILLISECONDS.sleep(EXTRA_UPDATES_DELAY_MS);
                         if (bCompHolder != null && tickDelay == 0 && cpu.isRunning() && !compilationIsRunning) {
-                            bCompHolder.updateMemory();
+                            bCompHolder.memoryEvent(UPDATE_LAST_ADDRESS);
+                            bCompHolder.memoryEvent(UPDATE_MEMORY);
                             bCompHolder.updateTabs();
                         }
                     }

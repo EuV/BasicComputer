@@ -9,7 +9,9 @@ import ru.ifmo.cs.bcomp.IOCtrl;
 import ru.ifmo.cs.bcomp.android.BCompInstance.BCompHolder;
 import ru.ifmo.cs.bcomp.android.fragment.GraphicalTab;
 import ru.ifmo.cs.bcomp.android.fragment.KeyboardFragment;
+import ru.ifmo.cs.bcomp.android.fragment.MPTab;
 import ru.ifmo.cs.bcomp.android.fragment.MemoryFragment;
+import ru.ifmo.cs.bcomp.android.fragment.MemoryFragment.MemoryEvent;
 import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
 import ru.ifmo.cs.bcomp.android.util.TabAdapter;
 import ru.ifmo.cs.elements.Register;
@@ -78,13 +80,22 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
 
 
     @Override
-    public void updateMemory() {
+    public void memoryEvent(final MemoryEvent event) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                memoryFragment.fillMemory();
+                memoryFragment.memoryEvent(event);
             }
         });
+    }
+
+
+    @Override
+    public void microMemoryEvent(final MemoryEvent event) {
+        MPTab mpTab = (MPTab) TabAdapter.getAdapter().getFragment(TabAdapter.MP_TAB);
+        if (mpTab != null) {
+            mpTab.microMemoryEvent(event);
+        }
     }
 
 

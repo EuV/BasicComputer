@@ -23,11 +23,12 @@ public class MemoryFragment extends RootFragment {
 
     private TextView[] addressRows;
     private TextView[] valueRows;
-    private int row_count;
+    private int rowCount;
 
     private Memory memory;
     private int addressBitWidth;
     private int valueBitWidth;
+    private int lastPage = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,28 +45,87 @@ public class MemoryFragment extends RootFragment {
         valueBitWidth = memory.getWidth();
 
         boolean portrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-        row_count = portrait ? PORTRAIT_ROW_COUNT : LANDSCAPE_ROW_COUNT;
+        rowCount = portrait ? PORTRAIT_ROW_COUNT : LANDSCAPE_ROW_COUNT;
 
-        addressRows = new TextView[row_count];
+        addressRows = new TextView[rowCount];
         LinearLayout addressColumn = (LinearLayout) memoryFragment.findViewById(R.id.memory_address_column);
         createRows(addressRows, addressColumn);
 
-        valueRows = new TextView[row_count];
+        valueRows = new TextView[rowCount];
         LinearLayout valueColumn = (LinearLayout) memoryFragment.findViewById(R.id.memory_value_column);
         createRows(valueRows, valueColumn);
 
-        fillMemory();
+        updateLastAddress();
+        updateMemory();
 
         return memoryFragment;
     }
 
 
-    public void fillMemory() {
-        int page = memory.getAddrValue() & (~(row_count - 1));
-        for (int i = 0; i < row_count; i++) {
-            addressRows[i].setText(Utils.toHex(page + i, addressBitWidth));
-            valueRows[i].setText(Utils.toHex(memory.getValue(page + i), valueBitWidth));
+    public void memoryEvent(MemoryEvent event) {
+        switch (event) {
+
+            case UPDATE_MEMORY:
+                updateMemory();
+                break;
+
+            case UPDATE_LAST_ADDRESS:
+                updateLastAddress();
+                break;
+
+            case READ:
+                read();
+                break;
+
+            case WRITE:
+                write();
+                break;
         }
+    }
+
+
+    private void updateMemory() {
+        for (int i = 0; i < rowCount; i++) {
+            updateValue(i);
+        }
+    }
+
+
+    private void updateLastAddress() {
+        lastPage = getPage();
+    }
+
+
+    private void read() {
+        int page = getPage();
+
+        if (page != lastPage) {
+            lastPage = page;
+            updateMemory();
+        }
+    }
+
+
+    private void write() {
+        int page = getPage();
+
+        if (page == lastPage) {
+            updateValue(memory.getAddrValue() - page);
+        } else {
+            lastPage = page;
+            updateMemory();
+        }
+    }
+
+
+    private void updateValue(int offset) {
+        addressRows[offset].setText(Utils.toHex(lastPage + offset, addressBitWidth));
+        valueRows[offset].setText(Utils.toHex(memory.getValue(lastPage + offset), valueBitWidth));
+    }
+
+
+    private int getPage() {
+        return memory.getAddrValue() & (~(rowCount - 1));
     }
 
 
@@ -82,5 +142,13 @@ public class MemoryFragment extends RootFragment {
             rows[i].setTypeface(Typeface.MONOSPACE);
             column.addView(rows[i]);
         }
+    }
+
+
+    public enum MemoryEvent {
+        UPDATE_MEMORY,
+        UPDATE_LAST_ADDRESS,
+        READ,
+        WRITE
     }
 }

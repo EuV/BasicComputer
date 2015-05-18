@@ -20,6 +20,8 @@ import ru.ifmo.cs.bcomp.android.util.TabAdapter;
 import ru.ifmo.cs.bcomp.android.view.HexButtonListView;
 import ru.ifmo.cs.elements.Register;
 
+import static ru.ifmo.cs.bcomp.android.fragment.MemoryFragment.MemoryEvent.UPDATE_LAST_ADDRESS;
+import static ru.ifmo.cs.bcomp.android.fragment.MemoryFragment.MemoryEvent.UPDATE_MEMORY;
 
 public class KeyboardFragment extends RootFragment {
     public static final int HEX_BUTTON_REQUEST = 0;
@@ -103,7 +105,9 @@ public class KeyboardFragment extends RootFragment {
             public void onClick(View v) {
                 BCompVibrator.vibrate();
                 if (bCompHolder.isInputToControlUnit()) {
+                    bCompHolder.microMemoryEvent(UPDATE_LAST_ADDRESS);
                     cpu.runMWrite();
+                    bCompHolder.microMemoryEvent(UPDATE_MEMORY);
                     bCompHolder.updateTab(TabAdapter.MP_TAB);
                 } else {
                     cpu.startWrite();

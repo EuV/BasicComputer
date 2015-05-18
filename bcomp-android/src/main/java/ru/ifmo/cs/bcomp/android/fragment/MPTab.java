@@ -8,7 +8,10 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import ru.ifmo.cs.bcomp.android.R;
+import ru.ifmo.cs.bcomp.android.fragment.MemoryFragment.MemoryEvent;
 import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
+
+import static ru.ifmo.cs.bcomp.android.fragment.MemoryFragment.MemoryEvent.READ;
 
 public class MPTab extends GraphicalTab {
     private MemoryFragment microMemory;
@@ -44,6 +47,11 @@ public class MPTab extends GraphicalTab {
 
     @Override
     protected void customUpdateViews() {
-        microMemory.fillMemory();
+        microMemory.memoryEvent(READ);
+    }
+
+
+    public void microMemoryEvent(MemoryEvent event) {
+        microMemory.memoryEvent(event);
     }
 }

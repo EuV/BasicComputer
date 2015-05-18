@@ -14,6 +14,8 @@ import ru.ifmo.cs.bcomp.android.R;
 import ru.ifmo.cs.bcomp.android.util.AsmDevProgram;
 import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
 
+import static ru.ifmo.cs.bcomp.android.fragment.MemoryFragment.MemoryEvent.UPDATE_MEMORY;
+
 
 public class AssemblerTab extends RootFragment {
     private final long[] delayPeriods = {0, 10, 50, 200, 500, 1000};
@@ -86,7 +88,7 @@ public class AssemblerTab extends RootFragment {
                     showMessage(e.getMessage());
                 }
 
-                bCompHolder.updateMemory();
+                bCompHolder.memoryEvent(UPDATE_MEMORY);
                 bCompHolder.updateTabs();
                 bCompHolder.updateKeyboard();
 
