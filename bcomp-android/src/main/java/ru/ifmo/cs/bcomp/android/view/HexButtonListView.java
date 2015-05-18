@@ -46,8 +46,6 @@ public class HexButtonListView extends ListView {
         int oldPosition = getCurrentPosition();
         int oldValue = oldPosition % cells.length;
 
-        if (oldPosition == 0) return;
-
         if (textWasChanged) {
             TextView cell = (TextView) getItemAtPosition(oldPosition);
             cell.setText(Utils.toHex(oldValue, 1));
@@ -56,7 +54,6 @@ public class HexButtonListView extends ListView {
         }
 
         if (newValue == oldValue) return;
-
 
         int newPositionAbove;
         int newPositionBelow;
