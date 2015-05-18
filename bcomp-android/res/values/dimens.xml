@@ -6,6 +6,7 @@
     <dimen name="register_vertical_space">15dp</dimen>
     <dimen name="register_horizontal_space">13dp</dimen>
     <dimen name="register_height">32dp</dimen>
+    <dimen name="register_height_three_quarter">23dp</dimen>
     <dimen name="register_height_half">15dp</dimen>
     <dimen name="register_height_quarter">6dp</dimen>
 
