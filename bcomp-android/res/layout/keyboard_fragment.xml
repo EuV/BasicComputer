@@ -36,19 +36,19 @@
                 android:layout_weight="3"
                 tools:ignore="NestedWeights">
 
-                <Button
+                <ru.ifmo.cs.bcomp.android.view.HexButtonListView
                     style="@style/HexButton"
                     android:tag="3" />
 
-                <Button
+                <ru.ifmo.cs.bcomp.android.view.HexButtonListView
                     style="@style/HexButton"
                     android:tag="2" />
 
-                <Button
+                <ru.ifmo.cs.bcomp.android.view.HexButtonListView
                     style="@style/HexButton"
                     android:tag="1" />
 
-                <Button
+                <ru.ifmo.cs.bcomp.android.view.HexButtonListView
                     style="@style/HexButton"
                     android:tag="0" />
 

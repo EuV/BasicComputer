@@ -7,7 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import ru.ifmo.cs.bcomp.CPU;
@@ -16,24 +17,30 @@ import ru.ifmo.cs.bcomp.android.KeyboardPopupActivity;
 import ru.ifmo.cs.bcomp.android.R;
 import ru.ifmo.cs.bcomp.android.util.BCompVibrator;
 import ru.ifmo.cs.bcomp.android.util.TabAdapter;
+import ru.ifmo.cs.bcomp.android.view.HexButtonListView;
 import ru.ifmo.cs.elements.Register;
 
 
 public class KeyboardFragment extends RootFragment {
-    public static final int HEX_SYMBOL_REQUEST = 0;
+    public static final int HEX_BUTTON_REQUEST = 0;
     public static final int DEVICE_NAME_INDEX = 3;
     public static final int CLOSE_BUTTON_INDEX = 2;
     public static final String CLOSE_BUTTON_SYMBOL = "╳";
-    public static final String HEX_SYMBOL_VALUE = "hex_symbol_value";
-    public static final String HEX_SYMBOL_PRESSED_INDEX = "hex_symbol_tag";
+    public static final String HEX_BUTTON_POSITIONS = "hex_button_positions";
+    public static final String HEX_BUTTON_VALUE = "hex_button_value";
+    public static final String HEX_BUTTON_PRESSED_INDEX = "hex_button_tag";
 
-    private Integer hexSymbolPressedIndex;
-    private Button[] hexSymbols;
+    private Integer hexButtonPressedIndex;
+    private HexButtonListView[] hexButtons;
+    private int[] hexButtonPositions;
     private TextView binaryView;
     private Register linkedRegister;
     private Register keyRegister;
     private ImageButton setAddressButton;
     private ImageButton writeButton;
+
+    private final HexButtonOnItemClickListener onItemClickListener = new HexButtonOnItemClickListener();
+    private final HexButtonOnScrollListener onScrollListener = new HexButtonOnScrollListener();
 
 
     @Override
@@ -49,26 +56,31 @@ public class KeyboardFragment extends RootFragment {
 
         if (savedInstanceState == null || linkedRegister == null) {
             linkedRegister = keyRegister;
-            hexSymbolPressedIndex = -1;
+            hexButtonPressedIndex = -1;
         } else {
-            hexSymbolPressedIndex = savedInstanceState.getInt(HEX_SYMBOL_PRESSED_INDEX);
+            hexButtonPressedIndex = savedInstanceState.getInt(HEX_BUTTON_PRESSED_INDEX);
+            hexButtonPositions = savedInstanceState.getIntArray(HEX_BUTTON_POSITIONS);
         }
 
         View keyboardView = inflater.inflate(R.layout.keyboard_fragment, container, false);
 
         binaryView = (TextView) keyboardView.findViewById(R.id.keyboard_binary);
 
-        hexSymbols = new Button[]{
-            (Button) keyboardView.findViewWithTag("0"),
-            (Button) keyboardView.findViewWithTag("1"),
-            (Button) keyboardView.findViewWithTag("2"),
-            (Button) keyboardView.findViewWithTag("3")
+        hexButtons = new HexButtonListView[]{
+            (HexButtonListView) keyboardView.findViewWithTag("0"),
+            (HexButtonListView) keyboardView.findViewWithTag("1"),
+            (HexButtonListView) keyboardView.findViewWithTag("2"),
+            (HexButtonListView) keyboardView.findViewWithTag("3")
         };
 
-        HexSymbolOnClickListener listener = new HexSymbolOnClickListener();
-
-        for (Button hexSymbol : hexSymbols) {
-            hexSymbol.setOnClickListener(listener);
+        for (int i = 0; i < hexButtons.length; i++) {
+            hexButtons[i].setOnItemClickListener(onItemClickListener);
+            hexButtons[i].setOnScrollListener(onScrollListener);
+            if (hexButtonPositions == null) {
+                hexButtons[i].setSelection(HexButtonListView.DEFAULT_POSITION);
+            } else {
+                hexButtons[i].setSelection(hexButtonPositions[i]);
+            }
         }
 
         setAddressButton = (ImageButton) keyboardView.findViewById(R.id.image_button_address);
@@ -99,6 +111,8 @@ public class KeyboardFragment extends RootFragment {
             }
         });
 
+        // FIXME: HexButtonListView#getCurrentPosition() returns 0 at this time, which
+        // FIXME: causes a bug with external devices while screen rotation
         updateKeyboard();
 
         return keyboardView;
@@ -117,22 +131,34 @@ public class KeyboardFragment extends RootFragment {
         setButtonsClickable(isKeyReg);
 
         if (!isKeyReg) {
-            hexSymbols[DEVICE_NAME_INDEX].setText(linkedRegister.name.substring(3));
-            hexSymbols[CLOSE_BUTTON_INDEX].setText(CLOSE_BUTTON_SYMBOL);
+            hexButtons[DEVICE_NAME_INDEX].smoothScrollBy(0, 0);
+            hexButtons[DEVICE_NAME_INDEX].setText(linkedRegister.name.substring(3));
+            hexButtons[DEVICE_NAME_INDEX].invalidate();
+
+            hexButtons[CLOSE_BUTTON_INDEX].smoothScrollBy(0, 0);
+            hexButtons[CLOSE_BUTTON_INDEX].setText(CLOSE_BUTTON_SYMBOL);
+            hexButtons[CLOSE_BUTTON_INDEX].invalidate();
         }
 
-        int symbolsCount = (isKeyReg) ? 4 : 2;
+        int buttonsCount = (isKeyReg) ? 4 : 2;
         String hexValue = Utils.toHex(linkedRegister.getValue(), linkedRegister.getWidth());
-        for (int i = 0; i < symbolsCount; i++) {
-            hexSymbols[i].setText(Character.toString(hexValue.charAt(hexValue.length() - 1 - i)));
+        for (int i = 0; i < buttonsCount; i++) {
+            hexButtons[i].scrollToValue(Character.digit(hexValue.charAt(hexValue.length() - 1 - i), 16));
         }
 
+        updateBinaryView();
+    }
+
+
+    private void updateBinaryView() {
         binaryView.setText(Utils.toBinary(linkedRegister.getValue(), linkedRegister.getWidth()));
     }
 
 
     private void setButtonsClickable(boolean isClickable) {
-        hexSymbols[DEVICE_NAME_INDEX].setClickable(isClickable);
+        hexButtons[DEVICE_NAME_INDEX].setScrollable(isClickable);
+        hexButtons[DEVICE_NAME_INDEX].setOnItemClickListener(isClickable ? onItemClickListener : null);
+        hexButtons[CLOSE_BUTTON_INDEX].setScrollable(isClickable);
         setAddressButton.setClickable(isClickable);
         writeButton.setClickable(isClickable);
     }
@@ -140,18 +166,24 @@ public class KeyboardFragment extends RootFragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(HEX_SYMBOL_PRESSED_INDEX, hexSymbolPressedIndex);
+        outState.putInt(HEX_BUTTON_PRESSED_INDEX, hexButtonPressedIndex);
         bCompHolder.setKeyboardLinkedRegister(linkedRegister);
+
+        hexButtonPositions = new int[hexButtons.length];
+        for (int i = 0; i < hexButtons.length; i++) {
+            hexButtonPositions[i] = hexButtons[i].getCurrentPosition();
+        }
+        outState.putIntArray(HEX_BUTTON_POSITIONS, hexButtonPositions);
     }
 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (hexSymbolPressedIndex == -1) return;
+        if (hexButtonPressedIndex == -1) return;
 
-        if (requestCode == HEX_SYMBOL_REQUEST && resultCode == Activity.RESULT_OK) {
-            linkedRegister.setValue(data.getIntExtra(HEX_SYMBOL_VALUE, 0), hexSymbolPressedIndex * 4, 4);
+        if (requestCode == HEX_BUTTON_REQUEST && resultCode == Activity.RESULT_OK) {
+            linkedRegister.setValue(data.getIntExtra(HEX_BUTTON_VALUE, 0), hexButtonPressedIndex * 4, 4);
             updateKeyboard();
 
             if (linkedRegister != keyRegister) {
@@ -159,25 +191,55 @@ public class KeyboardFragment extends RootFragment {
             }
         }
 
-        hexSymbolPressedIndex = -1;
+        hexButtonPressedIndex = -1;
     }
 
 
-    private class HexSymbolOnClickListener implements OnClickListener {
+    private class HexButtonOnItemClickListener implements AdapterView.OnItemClickListener {
         @Override
-        public void onClick(View view) {
-            if (hexSymbolPressedIndex != -1) return;
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if (hexButtonPressedIndex != -1) return;
             BCompVibrator.vibrate();
 
-            int buttonIndex = Integer.parseInt((String) view.getTag());
+            int buttonIndex = Integer.parseInt(parent.getTag().toString());
             if ((buttonIndex == CLOSE_BUTTON_INDEX) && (linkedRegister != keyRegister)) {
                 switchKeyboard(keyRegister);
                 return;
             }
 
-            hexSymbolPressedIndex = buttonIndex;
+            hexButtonPressedIndex = buttonIndex;
             Intent intent = new Intent(getActivity(), KeyboardPopupActivity.class);
-            startActivityForResult(intent, HEX_SYMBOL_REQUEST);
+            startActivityForResult(intent, HEX_BUTTON_REQUEST);
+        }
+    }
+
+
+    private class HexButtonOnScrollListener implements AbsListView.OnScrollListener {
+
+        @Override
+        public void onScrollStateChanged(AbsListView view, int scrollState) {
+            if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                HexButtonListView hexBtnView = (HexButtonListView) view;
+                int position = hexBtnView.getCurrentPosition();
+
+                if (hexBtnView.targetPosition != null && hexBtnView.targetPosition != position) {
+                    return;
+                }
+
+                hexBtnView.smoothScrollToPosition(position);
+                hexBtnView.targetPosition = null;
+
+                linkedRegister.setValue(position % 16, Integer.valueOf(view.getTag().toString()) * 4, 4);
+                if (linkedRegister != keyRegister) {
+                    bCompHolder.updateTab(TabAdapter.IO_TAB);
+                }
+
+                updateBinaryView();
+            }
+        }
+
+        @Override
+        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         }
     }
 }

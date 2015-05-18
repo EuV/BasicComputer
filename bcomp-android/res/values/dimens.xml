@@ -36,6 +36,8 @@
 
     <dimen name="device_button_text_size">12sp</dimen>
 
+    <dimen name="hex_button_text_size">18sp</dimen>
+
     <dimen name="memory_rows_padding">10dp</dimen>
 
     <dimen name="io_row_vertical_space">65dp</dimen>
