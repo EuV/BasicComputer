@@ -26,8 +26,8 @@ public class ALUView extends TextView {
         int offset = height / 3;
         int grooveOffset = offset / 3;
 
-        int xPoints[] = new int[]{half - grooveOffset, half, half + grooveOffset, width - 1, width - 1 - offset, offset};
-        int yPoints[] = new int[]{0, offset, 0, 0, height - 1, height - 1};
+        int xPoints[] = new int[]{half - grooveOffset, half, half + grooveOffset, width, width - offset, offset};
+        int yPoints[] = new int[]{0, offset, 0, 0, height, height};
 
         aluPath.moveTo(0, 0);
         for (int i = 0; i < xPoints.length; i++) {

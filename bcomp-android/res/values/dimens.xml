@@ -15,6 +15,13 @@
 
     <dimen name="bus_offset_x">15dp</dimen>
     <dimen name="bus_offset_x_neg">-16dp</dimen>
+    <dimen name="bus_offset_x_with_outlet">20dp</dimen>
+    <dimen name="bus_offset_x_neg_with_outlet">-21dp</dimen>
+    <dimen name="bus_offset_outlet">5dp</dimen>
+
+    <dimen name="outlet_on_keyboard_offset">3dp</dimen>
+    <dimen name="outlet_on_keyboard_padding">10dp</dimen>
+    <dimen name="bus_on_keyboard_width">9dp</dimen>
 
     <dimen name="bus_offset_y">15dp</dimen>
     <dimen name="bus_offset_y_neg">-16dp</dimen>

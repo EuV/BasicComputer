@@ -23,7 +23,7 @@ import ru.ifmo.cs.elements.Register;
 import static ru.ifmo.cs.bcomp.android.fragment.MemoryFragment.MemoryEvent.UPDATE_LAST_ADDRESS;
 import static ru.ifmo.cs.bcomp.android.fragment.MemoryFragment.MemoryEvent.UPDATE_MEMORY;
 
-public class KeyboardFragment extends RootFragment {
+public class KeyboardFragment extends GraphicalTab {
     public static final int HEX_BUTTON_REQUEST = 0;
     public static final int DEVICE_NAME_INDEX = 3;
     public static final int CLOSE_BUTTON_INDEX = 2;
@@ -40,6 +40,7 @@ public class KeyboardFragment extends RootFragment {
     private Register keyRegister;
     private ImageButton setAddressButton;
     private ImageButton writeButton;
+    private View keyToAluBus;
 
     private final HexButtonOnItemClickListener onItemClickListener = new HexButtonOnItemClickListener();
     private final HexButtonOnScrollListener onScrollListener = new HexButtonOnScrollListener();
@@ -65,6 +66,10 @@ public class KeyboardFragment extends RootFragment {
         }
 
         View keyboardView = inflater.inflate(R.layout.keyboard_fragment, container, false);
+
+        init((ViewGroup) keyboardView.findViewById(R.id.keyboard_bus_holder));
+
+        keyToAluBus = keyboardView.findViewById(R.id.key_to_alu_bus);
 
         binaryView = (TextView) keyboardView.findViewById(R.id.keyboard_binary);
 
@@ -133,6 +138,8 @@ public class KeyboardFragment extends RootFragment {
         boolean isKeyReg = (linkedRegister == keyRegister);
 
         setButtonsClickable(isKeyReg);
+
+        keyToAluBus.setVisibility(isKeyReg ? View.VISIBLE : View.INVISIBLE);
 
         if (!isKeyReg) {
             hexButtons[DEVICE_NAME_INDEX].smoothScrollBy(0, 0);

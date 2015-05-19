@@ -65,6 +65,7 @@ public class MainActivity extends ActionBarActivity implements BCompHolder {
                 updateTab(TabAdapter.BC_TAB);
                 updateTab(TabAdapter.IO_TAB);
                 updateTab(TabAdapter.MP_TAB);
+                keyboardFragment.updateViews();
             }
         });
     }

@@ -15,10 +15,10 @@ import ru.ifmo.cs.bcomp.android.R;
 import java.util.HashSet;
 import java.util.Set;
 
-import static ru.ifmo.cs.bcomp.android.view.BusView.Arrow.*;
+import static ru.ifmo.cs.bcomp.android.view.BusView.Direction.*;
 
 public class BusView extends View {
-    protected interface Arrow {
+    protected interface Direction {
         int NONE = 0;
         int LEFT_TOP_TO_BOTTOM = 1;
         int LEFT_BOTTOM_TO_TOP = 2;
@@ -32,6 +32,7 @@ public class BusView extends View {
 
     private static final Paint ACTIVE_PAINT;
     private static final Paint INACTIVE_PAINT;
+    private static final Paint TRANSPARENT_PAINT;
 
     static {
         ACTIVE_PAINT = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -41,10 +42,14 @@ public class BusView extends View {
         INACTIVE_PAINT = new Paint(Paint.ANTI_ALIAS_FLAG);
         INACTIVE_PAINT.setStyle(Paint.Style.FILL_AND_STROKE);
         INACTIVE_PAINT.setColor(Color.rgb(170, 170, 170));
+
+        TRANSPARENT_PAINT = new Paint(Paint.ANTI_ALIAS_FLAG);
+        TRANSPARENT_PAINT.setStyle(Paint.Style.FILL_AND_STROKE);
     }
 
     private static final int BUS_WIDTH_DP = 3; // TODO: define in xml ?
 
+    private static float OUTLET_WIDTH_PX = Float.NaN;
     private static float BUS_WIDTH_PX = Float.NaN; //  |
     private static float ARROW_SIDE_1 = Float.NaN; // 1V
     private static float ARROW_SIDE_2 = Float.NaN; // 2+2
@@ -57,6 +62,15 @@ public class BusView extends View {
     private float busOffsetRight = Float.NaN;
     private float busOffsetBottom = Float.NaN;
 
+    private float outletOuterX1;
+    private float outletOuterY1;
+    private float outletOuterX2;
+    private float outletOuterY2;
+    private float outletInnerX1;
+    private float outletInnerY1;
+    private float outletInnerX2;
+    private float outletInnerY2;
+
     private final boolean left;
     private final boolean top;
     private final boolean right;
@@ -68,6 +82,7 @@ public class BusView extends View {
     private final float bottomPadding;
 
     private final int arrow;
+    private final int outlet;
     private final Path arrowPath = new Path();
 
 
@@ -79,6 +94,10 @@ public class BusView extends View {
             BUS_WIDTH_PX = BUS_WIDTH_DP * displayMetrics.density;
             ARROW_SIDE_1 = BUS_WIDTH_PX * 2.0f;
             ARROW_SIDE_2 = BUS_WIDTH_PX * 1.5f;
+
+            OUTLET_WIDTH_PX = BUS_WIDTH_PX / 2;
+
+            TRANSPARENT_PAINT.setColor(getResources().getColor(R.color.fragment_background));
         }
 
         String[] signalNames = getTag().toString().split(" ");
@@ -99,6 +118,7 @@ public class BusView extends View {
             bottomPadding = attributes.getDimension(R.styleable.BusView_bottom_padding, 0);
 
             arrow = attributes.getInt(R.styleable.BusView_arrow, NONE);
+            outlet = attributes.getInt(R.styleable.BusView_outlet, NONE);
         } finally {
             attributes.recycle();
         }
@@ -128,6 +148,7 @@ public class BusView extends View {
     protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
         configureBuses(width, height);
         configureArrows(width, height);
+        configureOutlets();
     }
 
 
@@ -140,8 +161,16 @@ public class BusView extends View {
         if (right) canvas.drawRect(busOffsetRight - BUS_WIDTH_PX, busOffsetTop, busOffsetRight, busOffsetBottom, paint);
         if (bottom) canvas.drawRect(busOffsetLeft, busOffsetBottom - BUS_WIDTH_PX, busOffsetRight, busOffsetBottom, paint);
 
-        if (arrow == NONE) return;
-        canvas.drawPath(arrowPath, paint);
+        if (arrow != NONE) {
+            canvas.drawPath(arrowPath, paint);
+        }
+
+        if (outlet != NONE) {
+            canvas.drawRect(outletOuterX1, outletOuterY1, outletOuterX2, outletOuterY2, paint);
+            canvas.drawRect(outletOuterX1 + OUTLET_WIDTH_PX, outletOuterY1 + OUTLET_WIDTH_PX,
+                outletOuterX2 - OUTLET_WIDTH_PX, outletOuterY2 - OUTLET_WIDTH_PX, TRANSPARENT_PAINT);
+            canvas.drawRect(outletInnerX1, outletInnerY1, outletInnerX2, outletInnerY2, paint);
+        }
     }
 
 
@@ -242,5 +271,88 @@ public class BusView extends View {
         if (arrow != NONE) {
             arrowPath.close();
         }
+    }
+
+
+    private void configureOutlets() {
+        switch (outlet) {
+            case NONE:
+                break;
+
+            case LEFT_TOP_TO_BOTTOM:
+                outletOuterX1 = busOffsetLeft - BUS_WIDTH_PX;
+                outletOuterY1 = busOffsetTop;
+                outletInnerX1 = busOffsetLeft;
+                outletInnerY1 = busOffsetTop + BUS_WIDTH_PX;
+                outletInnerX2 = busOffsetLeft + BUS_WIDTH_PX;
+                outletInnerY2 = busOffsetTop + 3 * BUS_WIDTH_PX;
+                break;
+
+            case LEFT_BOTTOM_TO_TOP:
+                outletOuterX1 = busOffsetLeft - BUS_WIDTH_PX;
+                outletOuterY1 = busOffsetBottom - 3 * BUS_WIDTH_PX;
+                outletInnerX1 = busOffsetLeft;
+                outletInnerY1 = busOffsetBottom - 3 * BUS_WIDTH_PX;
+                outletInnerX2 = busOffsetLeft + BUS_WIDTH_PX;
+                outletInnerY2 = busOffsetBottom - BUS_WIDTH_PX;
+                break;
+
+            case TOP_RIGHT_TO_LEFT:
+                outletOuterX1 = busOffsetRight - 3 * BUS_WIDTH_PX;
+                outletOuterY1 = busOffsetTop - BUS_WIDTH_PX;
+                outletInnerX1 = busOffsetRight - 3 * BUS_WIDTH_PX;
+                outletInnerY1 = busOffsetTop;
+                outletInnerX2 = busOffsetRight - BUS_WIDTH_PX;
+                outletInnerY2 = busOffsetTop + BUS_WIDTH_PX;
+                break;
+
+            case TOP_LEFT_TO_RIGHT:
+                outletOuterX1 = busOffsetLeft;
+                outletOuterY1 = busOffsetTop - BUS_WIDTH_PX;
+                outletInnerX1 = busOffsetLeft + BUS_WIDTH_PX;
+                outletInnerY1 = busOffsetTop;
+                outletInnerX2 = busOffsetLeft + 3 * BUS_WIDTH_PX;
+                outletInnerY2 = busOffsetTop + BUS_WIDTH_PX;
+                break;
+
+            case RIGHT_BOTTOM_TO_TOP:
+                outletOuterX1 = busOffsetRight - 2 * BUS_WIDTH_PX;
+                outletOuterY1 = busOffsetBottom - 3 * BUS_WIDTH_PX;
+                outletInnerX1 = busOffsetRight - BUS_WIDTH_PX;
+                outletInnerY1 = busOffsetBottom - 3 * BUS_WIDTH_PX;
+                outletInnerX2 = busOffsetRight;
+                outletInnerY2 = busOffsetBottom - BUS_WIDTH_PX;
+                break;
+
+            case RIGHT_TOP_TO_BOTTOM:
+                outletOuterX1 = busOffsetRight - 2 * BUS_WIDTH_PX;
+                outletOuterY1 = busOffsetTop;
+                outletInnerX1 = busOffsetRight - BUS_WIDTH_PX;
+                outletInnerY1 = busOffsetTop + BUS_WIDTH_PX;
+                outletInnerX2 = busOffsetRight;
+                outletInnerY2 = busOffsetTop + 3 * BUS_WIDTH_PX;
+                break;
+
+            case BOTTOM_LEFT_TO_RIGHT:
+                outletOuterX1 = busOffsetLeft;
+                outletOuterY1 = busOffsetBottom - 2 * BUS_WIDTH_PX;
+                outletInnerX1 = busOffsetLeft + BUS_WIDTH_PX;
+                outletInnerY1 = busOffsetBottom - BUS_WIDTH_PX;
+                outletInnerX2 = busOffsetLeft + 3 * BUS_WIDTH_PX;
+                outletInnerY2 = busOffsetBottom;
+                break;
+
+            case BOTTOM_RIGHT_TO_LEFT:
+                outletOuterX1 = busOffsetRight - 3 * BUS_WIDTH_PX;
+                outletOuterY1 = busOffsetBottom - 2 * BUS_WIDTH_PX;
+                outletInnerX1 = busOffsetRight - 3 * BUS_WIDTH_PX;
+                outletInnerY1 = busOffsetBottom - BUS_WIDTH_PX;
+                outletInnerX2 = busOffsetRight - BUS_WIDTH_PX;
+                outletInnerY2 = busOffsetBottom;
+                break;
+        }
+
+        outletOuterX2 = outletOuterX1 + 3 * BUS_WIDTH_PX;
+        outletOuterY2 = outletOuterY1 + 3 * BUS_WIDTH_PX;
     }
 }
