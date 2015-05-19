@@ -30,22 +30,45 @@
 
                 <ru.ifmo.cs.bcomp.android.view.RegisterView
                     style="@style/Register"
+                    android:layout_width="@dimen/mp_register_width_1"
                     android:tag="РА"
                     android:id="@+id/reg_ra"
                     app:full_view="false"
                     android:layout_alignRight="@id/horizontal_anchor"
                     android:layout_marginRight="@dimen/mp_horizontal_margin" />
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/reg_ra_anchor"
+                    android:visibility="invisible"
+                    android:layout_alignLeft="@id/reg_ra"
+                    android:layout_alignRight="@id/reg_ra"
+                    android:layout_alignTop="@id/reg_ra"
+                    android:layout_alignBottom="@id/reg_ra" />
+
                 <ru.ifmo.cs.bcomp.android.view.RegisterView
                     style="@style/Register"
+                    android:layout_width="@dimen/mp_register_width_1"
                     android:tag="СК"
                     android:id="@+id/reg_sk"
                     app:full_view="false"
                     android:layout_alignLeft="@id/horizontal_anchor"
                     android:layout_marginLeft="@dimen/mp_horizontal_margin" />
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/reg_sk_anchor"
+                    android:visibility="invisible"
+                    android:layout_alignLeft="@id/reg_sk"
+                    android:layout_alignRight="@id/reg_sk"
+                    android:layout_alignTop="@id/reg_sk"
+                    android:layout_alignBottom="@id/reg_sk" />
+
                 <ru.ifmo.cs.bcomp.android.view.RegisterView
                     style="@style/Register"
+                    android:layout_width="@dimen/mp_register_width_1"
                     android:tag="РД"
                     android:id="@+id/reg_rd"
                     app:full_view="false"
@@ -56,6 +79,7 @@
 
                 <ru.ifmo.cs.bcomp.android.view.RegisterView
                     style="@style/Register"
+                    android:layout_width="@dimen/mp_register_width_1"
                     android:tag="РК"
                     android:id="@+id/reg_rk"
                     app:full_view="false"
@@ -64,35 +88,58 @@
                     android:layout_alignLeft="@id/horizontal_anchor"
                     android:layout_marginLeft="@dimen/mp_horizontal_margin" />
 
-                <ru.ifmo.cs.bcomp.android.view.ALUView
-                    style="@style/ALU"
-                    android:id="@+id/alu"
-                    android:layout_below="@id/reg_rd"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/mp_row_vertical_space" />
-
                 <ru.ifmo.cs.bcomp.android.view.RegisterView
                     style="@style/Register"
-                    android:tag="Акк"
-                    android:id="@+id/reg_akk"
-                    app:full_view="false"
-                    android:layout_below="@id/alu"
-                    android:layout_marginTop="@dimen/mp_row_vertical_space"
-                    android:layout_alignRight="@id/horizontal_anchor"
-                    android:layout_marginRight="@dimen/mp_horizontal_margin" />
-
-                <ru.ifmo.cs.bcomp.android.view.RegisterView
-                    style="@style/Register"
+                    android:layout_width="@dimen/mp_register_width_1"
                     android:tag="БР"
                     android:id="@+id/reg_br"
                     app:full_view="false"
-                    android:layout_below="@id/alu"
-                    android:layout_marginTop="@dimen/mp_row_vertical_space"
+                    android:layout_below="@id/reg_rd"
+                    android:layout_marginTop="@dimen/mp_above_alu_vertical_space"
                     android:layout_alignLeft="@id/horizontal_anchor"
                     android:layout_marginLeft="@dimen/mp_horizontal_margin" />
 
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="@dimen/mp_register_width_1"
+                    android:layout_height="0dp"
+                    android:tag="DATA_TO_ALU INSTR_TO_ALU IP_TO_ALU ACCUM_TO_ALU STATE_TO_ALU KEY_TO_ALU"
+                    app:top="true"
+                    app:top_padding="@dimen/register_height_half"
+                    app:arrow="top_left_to_right"
+                    android:layout_alignTop="@id/reg_br"
+                    android:layout_alignBottom="@id/reg_br"
+                    android:layout_toLeftOf="@id/reg_sk_anchor" />
+
+                <ru.ifmo.cs.bcomp.android.view.ALUView
+                    style="@style/MPTabALU"
+                    android:id="@+id/alu"
+                    android:layout_below="@id/reg_rd"
+                    android:layout_marginTop="@dimen/mp_above_alu_vertical_space"
+                    android:layout_alignRight="@id/horizontal_anchor" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/alu_anchor"
+                    android:visibility="invisible"
+                    android:layout_alignLeft="@id/alu"
+                    android:layout_alignRight="@id/alu"
+                    android:layout_alignTop="@id/alu"
+                    android:layout_alignBottom="@id/alu" />
+
                 <ru.ifmo.cs.bcomp.android.view.RegisterView
                     style="@style/Register"
+                    android:layout_width="@dimen/mp_register_width_3"
+                    android:tag="Акк"
+                    android:id="@+id/reg_akk"
+                    app:full_view="true"
+                    android:layout_below="@id/reg_br"
+                    android:layout_marginTop="@dimen/mp_row_vertical_space"
+                    android:layout_centerHorizontal="true" />
+
+                <ru.ifmo.cs.bcomp.android.view.RegisterView
+                    style="@style/Register"
+                    android:layout_width="@dimen/mp_register_width_2"
                     android:tag="C"
                     android:id="@+id/reg_rs"
                     app:full_view="true"
@@ -102,6 +149,7 @@
 
                 <ru.ifmo.cs.bcomp.android.view.RegisterView
                     style="@style/Register"
+                    android:layout_width="@dimen/mp_register_width_2"
                     android:tag="СМ"
                     android:id="@+id/reg_sm"
                     app:full_view="true"
@@ -111,6 +159,7 @@
 
                 <ru.ifmo.cs.bcomp.android.view.MicroCommandRegisterView
                     style="@style/Register"
+                    android:layout_width="@dimen/mp_register_width_3"
                     android:tag="РМ"
                     android:id="@+id/reg_rm"
                     app:full_view="true"
@@ -124,6 +173,256 @@
                     android:text="@string/control_unit_input_switcher"
                     android:layout_below="@id/reg_rm"
                     android:layout_marginTop="@dimen/mp_row_vertical_space" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="@dimen/mp_clipped_bus_length"
+                    android:layout_height="0dp"
+                    android:tag="BUF_TO_ADDR"
+                    app:top="true"
+                    app:top_padding="@dimen/register_height_quarter"
+                    app:arrow="top_right_to_left"
+                    app:outlet="top_right_to_left"
+                    android:layout_alignTop="@id/reg_ra"
+                    android:layout_alignBottom="@id/reg_ra"
+                    android:layout_toRightOf="@id/reg_ra_anchor" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="@dimen/mp_clipped_bus_length"
+                    android:layout_height="0dp"
+                    android:tag="BUF_TO_DATA"
+                    app:top="true"
+                    app:top_padding="@dimen/register_height_quarter"
+                    app:arrow="top_right_to_left"
+                    app:outlet="top_right_to_left"
+                    android:layout_alignTop="@id/reg_rd"
+                    android:layout_alignBottom="@id/reg_rd"
+                    android:layout_toRightOf="@id/reg_ra_anchor" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="@dimen/mp_clipped_bus_length"
+                    android:layout_height="0dp"
+                    android:tag="BUF_TO_IP"
+                    app:top="true"
+                    app:top_padding="@dimen/register_height_quarter"
+                    app:arrow="top_right_to_left"
+                    app:outlet="top_right_to_left"
+                    android:layout_alignTop="@id/reg_sk"
+                    android:layout_alignBottom="@id/reg_sk"
+                    android:layout_toRightOf="@id/reg_sk" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="@dimen/mp_clipped_bus_length"
+                    android:layout_height="0dp"
+                    android:tag="BUF_TO_INSTR"
+                    app:top="true"
+                    app:top_padding="@dimen/register_height_quarter"
+                    app:arrow="top_right_to_left"
+                    app:outlet="top_right_to_left"
+                    android:layout_alignTop="@id/reg_rk"
+                    android:layout_alignBottom="@id/reg_rk"
+                    android:layout_toRightOf="@id/reg_rk" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="@dimen/mp_clipped_bus_length_2"
+                    android:layout_height="0dp"
+                    android:tag="DATA_TO_ALU"
+                    app:top="true"
+                    app:top_padding="@dimen/register_height_three_quarter"
+                    app:outlet="top_left_to_right"
+                    android:layout_alignTop="@id/reg_rd"
+                    android:layout_alignBottom="@id/reg_rd"
+                    android:layout_toLeftOf="@id/reg_rd" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="@dimen/mp_clipped_bus_length_2"
+                    android:layout_height="0dp"
+                    android:tag="IP_TO_ALU"
+                    app:top="true"
+                    app:top_padding="@dimen/register_height_three_quarter"
+                    app:outlet="top_left_to_right"
+                    android:layout_alignTop="@id/reg_sk"
+                    android:layout_alignBottom="@id/reg_sk"
+                    android:layout_toLeftOf="@id/reg_sk_anchor" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="@dimen/mp_clipped_bus_length_2"
+                    android:layout_height="0dp"
+                    android:tag="INSTR_TO_ALU"
+                    app:top="true"
+                    app:top_padding="@dimen/register_height_three_quarter"
+                    app:outlet="top_left_to_right"
+                    android:layout_alignTop="@id/reg_rk"
+                    android:layout_alignBottom="@id/reg_rk"
+                    android:layout_toLeftOf="@id/reg_sk_anchor" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:tag="MEMORY_READ MEMORY_WRITE"
+                    app:top="true"
+                    app:top_padding="@dimen/register_height_half"
+                    app:arrow="top_right_to_left"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/reg_ra"
+                    android:layout_alignTop="@id/reg_ra"
+                    android:layout_alignBottom="@id/reg_ra" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:tag="MEMORY_READ"
+                    app:top="true"
+                    app:top_padding="@dimen/register_height_quarter"
+                    app:arrow="top_left_to_right"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/reg_rd"
+                    android:layout_alignTop="@id/reg_rd"
+                    android:layout_alignBottom="@id/reg_rd" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:tag="MEMORY_WRITE"
+                    app:top="true"
+                    app:top_padding="@dimen/register_height_half"
+                    app:arrow="top_right_to_left"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/reg_rd"
+                    android:layout_alignTop="@id/reg_rd"
+                    android:layout_alignBottom="@id/reg_rd" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/mp_clipped_bus_length"
+                    android:tag="DATA_TO_ALU INSTR_TO_ALU IP_TO_ALU"
+                    app:right="true"
+                    app:right_padding="@dimen/mp_alu_outlet_top"
+                    app:arrow="right_top_to_bottom"
+                    app:outlet="right_top_to_bottom"
+                    android:layout_alignLeft="@id/alu"
+                    android:layout_alignRight="@id/alu"
+                    android:layout_above="@id/alu_anchor" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/mp_clipped_bus_length_minus_bus"
+                    android:tag="KEY_TO_ALU ACCUM_TO_ALU STATE_TO_ALU"
+                    android:id="@+id/bus_to_alu_left"
+                    app:top="true"
+                    app:right="true"
+                    app:right_padding="@dimen/mp_alu_outlet_top_2"
+                    app:arrow="right_top_to_bottom"
+                    android:layout_alignLeft="@id/alu"
+                    android:layout_alignRight="@id/alu"
+                    android:layout_above="@id/alu_anchor" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="@dimen/mp_clipped_bus_length"
+                    android:layout_height="0dp"
+                    android:tag="BUF_TO_ADDR BUF_TO_DATA BUF_TO_INSTR BUF_TO_IP"
+                    app:top="true"
+                    app:top_padding="@dimen/register_height_half"
+                    app:outlet="top_right_to_left"
+                    android:layout_alignTop="@id/reg_br"
+                    android:layout_alignBottom="@id/reg_br"
+                    android:layout_toRightOf="@id/reg_br" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/mp_row_vertical_space"
+                    android:tag="BUF_TO_ACCUM"
+                    app:left="true"
+                    app:left_padding="@dimen/mp_register_width_1_half"
+                    app:arrow="left_top_to_bottom"
+                    android:layout_below="@id/reg_br"
+                    android:layout_alignLeft="@id/reg_br"
+                    android:layout_alignRight="@id/reg_br" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="@dimen/bus_offset_x"
+                    android:layout_height="0dp"
+                    android:tag="ACCUM_TO_ALU"
+                    android:id="@+id/bus_akk_to_alu"
+                    app:left_padding="@dimen/mp_outlet_padding"
+                    app:bottom="true"
+                    app:bottom_padding="@dimen/register_height_half"
+                    android:layout_toLeftOf="@id/reg_akk"
+                    android:layout_alignTop="@id/reg_akk"
+                    android:layout_alignBottom="@id/reg_akk" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:tag="STATE_TO_ALU"
+                    app:left_padding="@dimen/mp_outlet_padding"
+                    app:bottom="true"
+                    app:bottom_padding="@dimen/register_height_half"
+                    android:layout_alignLeft="@id/bus_akk_to_alu"
+                    android:layout_alignTop="@id/reg_rs"
+                    android:layout_toLeftOf="@id/reg_rs"
+                    android:layout_alignBottom="@id/reg_rs" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:tag="KEY_TO_ALU"
+                    app:left="true"
+                    app:left_padding="@dimen/mp_outlet_padding"
+                    app:top_padding="@dimen/register_height_half"
+                    app:bottom_padding="@dimen/register_height_half"
+                    app:outlet="left_bottom_to_top"
+                    android:layout_alignLeft="@id/bus_akk_to_alu"
+                    android:layout_alignTop="@id/reg_rs"
+                    android:layout_toLeftOf="@id/reg_rs"
+                    android:layout_alignBottom="@id/reg_sm" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:tag="KEY_TO_ALU STATE_TO_ALU"
+                    app:left="true"
+                    app:left_padding="@dimen/mp_outlet_padding"
+                    app:top_padding="@dimen/register_height_half"
+                    app:bottom_padding="@dimen/register_height_half"
+                    android:layout_alignLeft="@id/bus_akk_to_alu"
+                    android:layout_alignTop="@id/reg_akk"
+                    android:layout_toLeftOf="@id/reg_akk"
+                    android:layout_alignBottom="@id/reg_rs" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:tag="KEY_TO_ALU STATE_TO_ALU ACCUM_TO_ALU"
+                    app:left="true"
+                    app:left_padding="@dimen/mp_outlet_padding"
+                    app:top="true"
+                    app:bottom_padding="@dimen/register_height_half"
+                    android:layout_alignLeft="@id/bus_akk_to_alu"
+                    android:layout_alignTop="@id/bus_to_alu_left"
+                    android:layout_toLeftOf="@id/bus_to_alu_left"
+                    android:layout_alignBottom="@id/reg_akk" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:top="true"
+                    app:top_padding="@dimen/register_height_half"
+                    app:arrow="top_left_to_right"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/reg_sm"
+                    android:layout_alignTop="@id/reg_sm"
+                    android:layout_alignBottom="@id/reg_sm" />
+
+                <ru.ifmo.cs.bcomp.android.view.BusView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:top="true"
+                    app:top_padding="@dimen/register_height_half"
+                    app:arrow="top_right_to_left"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/reg_rm"
+                    android:layout_alignTop="@id/reg_rm"
+                    android:layout_alignBottom="@id/reg_rm" />
 
             </RelativeLayout>
 

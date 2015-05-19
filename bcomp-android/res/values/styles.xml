@@ -64,6 +64,14 @@
         <item name="android:paddingTop">@dimen/alu_text_padding</item>
     </style>
 
+    <!-- ALU on the MP Tab -->
+    <style name="MPTabALU" parent="ALU">
+        <item name="android:layout_width">@dimen/mp_alu_width</item>
+        <item name="android:layout_height">@dimen/mp_alu_height</item>
+        <item name="android:textSize">@dimen/register_text_size</item>
+        <item name="android:paddingTop">@dimen/mp_alu_text_padding</item>
+    </style>
+
     <!-- Static Block -->
     <style name="StaticBlock">
         <item name="android:layout_width">0dp</item>

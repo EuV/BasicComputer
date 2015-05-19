@@ -100,9 +100,11 @@ public class BusView extends View {
             TRANSPARENT_PAINT.setColor(getResources().getColor(R.color.fragment_background));
         }
 
-        String[] signalNames = getTag().toString().split(" ");
-        for (String signalName : signalNames) {
-            signals.add(ControlSignal.valueOf(signalName));
+        if (getTag() != null && !getTag().toString().equals("")) {
+            String[] signalNames = getTag().toString().split(" ");
+            for (String signalName : signalNames) {
+                signals.add(ControlSignal.valueOf(signalName));
+            }
         }
 
         TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.BusView, 0, 0);

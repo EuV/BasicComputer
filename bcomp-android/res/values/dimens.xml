@@ -2,6 +2,12 @@
 <resources>
     <dimen name="register_width">170dp</dimen>
 
+    <dimen name="mp_register_width_1">45dp</dimen>
+    <dimen name="mp_register_width_2">120dp</dimen>
+    <dimen name="mp_register_width_3">145dp</dimen>
+
+    <dimen name="mp_register_width_1_half">21dp</dimen>
+
     <dimen name="register_top_offset">15dp</dimen>
     <dimen name="register_vertical_space">15dp</dimen>
     <dimen name="register_horizontal_space">13dp</dimen>
@@ -19,6 +25,12 @@
     <dimen name="bus_offset_x_neg_with_outlet">-21dp</dimen>
     <dimen name="bus_offset_outlet">5dp</dimen>
 
+    <dimen name="mp_clipped_bus_length">20dp</dimen>
+    <dimen name="mp_clipped_bus_length_2">15dp</dimen>
+    <dimen name="mp_clipped_bus_length_minus_bus">17dp</dimen>
+
+    <dimen name="mp_outlet_padding">3dp</dimen>
+
     <dimen name="outlet_on_keyboard_offset">3dp</dimen>
     <dimen name="outlet_on_keyboard_padding">10dp</dimen>
     <dimen name="bus_on_keyboard_width">9dp</dimen>
@@ -30,6 +42,10 @@
     <dimen name="alu_height">40dp</dimen>
     <dimen name="alu_text_padding">10dp</dimen>
 
+    <dimen name="mp_alu_width">64dp</dimen>
+    <dimen name="mp_alu_height">32dp</dimen>
+    <dimen name="mp_alu_text_padding">7dp</dimen>
+
     <dimen name="alu_top_offset">40dp</dimen>
     <dimen name="alu_top_offset_neg">-41dp</dimen>
     <dimen name="alu_bottom_offset">25dp</dimen>
@@ -37,6 +53,9 @@
     <dimen name="alu_outlet_top">20dp</dimen>
     <dimen name="alu_outlet_top_2">57dp</dimen>
     <dimen name="alu_outlet_bottom">40dp</dimen>
+
+    <dimen name="mp_alu_outlet_top">15dp</dimen>
+    <dimen name="mp_alu_outlet_top_2">46dp</dimen>
 
     <dimen name="register_text_size">12sp</dimen>
 
@@ -52,6 +71,7 @@
     <dimen name="io_row_vertical_space">65dp</dimen>
     <dimen name="io_no_bus_row_vertical_space">45dp</dimen>
 
+    <dimen name="mp_above_alu_vertical_space">30dp</dimen>
     <dimen name="mp_row_vertical_space">20dp</dimen>
     <dimen name="mp_horizontal_margin">15dp</dimen>
 
