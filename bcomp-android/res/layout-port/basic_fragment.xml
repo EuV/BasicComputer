@@ -48,12 +48,9 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/register_vertical_space" />
 
-            <TextView
-                style="@style/Register"
-                android:layout_width="@dimen/alu_width"
-                android:layout_height="@dimen/alu_height"
+            <ru.ifmo.cs.bcomp.android.view.ALUView
+                style="@style/ALU"
                 android:id="@+id/alu"
-                android:text="@string/alu"
                 android:layout_below="@id/reg_rk"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/alu_top_offset" />
