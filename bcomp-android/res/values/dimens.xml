@@ -71,7 +71,8 @@
     <dimen name="io_row_vertical_space">65dp</dimen>
     <dimen name="io_no_bus_row_vertical_space">45dp</dimen>
 
-    <dimen name="mp_above_alu_vertical_space">30dp</dimen>
+    <dimen name="mp_above_alu_vertical_space">40dp</dimen>
+    <dimen name="mp_top_row_vertical_space">30dp</dimen>
     <dimen name="mp_row_vertical_space">20dp</dimen>
     <dimen name="mp_horizontal_margin">15dp</dimen>
 
